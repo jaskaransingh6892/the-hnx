@@ -148,11 +148,40 @@ message. `?type=<project type>` pre-selects the project type.
 
 ---
 
+## Deploying to Vercel
+
+Next.js needs no build configuration on Vercel — it detects the framework,
+runs `npm run build`, and serves the app.
+
+**One environment variable matters.** Set it in Project Settings → Environment
+Variables, for all environments:
+
+| Key | Value |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | the deployment origin, e.g. `https://the-hnx.vercel.app` (no trailing slash) |
+
+Canonical tags, `og:url`, the social card URL, `sitemap.xml`, and
+`robots.txt` all derive from it. Without it they fall back to
+`https://thehnx.com` and will point at the wrong place. Update the value when
+a custom domain is attached.
+
+Deploy from the CLI:
+
+```bash
+npx vercel login      # once, interactive
+npx vercel --prod
+```
+
+Or import the GitHub repo from the Vercel dashboard for automatic deploys on
+every push to `main`.
+
+---
+
 ## Before going live
 
 1. Replace the placeholder contact details and social URLs in `lib/site.ts`.
-2. Set `site.url` to the real domain — canonical URLs, the sitemap, robots.txt,
-   and social card URLs all derive from it.
+2. Set `NEXT_PUBLIC_SITE_URL` on the host to the real domain — canonical URLs,
+   the sitemap, robots.txt, and social card URLs all derive from it.
 3. Review the figures in `stats` (`lib/content.ts`); they are placeholders.
 4. Swap the six example products for real ones.
 5. Wire the contact endpoint to a real delivery provider.
