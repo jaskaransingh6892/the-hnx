@@ -23,7 +23,7 @@ export const site = {
     "Building powerful digital products, intelligent software, and technology for what's next.",
   email: "hello@thehnx.com",
   salesEmail: "projects@thehnx.com",
-  phone: "+1 (555) 018-2040",
+  phone: "+91-896-843-0482",
   location: "Remote-first — delivering to teams worldwide",
   hours: "Mon – Fri · 09:00 – 19:00",
   socials: [
