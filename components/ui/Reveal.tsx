@@ -15,14 +15,24 @@ const offset: Record<Direction, { x: number; y: number }> = {
   none: { x: 0, y: 0 },
 };
 
+/** Expands the observer a quarter-viewport past the fold so a reveal starts well
+    before the element is on screen. Paired with the shorter duration below this
+    keeps the animation ahead of a ~2500px/s flick, where the old 0.2 threshold and
+    0.7s duration left whole sections rendering at opacity 0. */
+const VIEWPORT_MARGIN = "0px 0px 25% 0px";
+
+/** Long enough to read as motion, short enough to finish before a fast scroll
+    carries the element past the middle of the screen. */
+const DURATION = 0.5;
+
 /** Scroll-triggered reveal. Fires once, respects reduced motion via CSS. */
 export function Reveal({
   children,
   className,
   delay = 0,
-  duration = 0.7,
+  duration = DURATION,
   direction = "up",
-  amount = 0.2,
+  amount = 0.05,
 }: {
   children: ReactNode;
   className?: string;
@@ -38,7 +48,7 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin: VIEWPORT_MARGIN }}
       transition={{ duration, delay, ease: EASE }}
     >
       {children}
@@ -48,19 +58,19 @@ export function Reveal({
 
 export const staggerParent: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
 };
 
 export const staggerChild: Variants = {
   hidden: { opacity: 0, y: 26 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
+  show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
 };
 
 /** Wraps a grid/list so children animate in sequence. */
 export function Stagger({
   children,
   className,
-  amount = 0.15,
+  amount = 0.05,
 }: {
   children: ReactNode;
   className?: string;
@@ -72,7 +82,7 @@ export function Stagger({
       variants={staggerParent}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount }}
+      viewport={{ once: true, amount, margin: VIEWPORT_MARGIN }}
     >
       {children}
     </motion.div>

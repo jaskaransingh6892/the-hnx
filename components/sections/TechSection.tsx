@@ -8,8 +8,8 @@ import { technologies, techCategories } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const rings = [
-  { items: technologies.filter((tech) => tech.ring === 0), radius: 33, duration: 48, reverse: false },
-  { items: technologies.filter((tech) => tech.ring === 1), radius: 45, duration: 64, reverse: true },
+  { items: technologies.filter((tech) => tech.ring === 0), radius: 32, duration: 48, reverse: false },
+  { items: technologies.filter((tech) => tech.ring === 1), radius: 47, duration: 64, reverse: true },
 ];
 
 /**
@@ -20,15 +20,15 @@ const rings = [
  */
 function Orbit() {
   return (
-    <div className="group relative mx-auto hidden aspect-square w-full max-w-[44rem] lg:block">
+    <div className="group relative mx-auto hidden aspect-square w-full max-w-[36rem] lg:block">
       <div
         aria-hidden
-        className="absolute inset-[24%] rounded-full bg-[radial-gradient(circle,rgba(79,124,255,0.24),transparent_66%)] blur-3xl animate-pulse-glow"
+        className="absolute inset-[22%] rounded-full bg-[radial-gradient(circle,rgba(91,134,255,0.26),transparent_66%)] blur-3xl animate-pulse-glow"
       />
 
       <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden>
-        <circle cx="200" cy="200" r="132" fill="none" stroke="rgba(148,163,184,0.13)" strokeDasharray="2 8" />
-        <circle cx="200" cy="200" r="180" fill="none" stroke="rgba(148,163,184,0.10)" strokeDasharray="2 8" />
+        <circle cx="200" cy="200" r="128" fill="none" stroke="rgba(148,163,184,0.15)" strokeDasharray="2 8" />
+        <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(148,163,184,0.12)" strokeDasharray="2 8" />
       </svg>
 
       {rings.map((ring) => (
@@ -69,7 +69,7 @@ function Orbit() {
         </div>
       ))}
 
-      <div className="absolute left-1/2 top-1/2 grid h-[27%] w-[27%] -translate-x-1/2 -translate-y-1/2 place-items-center gap-1.5 rounded-full border border-white/12 bg-[linear-gradient(150deg,rgba(18,26,48,0.95),rgba(5,7,15,0.98))] shadow-[0_20px_80px_-20px_rgba(79,124,255,0.8)] backdrop-blur-xl">
+      <div className="absolute left-1/2 top-1/2 grid h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center gap-1.5 rounded-full border border-white/12 bg-[linear-gradient(150deg,rgba(25,34,58,0.95),rgba(13,18,32,0.98))] shadow-[0_20px_80px_-20px_rgba(91,134,255,0.8)] backdrop-blur-xl">
         <LogoMark className="h-11 w-11" animated />
         <span className="eyebrow text-mist-400">Ecosystem</span>
       </div>
@@ -106,7 +106,7 @@ function Marquee() {
 
 export function TechSection() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-28">
+    <section className="relative overflow-hidden py-20 sm:py-24">
       <div className="shell relative flex flex-col gap-12">
         <SectionHeading
           eyebrow="Our stack"

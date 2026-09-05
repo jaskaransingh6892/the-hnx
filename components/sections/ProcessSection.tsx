@@ -19,10 +19,10 @@ export function ProcessSection() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 90, damping: 26, restDelta: 0.001 });
 
   return (
-    <section id="process" className="relative overflow-hidden border-y border-white/[0.06] py-24 sm:py-32">
+    <section id="process" className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(139,92,246,0.10),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(155,114,248,0.10),transparent_60%)]"
       />
 
       <div className="shell relative flex flex-col gap-16">

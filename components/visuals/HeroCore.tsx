@@ -103,7 +103,7 @@ export function HeroCore() {
 
         {/* centre core */}
         <div
-          className="absolute left-1/2 top-1/2 grid h-[32%] w-[32%] place-items-center rounded-[30%] border border-white/12 bg-[linear-gradient(150deg,rgba(18,26,48,0.95),rgba(5,7,15,0.98))] shadow-[0_20px_80px_-20px_rgba(91,134,255,0.7)] backdrop-blur-xl"
+          className="absolute left-1/2 top-1/2 grid h-[32%] w-[32%] place-items-center rounded-[30%] border border-white/12 bg-[linear-gradient(150deg,rgba(25,34,58,0.95),rgba(13,18,32,0.98))] shadow-[0_20px_80px_-20px_rgba(91,134,255,0.7)] backdrop-blur-xl"
           style={{ transform: "translate(-50%,-50%) translateZ(60px)" }}
         >
           <LogoMark className="h-[58%] w-[58%]" animated />

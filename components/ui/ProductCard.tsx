@@ -13,7 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
     <SpotlightCard
       as="article"
       className="h-full"
-      glow={isLive ? "rgba(34,211,238,0.16)" : "rgba(139,92,246,0.14)"}
+      glow={isLive ? "rgba(34,211,238,0.16)" : "rgba(155,114,248,0.14)"}
     >
       <div id={product.slug} className="flex h-full scroll-mt-32 flex-col gap-6 p-6 sm:p-7">
         <div className="flex items-start justify-between gap-4">

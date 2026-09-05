@@ -4,7 +4,7 @@ import { stats } from "@/lib/content";
 
 export function TrustIntro() {
   return (
-    <section id="intro" className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-28">
+    <section id="intro" className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent via-hnx-blue/50 to-transparent"

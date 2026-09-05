@@ -32,7 +32,7 @@ export default function ProcessPage() {
 
       <ProcessSection />
 
-      <section className="relative py-24 sm:py-28">
+      <section className="relative py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
             eyebrow="Engagement"

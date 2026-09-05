@@ -11,7 +11,7 @@ export function SpotlightCard({
   children,
   className,
   as: Tag = "div",
-  glow = "rgba(79,124,255,0.16)",
+  glow = "rgba(91,134,255,0.16)",
 }: {
   children: ReactNode;
   className?: string;

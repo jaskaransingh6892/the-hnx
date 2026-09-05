@@ -13,10 +13,10 @@ export function ProductsSection({ limit }: { limit?: number }) {
   const shown = typeof limit === "number" ? products.slice(0, limit) : products;
 
   return (
-    <section id="products" className="relative overflow-hidden border-y border-white/[0.06] py-24 sm:py-32">
+    <section id="products" className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(79,124,255,0.10),transparent_58%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(91,134,255,0.10),transparent_58%)]"
       />
 
       <div className="shell relative flex flex-col gap-14">

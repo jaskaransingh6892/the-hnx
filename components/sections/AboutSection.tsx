@@ -5,7 +5,7 @@ import { principles } from "@/lib/content";
 
 export function AboutSection({ compact = false }: { compact?: boolean }) {
   return (
-    <section id="about" className="relative overflow-hidden py-24 sm:py-32">
+    <section id="about" className="relative overflow-hidden py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-hnx-blue/10 blur-[130px]"
