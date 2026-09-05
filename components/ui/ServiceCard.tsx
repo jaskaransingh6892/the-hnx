@@ -7,12 +7,10 @@ import { SpotlightCard } from "./SpotlightCard";
 export function ServiceCard({
   service,
   index,
-  href = "/services",
   showCapabilities = false,
 }: {
   service: Service;
   index: number;
-  href?: string;
   showCapabilities?: boolean;
 }) {
   const Icon = service.icon;
@@ -20,7 +18,7 @@ export function ServiceCard({
   return (
     <SpotlightCard as="article" className="h-full">
       <Link
-        href={`${href}#${service.slug}`}
+        href={`/services/${service.slug}`}
         className="flex h-full flex-col gap-5 p-6 sm:p-7"
         aria-label={`${service.title} — ${service.tagline}`}
       >
