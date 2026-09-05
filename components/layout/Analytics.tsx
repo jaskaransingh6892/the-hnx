@@ -3,11 +3,11 @@ import Script from "next/script";
 import { site } from "@/lib/site";
 
 /**
- * Google Tag Manager container + the Google tag (gtag.js) for GA4. Both load
- * with the `afterInteractive` strategy so they never compete with the first
- * paint. Set NEXT_PUBLIC_GTM_ID / NEXT_PUBLIC_GA_ID to point a preview or
- * staging deployment at different containers; leave them unset to use the
- * production IDs from `lib/site.ts`.
+ * Google Tag Manager container. GA4 is configured inside the container rather
+ * than with a second gtag.js snippet here — running both would count every
+ * pageview twice. Loads with the `afterInteractive` strategy so it never
+ * competes with the first paint. Set NEXT_PUBLIC_GTM_ID to point a preview or
+ * staging deployment at a different container.
  */
 export function Analytics() {
   return (
@@ -20,21 +20,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${site.gtmId}');`}
         </Script>
-      ) : null}
-
-      {site.gaId ? (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}
-            strategy="afterInteractive"
-          />
-          <Script id="gtag-init" strategy="afterInteractive">
-            {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${site.gaId}');`}
-          </Script>
-        </>
       ) : null}
     </>
   );
