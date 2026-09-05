@@ -71,6 +71,9 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   category: "technology",
+  ...(site.googleSiteVerification
+    ? { verification: { google: site.googleSiteVerification } }
+    : {}),
 };
 
 export const viewport: Viewport = {

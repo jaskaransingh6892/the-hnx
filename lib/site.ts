@@ -30,6 +30,12 @@ export const site = {
   gaId: process.env.NEXT_PUBLIC_GA_ID || "G-563R65KGMV",
   /** Google Tag Manager container ID; override per environment with NEXT_PUBLIC_GTM_ID. */
   gtmId: process.env.NEXT_PUBLIC_GTM_ID || "GTM-K98J9FCB",
+  /**
+   * Search Console HTML-tag verification token. Only needed if the domain is
+   * verified by meta tag rather than DNS; leave NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+   * unset and no tag is emitted.
+   */
+  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/thehnx" },
     { label: "X", href: "https://x.com/thehnx" },
