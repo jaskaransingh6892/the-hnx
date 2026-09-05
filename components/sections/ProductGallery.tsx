@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { EASE } from "@/components/ui/Reveal";
 import { productCategories, products } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { cn, productGridColumns } from "@/lib/utils";
 
 /**
  * Filterable catalogue. Categories are derived from the product list, so a new
@@ -50,7 +50,7 @@ export function ProductGallery() {
         })}
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className={cn("grid gap-5", productGridColumns(visible.length))}>
         {visible.map((product, index) => (
           <motion.div
             key={`${active}-${product.slug}`}

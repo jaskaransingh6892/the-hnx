@@ -4,6 +4,7 @@ import { ProductCard } from "@/components/ui/ProductCard";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { products } from "@/lib/content";
+import { cn, productGridColumns } from "@/lib/utils";
 
 /**
  * Product showcase. Driven entirely by `products` in lib/content.ts —
@@ -27,7 +28,7 @@ export function ProductsSection({ limit }: { limit?: number }) {
           description="Software we own end to end — built from problems we kept seeing in client work, then engineered into platforms anyone can run."
         />
 
-        <Stagger className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger className={cn("grid gap-5", productGridColumns(shown.length))}>
           {shown.map((product) => (
             <StaggerItem key={product.slug} className="h-full">
               <ProductCard product={product} />

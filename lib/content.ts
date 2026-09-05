@@ -14,10 +14,8 @@ import {
   GitBranch,
   Globe,
   GraduationCap,
-  Headset,
   Layers,
   LayoutDashboard,
-  LineChart,
   MonitorSmartphone,
   Network,
   Palette,
@@ -25,11 +23,9 @@ import {
   ScanSearch,
   Server,
   ShieldCheck,
-  ShoppingBag,
   Store,
   Smartphone,
   Sparkles,
-  Workflow,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------
@@ -222,78 +218,6 @@ export const products: Product[] = [
     icon: GraduationCap,
     accent: "from-sky-400 to-indigo-600",
     highlights: ["25+ modules", "Parent app & online fees", "PM POSHAN ready", "Built-in AI assistant"],
-  },
-  {
-    slug: "orbit",
-    name: "Orbit",
-    category: "ERP",
-    status: "Live",
-    summary: "The operating system for growing operations.",
-    description:
-      "A modular ERP covering finance, inventory, procurement, and workforce, deployed in weeks rather than quarters.",
-    icon: Boxes,
-    accent: "from-cyan-400 to-blue-600",
-    highlights: ["Modular deployment", "Multi-entity ledger", "Realtime inventory"],
-  },
-  {
-    slug: "nexa",
-    name: "Nexa",
-    category: "SaaS",
-    status: "Live",
-    summary: "Revenue intelligence for modern sales teams.",
-    description:
-      "A CRM that captures every touchpoint and turns pipeline noise into forecasts leadership can trust.",
-    icon: LineChart,
-    accent: "from-violet-400 to-indigo-600",
-    highlights: ["Pipeline forecasting", "Automated capture", "Team analytics"],
-  },
-  {
-    slug: "cortex",
-    name: "Cortex",
-    category: "AI Platform",
-    status: "In Development",
-    summary: "Private AI infrastructure for your own data.",
-    description:
-      "Retrieval, evaluation, and guardrails in one platform, so teams can ship AI features on internal knowledge safely.",
-    icon: BrainCircuit,
-    accent: "from-fuchsia-400 to-violet-600",
-    highlights: ["Private retrieval", "Evaluation suite", "Policy guardrails"],
-  },
-  {
-    slug: "flowline",
-    name: "Flowline",
-    category: "Business Automation",
-    status: "In Development",
-    summary: "Visual automation for operational workflows.",
-    description:
-      "Design approval chains, integrations, and scheduled jobs on a canvas without opening an engineering ticket.",
-    icon: Workflow,
-    accent: "from-teal-400 to-cyan-600",
-    highlights: ["Visual builder", "Connector library", "Full audit trail"],
-  },
-  {
-    slug: "vaulta",
-    name: "Vaulta",
-    category: "E-commerce Technology",
-    status: "Coming Soon",
-    summary: "Composable commerce for high-volume catalogues.",
-    description:
-      "A headless commerce core with storefront APIs, a pricing engine, and fulfilment orchestration built in.",
-    icon: ShoppingBag,
-    accent: "from-amber-400 to-orange-600",
-    highlights: ["Headless storefronts", "Pricing engine", "Fulfilment routing"],
-  },
-  {
-    slug: "signal-desk",
-    name: "Signal Desk",
-    category: "AI Platform",
-    status: "Coming Soon",
-    summary: "An AI support layer that resolves, not deflects.",
-    description:
-      "Handles repetitive requests, drafts grounded answers, and escalates complex cases to humans with full context.",
-    icon: Headset,
-    accent: "from-emerald-400 to-teal-600",
-    highlights: ["Intent resolution", "Grounded answers", "Human handoff"],
   },
 ];
 
