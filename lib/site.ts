@@ -28,6 +28,8 @@ export const site = {
   hours: "Mon – Fri · 09:00 – 19:00",
   /** GA4 measurement ID for the Google tag; override per environment with NEXT_PUBLIC_GA_ID. */
   gaId: process.env.NEXT_PUBLIC_GA_ID || "G-563R65KGMV",
+  /** Google Tag Manager container ID; override per environment with NEXT_PUBLIC_GTM_ID. */
+  gtmId: process.env.NEXT_PUBLIC_GTM_ID || "GTM-K98J9FCB",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/thehnx" },
     { label: "X", href: "https://x.com/thehnx" },

@@ -3,7 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { Analytics } from "@/components/layout/Analytics";
+import { Analytics, AnalyticsNoScript } from "@/components/layout/Analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -102,6 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body className="min-h-screen bg-ink-950 antialiased">
+        <AnalyticsNoScript />
         <script
           type="application/ld+json"
           suppressHydrationWarning
