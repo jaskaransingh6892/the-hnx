@@ -13,6 +13,7 @@ import {
   Gauge,
   GitBranch,
   Globe,
+  GraduationCap,
   Headset,
   Layers,
   LayoutDashboard,
@@ -25,6 +26,7 @@ import {
   Server,
   ShieldCheck,
   ShoppingBag,
+  Store,
   Smartphone,
   Sparkles,
   Workflow,
@@ -182,6 +184,8 @@ export type ProductStatus = "Live" | "In Development" | "Coming Soon";
 
 export type Product = {
   slug: string;
+  /** Public URL of the running product. Absent for anything not yet shipped. */
+  href?: string;
   name: string;
   category: string;
   status: ProductStatus;
@@ -193,6 +197,32 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  {
+    slug: "myinventory",
+    name: "MyInventory",
+    category: "Retail & Billing",
+    status: "Live",
+    href: "https://myinventory-tbpd.onrender.com/",
+    summary: "Every shelf, every bill, one counter.",
+    description:
+      "Retail software that carries a sale the whole way — barcode scan, till, return, delivery van and online storefront — so a figure is entered once and still agrees across every outlet.",
+    icon: Store,
+    accent: "from-orange-400 to-rose-600",
+    highlights: ["GST-ready billing", "Barcode at the till", "Multi-store stock", "Online storefront"],
+  },
+  {
+    slug: "educationcloud",
+    name: "EducationCloud",
+    category: "School Management",
+    status: "Live",
+    href: "https://educationcloud.co.in/",
+    summary: "Run the whole school from one portal.",
+    description:
+      "Students, teachers, houses, homework, exams and fees in a single cloud portal, with a parent app, online payments and an assistant that answers from the school’s own data.",
+    icon: GraduationCap,
+    accent: "from-sky-400 to-indigo-600",
+    highlights: ["25+ modules", "Parent app & online fees", "PM POSHAN ready", "Built-in AI assistant"],
+  },
   {
     slug: "orbit",
     name: "Orbit",

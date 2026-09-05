@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import type { Product } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "./SpotlightCard";
@@ -61,13 +61,26 @@ export function ProductCard({ product }: { product: Product }) {
               strokeWidth={1.8}
             />
           </Link>
-          <span
-            aria-hidden
-            className={cn(
-              "h-px w-16 bg-gradient-to-r opacity-40 transition-opacity duration-500 group-hover:opacity-100",
-              product.accent,
-            )}
-          />
+          {product.href ? (
+            <a
+              href={product.href}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1.5 rounded-full border border-hnx-cyan/30 bg-hnx-cyan/10 px-3 py-1.5 text-[0.75rem] font-medium text-hnx-cyan transition-colors duration-300 hover:border-hnx-cyan/60 hover:bg-hnx-cyan/20"
+            >
+              Visit site
+              <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.8} />
+              <span className="sr-only">(opens {product.name} in a new tab)</span>
+            </a>
+          ) : (
+            <span
+              aria-hidden
+              className={cn(
+                "h-px w-16 bg-gradient-to-r opacity-40 transition-opacity duration-500 group-hover:opacity-100",
+                product.accent,
+              )}
+            />
+          )}
         </div>
       </div>
     </SpotlightCard>
