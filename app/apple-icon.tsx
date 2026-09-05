@@ -14,15 +14,15 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(150deg, #0a1020 0%, #03050a 100%)",
+          background: "linear-gradient(150deg, #131a2c 0%, #080b14 100%)",
         }}
       >
         <svg width="132" height="132" viewBox="0 0 48 48">
           <defs>
             <linearGradient id="s" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
               <stop stopColor="#22d3ee" />
-              <stop offset="0.5" stopColor="#4f7cff" />
-              <stop offset="1" stopColor="#8b5cf6" />
+              <stop offset="0.5" stopColor="#5b86ff" />
+              <stop offset="1" stopColor="#9b72f8" />
             </linearGradient>
           </defs>
           <g stroke="url(#s)" strokeWidth="3.1" strokeLinecap="round" opacity="0.92">
@@ -33,7 +33,7 @@ export default function AppleIcon() {
             <path d="M12.5 9 L12.5 39" />
             <path d="M35.5 9 L35.5 39" />
           </g>
-          <circle cx="24" cy="24" r="4.8" fill="#03050a" />
+          <circle cx="24" cy="24" r="4.8" fill="#080b14" />
           <circle cx="24" cy="24" r="2.9" fill="#7dd3fc" />
         </svg>
       </div>

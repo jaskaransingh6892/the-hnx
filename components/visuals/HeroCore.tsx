@@ -49,7 +49,7 @@ export function HeroCore() {
       >
         <div
           aria-hidden
-          className="absolute inset-[16%] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(79,124,255,0.32),transparent_62%)] blur-2xl animate-pulse-glow"
+          className="absolute inset-[16%] rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(91,134,255,0.32),transparent_62%)] blur-2xl animate-pulse-glow"
         />
 
         <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full animate-spin-slower" aria-hidden>
@@ -60,8 +60,8 @@ export function HeroCore() {
           <defs>
             <linearGradient id="hero-arc" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="#22d3ee" stopOpacity="0" />
-              <stop offset="55%" stopColor="#4f7cff" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+              <stop offset="55%" stopColor="#5b86ff" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#9b72f8" stopOpacity="0" />
             </linearGradient>
           </defs>
           <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(148,163,184,0.13)" strokeWidth="1" />
@@ -103,7 +103,7 @@ export function HeroCore() {
 
         {/* centre core */}
         <div
-          className="absolute left-1/2 top-1/2 grid h-[32%] w-[32%] place-items-center rounded-[30%] border border-white/12 bg-[linear-gradient(150deg,rgba(18,26,48,0.95),rgba(5,7,15,0.98))] shadow-[0_20px_80px_-20px_rgba(79,124,255,0.7)] backdrop-blur-xl"
+          className="absolute left-1/2 top-1/2 grid h-[32%] w-[32%] place-items-center rounded-[30%] border border-white/12 bg-[linear-gradient(150deg,rgba(18,26,48,0.95),rgba(5,7,15,0.98))] shadow-[0_20px_80px_-20px_rgba(91,134,255,0.7)] backdrop-blur-xl"
           style={{ transform: "translate(-50%,-50%) translateZ(60px)" }}
         >
           <LogoMark className="h-[58%] w-[58%]" animated />

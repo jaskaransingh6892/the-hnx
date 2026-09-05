@@ -18,8 +18,8 @@ export default function OpengraphImage() {
           justifyContent: "space-between",
           padding: 72,
           background:
-            "radial-gradient(1000px 620px at 78% 12%, #16224a 0%, #070b16 55%, #03050a 100%)",
-          color: "#eef3fb",
+            "radial-gradient(1000px 620px at 78% 12%, #16224a 0%, #0d1220 55%, #080b14 100%)",
+          color: "#e9effa",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -27,8 +27,8 @@ export default function OpengraphImage() {
             <defs>
               <linearGradient id="s" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#22d3ee" />
-                <stop offset="0.5" stopColor="#4f7cff" />
-                <stop offset="1" stopColor="#8b5cf6" />
+                <stop offset="0.5" stopColor="#5b86ff" />
+                <stop offset="1" stopColor="#9b72f8" />
               </linearGradient>
             </defs>
             <g stroke="url(#s)" strokeWidth="3.1" strokeLinecap="round" opacity="0.92">
@@ -39,11 +39,11 @@ export default function OpengraphImage() {
               <path d="M12.5 9 L12.5 39" />
               <path d="M35.5 9 L35.5 39" />
             </g>
-            <circle cx="24" cy="24" r="4.8" fill="#03050a" />
+            <circle cx="24" cy="24" r="4.8" fill="#080b14" />
             <circle cx="24" cy="24" r="2.9" fill="#7dd3fc" />
           </svg>
           <div style={{ display: "flex", fontSize: 40, letterSpacing: -1 }}>
-            <span style={{ color: "#9aa9c6" }}>The&nbsp;</span>
+            <span style={{ color: "#94a3c0" }}>The&nbsp;</span>
             <span style={{ color: "#7dd3fc", fontWeight: 700 }}>HNX</span>
           </div>
         </div>
@@ -52,12 +52,12 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", fontSize: 92, fontWeight: 700, letterSpacing: -3 }}>
             Building What&apos;s Next.
           </div>
-          <div style={{ display: "flex", fontSize: 30, color: "#9aa9c6", maxWidth: 900 }}>
+          <div style={{ display: "flex", fontSize: 30, color: "#94a3c0", maxWidth: 900 }}>
             Digital products, intelligent software, and AI-driven systems.
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 16, fontSize: 22, color: "#6b7b9c" }}>
+        <div style={{ display: "flex", gap: 16, fontSize: 22, color: "#7b8aab" }}>
           <span>Web</span>
           <span>·</span>
           <span>ERP &amp; SaaS</span>

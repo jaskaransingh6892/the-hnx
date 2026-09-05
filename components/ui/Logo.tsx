@@ -36,13 +36,13 @@ export function LogoMark({
       <defs>
         <linearGradient id={stroke} x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
           <stop stopColor="#22d3ee" />
-          <stop offset="0.5" stopColor="#4f7cff" />
-          <stop offset="1" stopColor="#8b5cf6" />
+          <stop offset="0.5" stopColor="#5b86ff" />
+          <stop offset="1" stopColor="#9b72f8" />
         </linearGradient>
         <radialGradient id={core} cx="0.5" cy="0.5" r="0.5">
           <stop stopColor="#ffffff" />
           <stop offset="0.55" stopColor="#7dd3fc" />
-          <stop offset="1" stopColor="#4f7cff" />
+          <stop offset="1" stopColor="#5b86ff" />
         </radialGradient>
         <filter id={glow} x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="1.6" result="b" />
@@ -72,7 +72,7 @@ export function LogoMark({
       </g>
 
       {/* the connection node */}
-      <circle cx="24" cy="24" r="4.8" fill="#03050a" />
+      <circle cx="24" cy="24" r="4.8" fill="#080b14" />
       <circle
         cx="24"
         cy="24"

@@ -42,7 +42,7 @@ export function ProcessSection() {
           <motion.div
             aria-hidden
             style={{ scaleY }}
-            className="absolute left-[1.4375rem] top-2 bottom-2 w-px origin-top bg-[linear-gradient(180deg,#22d3ee,#4f7cff,#8b5cf6)] sm:left-[2.1875rem]"
+            className="absolute left-[1.4375rem] top-2 bottom-2 w-px origin-top bg-[linear-gradient(180deg,#22d3ee,#5b86ff,#9b72f8)] sm:left-[2.1875rem]"
           />
 
           <ol className="flex flex-col gap-10 sm:gap-12">
@@ -58,7 +58,7 @@ export function ProcessSection() {
                   className="group relative flex gap-5 sm:gap-8"
                 >
                   <div className="relative z-10 shrink-0">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/12 bg-ink-900 shadow-[0_10px_40px_-16px_rgba(79,124,255,0.9)] transition-colors duration-500 group-hover:border-hnx-cyan/45 sm:h-[4.5rem] sm:w-[4.5rem]">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/12 bg-ink-900 shadow-[0_10px_40px_-16px_rgba(91,134,255,0.9)] transition-colors duration-500 group-hover:border-hnx-cyan/45 sm:h-[4.5rem] sm:w-[4.5rem]">
                       <Icon
                         className="h-5 w-5 text-hnx-cyan transition-transform duration-500 group-hover:scale-110 sm:h-7 sm:w-7"
                         strokeWidth={1.5}
