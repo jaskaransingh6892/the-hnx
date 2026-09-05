@@ -26,6 +26,8 @@ export const site = {
   phone: "+91-896-843-0482",
   location: "Remote-first — delivering to teams worldwide",
   hours: "Mon – Fri · 09:00 – 19:00",
+  /** GA4 measurement ID for the Google tag; override per environment with NEXT_PUBLIC_GA_ID. */
+  gaId: process.env.NEXT_PUBLIC_GA_ID || "G-563R65KGMV",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/thehnx" },
     { label: "X", href: "https://x.com/thehnx" },

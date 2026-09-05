@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { Analytics } from "@/components/layout/Analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -116,6 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
