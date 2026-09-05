@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 48" width="220" height="48">
   <defs>
     <linearGradient id="s" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#4f7cff"/><stop offset="1" stop-color="#8b5cf6"/>
+      <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#5b86ff"/><stop offset="1" stop-color="#9b72f8"/>
     </linearGradient>
     <radialGradient id="c" cx=".5" cy=".5" r=".5">
-      <stop stop-color="#fff"/><stop offset=".55" stop-color="#7dd3fc"/><stop offset="1" stop-color="#4f7cff"/>
+      <stop stop-color="#fff"/><stop offset=".55" stop-color="#7dd3fc"/><stop offset="1" stop-color="#5b86ff"/>
     </radialGradient>
     <linearGradient id="w" x1="60" y1="14" x2="205" y2="34" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#22d3ee"/><stop offset=".6" stop-color="#6f9bff"/><stop offset="1" stop-color="#8b5cf6"/>
+      <stop stop-color="#22d3ee"/><stop offset=".6" stop-color="#7d9dff"/><stop offset="1" stop-color="#9b72f8"/>
     </linearGradient>
   </defs>
   <g stroke="url(#s)" stroke-width="3.1" stroke-linecap="round" opacity=".92">
@@ -16,8 +16,8 @@
   <g stroke="url(#s)" stroke-width="3.4" stroke-linecap="round">
     <path d="M12.5 9 L12.5 39"/><path d="M35.5 9 L35.5 39"/>
   </g>
-  <circle cx="24" cy="24" r="4.8" fill="#03050a"/>
+  <circle cx="24" cy="24" r="4.8" fill="#080b14"/>
   <circle cx="24" cy="24" r="2.9" fill="url(#c)"/>
-  <text x="58" y="31.5" font-family="Space Grotesk, Inter, Segoe UI, sans-serif" font-size="21" font-weight="500" fill="#9aa9c6" letter-spacing="-0.4">The</text>
+  <text x="58" y="31.5" font-family="Space Grotesk, Inter, Segoe UI, sans-serif" font-size="21" font-weight="500" fill="#94a3c0" letter-spacing="-0.4">The</text>
   <text x="104" y="31.5" font-family="Space Grotesk, Inter, Segoe UI, sans-serif" font-size="21" font-weight="700" fill="url(#w)" letter-spacing="-0.4">HNX</text>
 </svg>

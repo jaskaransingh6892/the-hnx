@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
   <defs>
     <linearGradient id="s" x1="8" y1="6" x2="40" y2="42" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#4f7cff"/><stop offset="1" stop-color="#8b5cf6"/>
+      <stop stop-color="#22d3ee"/><stop offset=".5" stop-color="#5b86ff"/><stop offset="1" stop-color="#9b72f8"/>
     </linearGradient>
     <radialGradient id="c" cx=".5" cy=".5" r=".5">
-      <stop stop-color="#fff"/><stop offset=".55" stop-color="#7dd3fc"/><stop offset="1" stop-color="#4f7cff"/>
+      <stop stop-color="#fff"/><stop offset=".55" stop-color="#7dd3fc"/><stop offset="1" stop-color="#5b86ff"/>
     </radialGradient>
     <linearGradient id="bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0a1020"/><stop offset="1" stop-color="#03050a"/>
+      <stop stop-color="#131a2c"/><stop offset="1" stop-color="#080b14"/>
     </linearGradient>
   </defs>
   <rect width="48" height="48" rx="11" fill="url(#bg)"/>
-  <rect x="0.5" y="0.5" width="47" height="47" rx="10.5" fill="none" stroke="#4f7cff" stroke-opacity=".28"/>
+  <rect x="0.5" y="0.5" width="47" height="47" rx="10.5" fill="none" stroke="#5b86ff" stroke-opacity=".28"/>
   <g stroke="url(#s)" stroke-width="3" stroke-linecap="round" opacity=".92">
     <path d="M13.5 15 L34.5 33"/><path d="M34.5 15 L13.5 33"/>
   </g>
   <g stroke="url(#s)" stroke-width="3.3" stroke-linecap="round">
     <path d="M13.5 11 L13.5 37"/><path d="M34.5 11 L34.5 37"/>
   </g>
-  <circle cx="24" cy="24" r="4.4" fill="#03050a"/>
+  <circle cx="24" cy="24" r="4.4" fill="#080b14"/>
   <circle cx="24" cy="24" r="2.7" fill="url(#c)"/>
 </svg>
