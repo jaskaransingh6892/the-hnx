@@ -21,7 +21,7 @@ export const site = {
     "The HNX builds powerful digital products, intelligent software, and AI-driven systems for startups, businesses, and enterprises worldwide.",
   shortDescription:
     "Building powerful digital products, intelligent software, and technology for what's next.",
-  email: "hello@thehnx.com",
+  email: "info@thehnx.com",
   salesEmail: "projects@thehnx.com",
   phone: "+91-896-843-0482",
   location: "Remote-first — delivering to teams worldwide",
