@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { services } from "@/lib/content";
+import { products, services } from "@/lib/content";
+import { caseStudies } from "@/lib/case-studies";
 import { nav, site } from "@/lib/site";
 
 const url = (path: string) => `${site.url}${path === "/" ? "" : path}`;
@@ -23,5 +24,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...servicePages];
+  // Only products with a written case study have a page to point at.
+  const productPages: MetadataRoute.Sitemap = products
+    .filter((product) => caseStudies[product.slug])
+    .map((product) => ({
+      url: url(`/products/${product.slug}`),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }));
+
+  return [...pages, ...servicePages, ...productPages];
 }

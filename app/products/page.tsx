@@ -12,7 +12,7 @@ import { products } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "ERP, CRM, AI, automation, and commerce platforms built and owned by The HNX — with more in development.",
+    "Retail billing and school management software built, shipped, and supported by The HNX — both running in production today.",
   alternates: { canonical: "/products" },
 };
 
