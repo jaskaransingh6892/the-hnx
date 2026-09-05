@@ -1,6 +1,20 @@
-import { Counter } from "@/components/ui/Counter";
+import Link from "next/link";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
-import { stats } from "@/lib/content";
+import { products } from "@/lib/content";
+
+/**
+ * This panel used to hold four counters — projects delivered, industries
+ * served, years of expertise. None of them could be checked by a reader, and
+ * one contradicted the technology section further down the page. Shipped
+ * software a visitor can open is worth more than a number they have to take
+ * on faith, so that is what sits here instead.
+ */
+const commitments = [
+  "A senior engineer reads every enquiry, and replies within one business day",
+  "You own the code, the repositories, and the infrastructure accounts",
+  "Same engineers and same standards, whether the brief is a marketing site or an ERP",
+];
 
 export function TrustIntro() {
   return (
@@ -36,23 +50,58 @@ export function TrustIntro() {
           </Reveal>
         </div>
 
-        <Stagger className="grid grid-cols-2 gap-4 sm:gap-5">
-          {stats.map((stat) => (
-            <StaggerItem key={stat.label}>
-              <div className="glass edge-glow group relative h-full overflow-hidden rounded-2xl p-5 sm:p-6">
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-hnx-blue/16 blur-2xl transition-colors duration-500 group-hover:bg-hnx-cyan/24"
-                />
-                <p className="relative font-display text-[clamp(2rem,5vw,2.85rem)] font-bold leading-none text-gradient">
-                  <Counter value={stat.value} suffix={stat.suffix} />
-                </p>
-                <p className="relative mt-3 text-[0.8125rem] font-medium text-mist-100">{stat.label}</p>
-                <p className="relative mt-1 text-[0.75rem] leading-relaxed text-mist-400">{stat.hint}</p>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <div className="flex flex-col gap-4">
+          <Stagger className="flex flex-col gap-4">
+            {products.map((product) => (
+              <StaggerItem key={product.slug}>
+                <article className="glass edge-glow group relative overflow-hidden rounded-2xl p-5 sm:p-6">
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-hnx-blue/16 blur-2xl transition-colors duration-500 group-hover:bg-hnx-cyan/24"
+                  />
+                  <div className="relative flex items-baseline gap-2.5">
+                    <h3 className="font-display text-lg font-bold text-mist-100">{product.name}</h3>
+                    <span className="eyebrow text-mist-400">{product.category}</span>
+                  </div>
+                  <p className="relative mt-2 text-[0.8125rem] leading-relaxed text-mist-300">
+                    {product.summary}
+                  </p>
+                  <div className="relative mt-4 flex flex-wrap items-center gap-4">
+                    <Link
+                      href={`/products/${product.slug}`}
+                      className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300 hover:text-hnx-cyan"
+                    >
+                      Read the case study
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
+                    </Link>
+                    {product.href ? (
+                      <a
+                        href={product.href}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-hnx-cyan transition-colors duration-300 hover:text-hnx-blue"
+                      >
+                        Open it
+                        <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.8} />
+                      </a>
+                    ) : null}
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          <Reveal delay={0.12}>
+            <ul className="flex flex-col gap-2.5 pt-1">
+              {commitments.map((line) => (
+                <li key={line} className="flex items-start gap-2.5">
+                  <span aria-hidden className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-hnx-cyan" />
+                  <span className="text-[0.8125rem] leading-relaxed text-mist-300">{line}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

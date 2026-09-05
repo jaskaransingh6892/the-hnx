@@ -370,23 +370,6 @@ export const technologies: Tech[] = [
 ];
 
 /* ------------------------------------------------------------------
-   STATS - placeholder figures, review before launch
------------------------------------------------------------------- */
-export type Stat = {
-  value: number;
-  suffix: string;
-  label: string;
-  hint: string;
-};
-
-export const stats: Stat[] = [
-  { value: 120, suffix: "+", label: "Projects Delivered", hint: "Shipped and running in production" },
-  { value: 40, suffix: "+", label: "Technologies", hint: "Across web, cloud, data, and AI" },
-  { value: 18, suffix: "", label: "Industries Served", hint: "From fintech to logistics" },
-  { value: 9, suffix: "+", label: "Years of Expertise", hint: "Combined engineering leadership" },
-];
-
-/* ------------------------------------------------------------------
    ABOUT - the four disciplines
 ------------------------------------------------------------------ */
 export const principles: Feature[] = [
