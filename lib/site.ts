@@ -37,10 +37,9 @@ export const site = {
    */
   googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/thehnx" },
-    { label: "X", href: "https://x.com/thehnx" },
-    { label: "GitHub", href: "https://github.com/thehnx" },
-    { label: "Dribbble", href: "https://dribbble.com/thehnx" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/the-hnx-278582434/" },
+    { label: "X", href: "https://x.com/the__hnx" },
+    { label: "Instagram", href: "https://www.instagram.com/the__hnx/" },
   ],
 } as const;
 

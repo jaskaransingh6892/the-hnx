@@ -7,8 +7,7 @@ import { nav, site } from "@/lib/site";
 const socialGlyphs: Record<string, string> = {
   LinkedIn: "in",
   X: "X",
-  GitHub: "gh",
-  Dribbble: "dr",
+  Instagram: "ig",
 };
 
 export function Footer() {
