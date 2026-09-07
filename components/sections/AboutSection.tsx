@@ -21,7 +21,18 @@ export function AboutSection({ compact = false }: { compact?: boolean }) {
         />
 
         <div className="flex flex-col gap-6">
+          {/* Written for readers, but it also does a job for search: this is the
+              only place the name appears in its other spellings, which is how a
+              search engine learns "HNX" and "TheHNX" point at this company. */}
           <Reveal>
+            <p className="text-[0.9375rem] leading-relaxed text-mist-300">
+              The HNX — written TheHNX, and shortened to HNX by most people who work with
+              us — is a software company building digital products, custom systems, and
+              AI-driven tools for teams in India and worldwide.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.04}>
             <p className="text-[0.9375rem] leading-relaxed text-mist-300">
               We combine engineering, design, strategy, and artificial intelligence in the same
               team, because separating them is where most projects quietly go wrong. The engineer

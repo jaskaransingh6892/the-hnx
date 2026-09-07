@@ -7,6 +7,7 @@ import { EASE } from "@/components/ui/Reveal";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 import { HeroCore } from "@/components/visuals/HeroCore";
 import { ParticleField } from "@/components/visuals/ParticleField";
+import { site } from "@/lib/site";
 
 const headline = ["Building", "What's", "Next."];
 
@@ -40,7 +41,18 @@ export function Hero() {
             Products &amp; Engineering
           </motion.span>
 
+          {/* The brand name lives inside the h1, not just the <title>. Search
+              engines lean on the h1 to decide what entity a homepage is about,
+              and "Building What's Next." on its own never names the company. */}
           <h1 className="font-display text-[clamp(2.7rem,8.2vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.035em]">
+            <motion.span
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE }}
+              className="mb-3 block font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-mist-400 sm:text-sm"
+            >
+              {site.name}
+            </motion.span>
             {headline.map((word, index) => (
               <motion.span
                 key={word}

@@ -6,6 +6,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { TrustIntro } from "@/components/sections/TrustIntro";
 import { WhySection } from "@/components/sections/WhySection";
 import { ButtonLink } from "@/components/ui/Button";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -14,9 +15,28 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
+// Points /about at the Organization node declared in the root layout, so the
+// page is registered as the company's own page rather than a loose document.
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  url: `${site.url}/about`,
+  name: `About ${site.name}`,
+  inLanguage: "en",
+  isPartOf: { "@id": `${site.url}/#website` },
+  mainEntity: { "@id": `${site.url}/#organization` },
+};
+
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(aboutSchema).replace(/</g, "\\u003c"),
+        }}
+      />
       <PageHero
         eyebrow="About us"
         title="Technology should move"
