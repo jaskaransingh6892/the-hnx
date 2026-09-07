@@ -7,6 +7,7 @@ import { CTASection } from "@/components/sections/CTASection";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { OwnershipSeal } from "@/components/ui/OwnershipSeal";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { products } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
@@ -77,6 +78,9 @@ export default async function ProductCaseStudy({
       // both products credit one company rather than two lookalike ones.
       author: { "@id": `${site.url}/#organization` },
       publisher: { "@id": `${site.url}/#organization` },
+      copyrightHolder: { "@id": `${site.url}/#organization` },
+      copyrightYear: new Date().getFullYear(),
+      creator: { "@id": `${site.url}/#organization` },
       operatingSystem: "Web",
     },
     {
@@ -270,7 +274,9 @@ export default async function ProductCaseStudy({
         </section>
       ) : null}
 
-      <section className="relative py-16">
+      <OwnershipSeal product={product.name} />
+
+      <section className="relative pb-16">
         <div className="shell flex justify-center">
           <ButtonLink
             href="/contact"
