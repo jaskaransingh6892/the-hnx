@@ -14,6 +14,13 @@ const origin = rawOrigin.endsWith("/") ? rawOrigin.slice(0, -1) : rawOrigin;
 export const site = {
   name: "The HNX",
   legalName: "The HNX",
+  /**
+   * Every spelling people actually type for the brand. Google reads "thehnx" as
+   * a misspelling of other words until it recognises it as a name, so these are
+   * published as schema.org alternateName values on the Organization and the
+   * WebSite to tie all the variants to one entity.
+   */
+  alternateNames: ["TheHNX", "The HNX", "HNX", "The Hnx", "TheHnx", "HNX Technologies"],
   domain: "thehnx.com",
   url: origin,
   tagline: "Building What's Next.",

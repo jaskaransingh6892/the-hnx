@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "web application development",
     "mobile app development",
     "cloud solutions",
-    "The HNX",
+    ...site.alternateNames,
   ],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
@@ -83,15 +83,75 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const organisationSchema = {
+/**
+ * One graph, two nodes, stable @ids so every other page can reference them.
+ * The alternateName lists are the point: they tell Google that "TheHNX",
+ * "HNX" and "The Hnx" are the same named entity rather than a typo.
+ */
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: site.name,
-  url: site.url,
-  description: site.description,
-  email: site.email,
-  telephone: site.phone,
-  sameAs: site.socials.map((social) => social.href),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.url}/#organization`,
+      name: site.name,
+      legalName: site.legalName,
+      alternateName: [...site.alternateNames],
+      url: site.url,
+      description: site.description,
+      slogan: site.tagline,
+      email: site.email,
+      telephone: site.phone,
+      logo: {
+        "@type": "ImageObject",
+        url: `${site.url}/brand/icon-512.png`,
+        width: 512,
+        height: 512,
+      },
+      image: `${site.url}/brand/icon-512.png`,
+      address: { "@type": "PostalAddress", addressCountry: "IN" },
+      areaServed: "Worldwide",
+      knowsAbout: [
+        "Custom software development",
+        "Artificial intelligence",
+        "AI automation",
+        "SaaS product development",
+        "ERP software",
+        "CRM software",
+        "Web application development",
+        "Mobile app development",
+        "Cloud infrastructure",
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: site.salesEmail,
+          telephone: site.phone,
+          areaServed: "Worldwide",
+          availableLanguage: ["English", "Hindi"],
+        },
+        {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: site.email,
+          areaServed: "Worldwide",
+          availableLanguage: ["English", "Hindi"],
+        },
+      ],
+      sameAs: site.socials.map((social) => social.href),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: site.name,
+      alternateName: [...site.alternateNames],
+      description: site.description,
+      inLanguage: "en",
+      publisher: { "@id": `${site.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -109,7 +169,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           suppressHydrationWarning
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+          }}
         />
         <a
           href="#main"
