@@ -76,7 +76,10 @@ export default async function ServiceDetailPage({
       serviceType: service.title,
       description: page.metaDescription,
       url,
-      provider: { "@type": "Organization", name: site.name, url: site.url },
+      // Reference the Organization the root layout declares rather than
+      // describing a second one here — two partial Organization nodes for the
+      // same company split the entity signal instead of reinforcing it.
+      provider: { "@id": `${site.url}/#organization` },
       areaServed: "Worldwide",
       hasOfferCatalog: {
         "@type": "OfferCatalog",

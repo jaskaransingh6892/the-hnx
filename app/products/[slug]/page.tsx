@@ -73,7 +73,10 @@ export default async function ProductCaseStudy({
       applicationCategory: "BusinessApplication",
       description: study.metaDescription,
       url: product.href ?? url,
-      author: { "@type": "Organization", name: site.name, url: site.url },
+      // Same Organization node the root layout declares, referenced by @id so
+      // both products credit one company rather than two lookalike ones.
+      author: { "@id": `${site.url}/#organization` },
+      publisher: { "@id": `${site.url}/#organization` },
       operatingSystem: "Web",
     },
     {

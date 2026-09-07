@@ -7,7 +7,8 @@ import { ButtonLink } from "@/components/ui/Button";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { engagementModels } from "@/lib/content";
+import { engagementModels, processSteps } from "@/lib/content";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Our Process",
@@ -16,9 +17,45 @@ export const metadata: Metadata = {
   alternates: { canonical: "/process" },
 };
 
+// The page is already a numbered sequence; HowTo just states that in a form a
+// crawler can read, which is what makes the individual steps eligible to show
+// under the result rather than a single truncated paragraph.
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `How ${site.name} builds software`,
+    description:
+      "The six phases every engagement moves through, from discovery to launch and scale.",
+    url: `${site.url}/process`,
+    step: processSteps.map((item, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: item.title,
+      text: item.detail,
+      url: `${site.url}/process#${item.title.toLowerCase()}`,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Our Process", item: `${site.url}/process` },
+    ],
+  },
+];
+
 export default function ProcessPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+        }}
+      />
       <PageHero
         eyebrow="Our process"
         title="A process with"

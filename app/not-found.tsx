@@ -4,7 +4,14 @@ import { ButtonLink } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/Logo";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 
-export const metadata: Metadata = { title: "Page not found" };
+// Without this the 404 inherits the root canonical and points at the homepage,
+// which invites Google to index an error page as if it were "/". Nothing here
+// should be indexed, and nothing should claim to be another URL.
+export const metadata: Metadata = {
+  title: "Page not found",
+  robots: { index: false, follow: true },
+  alternates: { canonical: null },
+};
 
 export default function NotFound() {
   return (

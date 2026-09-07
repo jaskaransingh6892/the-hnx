@@ -8,6 +8,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { engagementModels, services } from "@/lib/content";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -16,9 +17,48 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
+// An ItemList tells Google this page is a catalogue pointing at eight indexable
+// service pages rather than one long page about everything, which is what makes
+// the individual pages eligible to surface instead of this one.
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    url: `${site.url}/services`,
+    name: `Services — ${site.name}`,
+    inLanguage: "en",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: services.map((service, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: service.title,
+        url: `${site.url}/services/${service.slug}`,
+      })),
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${site.url}/services` },
+    ],
+  },
+];
+
 export default function ServicesPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+        }}
+      />
       <PageHero
         eyebrow="Services"
         title="Technology Built Around"

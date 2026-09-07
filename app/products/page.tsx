@@ -8,6 +8,8 @@ import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { products } from "@/lib/content";
+import { caseStudies } from "@/lib/case-studies";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -15,6 +17,39 @@ export const metadata: Metadata = {
     "Retail billing and school management software built, shipped, and supported by The HNX — both running in production today.",
   alternates: { canonical: "/products" },
 };
+
+// Only the products with a case-study page are listed: an ItemList entry
+// pointing at a URL that does not exist is a broken promise to the crawler.
+const listed = products.filter((product) => caseStudies[product.slug]);
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    url: `${site.url}/products`,
+    name: `Products — ${site.name}`,
+    inLanguage: "en",
+    isPartOf: { "@id": `${site.url}/#website` },
+    about: { "@id": `${site.url}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: listed.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: product.name,
+        url: `${site.url}/products/${product.slug}`,
+      })),
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+      { "@type": "ListItem", position: 2, name: "Products", item: `${site.url}/products` },
+    ],
+  },
+];
 
 const productPrinciples = [
   {
@@ -42,6 +77,13 @@ export default function ProductsPage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+        }}
+      />
       <PageHero
         eyebrow="Products"
         title="Products Built for"

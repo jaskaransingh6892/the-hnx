@@ -5,8 +5,16 @@ import { nav, site } from "@/lib/site";
 
 const url = (path: string) => `${site.url}${path === "/" ? "" : path}`;
 
+/**
+ * When this was last a real content change — bump it when page copy changes,
+ * not on every deploy. `new Date()` here would restamp all 18 URLs on every
+ * build, and a lastmod that always says "just now" is one a crawler learns to
+ * ignore, which is worse than not sending one.
+ */
+const LAST_CONTENT_UPDATE = new Date("2026-09-07");
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const now = LAST_CONTENT_UPDATE;
 
   const pages: MetadataRoute.Sitemap = nav.map((item) => ({
     url: url(item.href),
