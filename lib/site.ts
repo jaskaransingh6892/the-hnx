@@ -38,11 +38,14 @@ export const site = {
   /** Google Tag Manager container ID; override per environment with NEXT_PUBLIC_GTM_ID. */
   gtmId: process.env.NEXT_PUBLIC_GTM_ID || "GTM-K98J9FCB",
   /**
-   * Search Console HTML-tag verification token. Only needed if the domain is
-   * verified by meta tag rather than DNS; leave NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-   * unset and no tag is emitted.
+   * Search Console HTML-tag verification token, checked in deliberately: it is
+   * served in the page head on every request, so it is public by design and is
+   * not a credential. Search Console keeps checking for it after verification —
+   * removing it un-verifies the property.
    */
-  googleSiteVerification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+  googleSiteVerification:
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+    "A2OLyaGhacAh2P_6UpYgk5fmKUjc7tzfRJPBMnY7vFk",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/the-hnx-278582434/" },
     { label: "X", href: "https://x.com/the__hnx" },
