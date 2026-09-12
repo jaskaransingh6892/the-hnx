@@ -23,6 +23,7 @@ import {
   ScanSearch,
   Server,
   ShieldCheck,
+  Stethoscope,
   Store,
   Smartphone,
   Sparkles,
@@ -193,6 +194,19 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  {
+    slug: "nabz",
+    name: "Nabz",
+    category: "Clinic Management",
+    status: "Live",
+    href: "https://nabz.co.in/",
+    summary: "The clinic OS for small practices.",
+    description:
+      "Patients, the live OPD queue, prescriptions, billing and medicine stock in one place — built for the clinics the big hospital systems ignore, priced like a clinic expense.",
+    icon: Stethoscope,
+    accent: "from-emerald-400 to-teal-600",
+    highlights: ["Live OPD queue", "Prescriptions in a minute", "Cash-box-accurate billing", "Medicine stock alerts"],
+  },
   {
     slug: "myinventory",
     name: "MyInventory",

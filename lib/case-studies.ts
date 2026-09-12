@@ -27,6 +27,91 @@ export type CaseStudy = {
 };
 
 export const caseStudies: Record<string, CaseStudy> = {
+  nabz: {
+    metaTitle: "Nabz — Clinic Management Software Case Study",
+    metaDescription:
+      "How we built Nabz: patient records with UHID, a live OPD queue, one-minute prescriptions, cash-accurate billing, and medicine stock for small clinics.",
+    h1: "Nabz",
+    standfirst:
+      "Clinic software for the practices that still run on a register, a diary and a WhatsApp group — patients, queue, prescriptions, billing and stock in one place the receptionist can actually use.",
+    problem: [
+      "Hospital information systems are built for hospitals. They assume an IT department, a six-week implementation, and a per-seat budget. A three-doctor clinic has none of those, so it keeps running on a paper register — and the software industry treats that as the clinic’s fault.",
+      "Small clinics do not lose money on big things. They lose it on small ones. A regular patient returns after eight months and nobody can find what was prescribed last time, so the workup starts again. Three patients pay cash during the rush and by evening the register and the cash box disagree with no way to check. Stock is a guess, so you either run out mid-consult or find a strip six months past its date at the back of the cupboard.",
+      "Nabz was built for exactly that clinic: the whole of the front desk and the consulting room, and nothing else.",
+    ],
+    decisions: [
+      {
+        title: "Four screens, not twenty-five modules",
+        body: "Patient walks in, token is issued, doctor consults, bill and go. That is the entire workflow. Software a receptionist can learn between two patients gets used; software that needs training does not, however complete its feature list.",
+      },
+      {
+        title: "A UHID from the first visit",
+        body: "Every patient gets a permanent identifier on registration, so searching a name or phone number brings up the whole history — visits, prescriptions, bills — on one screen. The eight-month-old prescription is the reason the system exists.",
+      },
+      {
+        title: "The queue is shared, not shouted",
+        body: "The front desk marks arrivals and the doctor’s own screen updates immediately. It replaces calling names across a waiting room, which is the part of a small clinic that scales worst.",
+      },
+      {
+        title: "Billing that reconciles against the cash box",
+        body: "Consultation fees, procedures, discounts and GST, with cash, UPI or card recorded against each bill. The evening check is a screen rather than an argument.",
+      },
+      {
+        title: "Priced like a clinic expense",
+        body: "₹499 a month for a solo doctor, ₹999 for a clinic with a front desk. A 14-day trial with no card, monthly or yearly, cancel whenever. Data exports at any time and there is no lock-in — a clinic that cannot leave never really chose to stay.",
+      },
+    ],
+    built: [
+      {
+        area: "Patients",
+        items: [
+          "UHID issued on first visit, permanent thereafter",
+          "Search by name or phone, full history on one screen",
+          "Twenty seconds to register someone new",
+          "Visits, prescriptions and bills tied to the same record",
+        ],
+      },
+      {
+        area: "The OPD day",
+        items: [
+          "Live queue shared between front desk and doctor",
+          "Token numbers issued and printed on arrival",
+          "Appointments booked by slot, with the day at a glance",
+          "Follow-up date set while the prescription is still open",
+        ],
+      },
+      {
+        area: "Consulting room",
+        items: [
+          "Vitals, complaints, diagnosis and prescription on one page",
+          "Last visit visible beside the current one",
+          "Medicines picked from the clinic’s own list with 1-0-1 style dosing",
+          "Print on letterhead or send to the patient on WhatsApp",
+        ],
+      },
+      {
+        area: "Money",
+        items: [
+          "Consultation fees, procedures, discounts and GST",
+          "Cash, UPI and card recorded per bill",
+          "Pending payments visible rather than remembered",
+          "GST invoices and revenue and footfall reports",
+        ],
+      },
+      {
+        area: "Pharmacy stock",
+        items: [
+          "What is dispensed tracked against what is held",
+          "Low-stock warnings before something runs out",
+          "Expiry warnings before a strip becomes unusable",
+          "No parallel spreadsheet to keep in step",
+        ],
+      },
+    ],
+    stack: ["Next.js", "PostgreSQL", "Prisma", "Razorpay", "WhatsApp delivery"],
+    results: [],
+  },
+
   myinventory: {
     metaTitle: "MyInventory — Retail Stock & Billing Software Case Study",
     metaDescription:
