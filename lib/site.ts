@@ -30,7 +30,7 @@ export const site = {
     "Building powerful digital products, intelligent software, and technology for what's next.",
   email: "info@thehnx.com",
   salesEmail: "projects@thehnx.com",
-  phone: "+91-896-843-0482",
+  phone: "+91 78890 02108",
   location: "Remote-first — delivering to teams worldwide",
   hours: "Mon – Fri · 09:00 – 19:00",
   /** GA4 measurement ID for the Google tag; override per environment with NEXT_PUBLIC_GA_ID. */
