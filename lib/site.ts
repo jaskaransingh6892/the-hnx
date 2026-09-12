@@ -31,6 +31,13 @@ export const site = {
   email: "info@thehnx.com",
   salesEmail: "projects@thehnx.com",
   phone: "+91 78890 02108",
+  /**
+   * The wa.me form of `phone`, digits only. Derived rather than typed twice so
+   * the two can never disagree the way the old number did across our sites.
+   */
+  get whatsapp() {
+    return this.phone.replace(/\D/g, "");
+  },
   location: "Remote-first — delivering to teams worldwide",
   hours: "Mon – Fri · 09:00 – 19:00",
   /** GA4 measurement ID for the Google tag; override per environment with NEXT_PUBLIC_GA_ID. */

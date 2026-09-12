@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { assurances } from "@/lib/content";
@@ -12,6 +12,13 @@ const details = [
     label: "Phone",
     value: site.phone,
     href: `tel:${site.phone.replace(/[^+\d]/g, "")}`,
+  },
+  {
+    icon: MessageCircle,
+    label: "WhatsApp",
+    value: site.phone,
+    href: `https://wa.me/${site.whatsapp}`,
+    external: true,
   },
   { icon: MapPin, label: "Where we work", value: site.location },
   { icon: Clock, label: "Hours", value: site.hours },
@@ -46,6 +53,9 @@ export function ContactSection() {
                         {detail.href ? (
                           <a
                             href={detail.href}
+                            {...("external" in detail && detail.external
+                              ? { target: "_blank", rel: "noreferrer noopener" }
+                              : {})}
                             className="text-[0.9375rem] text-mist-100 transition-colors duration-300 hover:text-hnx-cyan"
                           >
                             {detail.value}

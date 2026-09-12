@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { services } from "@/lib/content";
 import { nav, site } from "@/lib/site";
@@ -93,6 +93,17 @@ export function Footer() {
                 >
                   <Phone className="h-4 w-4 text-mist-400" strokeWidth={1.6} />
                   {site.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/${site.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-2.5 transition-colors duration-300 hover:text-hnx-cyan"
+                >
+                  <MessageCircle className="h-4 w-4 text-mist-400" strokeWidth={1.6} />
+                  WhatsApp
                 </a>
               </li>
               <li className="inline-flex items-start gap-2.5">
