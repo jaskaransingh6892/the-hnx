@@ -8,7 +8,7 @@ import { services } from "@/lib/content";
 
 export function ServicesSection() {
   return (
-    <section id="services" className="relative overflow-hidden py-20 sm:py-24">
+    <section id="services" className="relative overflow-hidden bg-[#f4f7ff] py-20 sm:py-24">
       <GridField className="opacity-60" />
       <div
         aria-hidden

@@ -51,7 +51,7 @@ export function Navbar() {
         className={cn(
           "transition-[background-color,border-color,backdrop-filter,box-shadow] duration-500",
           scrolled || open
-            ? "border-b border-white/[0.07] bg-ink-950/72 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl"
+            ? "border-b border-slate-900/[0.08] bg-white/85 shadow-[0_12px_36px_-26px_rgba(50,72,130,0.28)] backdrop-blur-xl"
             : "border-b border-transparent bg-transparent",
         )}
       >
@@ -75,7 +75,7 @@ export function Navbar() {
                   {isActive(item.href) && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 -z-10 rounded-full border border-white/10 bg-white/[0.06]"
+                      className="absolute inset-0 -z-10 rounded-full border border-hnx-blue/15 bg-hnx-blue/[0.08]"
                       transition={{ duration: 0.45, ease: EASE }}
                     />
                   )}
@@ -97,7 +97,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04] lg:hidden"
+            className="relative grid h-11 w-11 place-items-center rounded-full border border-hnx-blue/15 bg-white/90 shadow-sm lg:hidden"
           >
             <span className="sr-only">Menu</span>
             <span className="relative block h-3.5 w-5">
@@ -129,7 +129,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto border-t border-white/[0.07] bg-ink-950/[0.97] backdrop-blur-2xl lg:hidden"
+            className="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto border-t border-slate-900/[0.08] bg-ink-950/[0.97] backdrop-blur-2xl lg:hidden"
           >
             <div className="shell flex min-h-full flex-col justify-between gap-10 py-10">
               <ul className="flex flex-col gap-1.5">
@@ -145,7 +145,7 @@ export function Navbar() {
                       className={cn(
                         "flex items-center justify-between rounded-2xl border border-transparent px-4 py-4 font-display text-2xl font-semibold transition-colors",
                         isActive(item.href)
-                          ? "border-white/10 bg-white/[0.05] text-mist-100"
+                          ? "border-slate-900/10 bg-slate-900/[0.05] text-mist-100"
                           : "text-mist-300 hover:text-mist-100",
                       )}
                     >

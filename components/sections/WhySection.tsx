@@ -12,16 +12,16 @@ function CoreVisual() {
     <div className="relative mx-auto aspect-square w-full max-w-[22rem] lg:absolute lg:left-1/2 lg:top-1/2 lg:h-full lg:w-auto lg:max-w-none lg:-translate-x-1/2 lg:-translate-y-1/2">
       <div
         aria-hidden
-        className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(155,114,248,0.28),transparent_65%)] blur-2xl animate-pulse-glow"
+        className="absolute inset-[12%] rounded-full bg-[radial-gradient(circle,rgba(155,114,248,0.24),transparent_65%)] blur-2xl animate-pulse-glow"
       />
       <svg viewBox="0 0 320 320" className="absolute inset-0 h-full w-full animate-spin-slower" aria-hidden>
-        <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(148,163,184,0.14)" strokeDasharray="2 9" />
-        <circle cx="160" cy="160" r="112" fill="none" stroke="rgba(34,211,238,0.18)" strokeDasharray="1 8" />
+        <circle cx="160" cy="160" r="152" fill="none" stroke="rgba(71,99,173,0.22)" strokeDasharray="2 9" />
+        <circle cx="160" cy="160" r="112" fill="none" stroke="rgba(8,127,156,0.22)" strokeDasharray="1 8" />
       </svg>
       <svg viewBox="0 0 320 320" className="absolute inset-0 h-full w-full animate-spin-reverse" aria-hidden>
         <circle cx="160" cy="160" r="76" fill="none" stroke="rgba(91,134,255,0.28)" strokeWidth="1.2" strokeDasharray="90 300" strokeLinecap="round" />
       </svg>
-      <div className="absolute left-1/2 top-1/2 grid h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[30%] border border-white/12 bg-[linear-gradient(150deg,rgba(25,34,58,0.95),rgba(13,18,32,0.98))] shadow-[0_18px_70px_-18px_rgba(155,114,248,0.7)] backdrop-blur-xl">
+      <div className="absolute left-1/2 top-1/2 grid h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[30%] border border-white bg-[linear-gradient(150deg,#ffffff,#eeeaff)] shadow-[0_18px_70px_-18px_rgba(120,67,216,0.32)] backdrop-blur-xl">
         <LogoMark className="h-[56%] w-[56%]" animated />
       </div>
     </div>
@@ -30,7 +30,7 @@ function CoreVisual() {
 
 export function WhySection() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-[#f4f7ff] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute left-0 top-1/3 h-80 w-80 rounded-full bg-hnx-cyan/10 blur-[120px]"

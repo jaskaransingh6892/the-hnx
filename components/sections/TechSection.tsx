@@ -27,8 +27,8 @@ function Orbit() {
       />
 
       <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden>
-        <circle cx="200" cy="200" r="128" fill="none" stroke="rgba(148,163,184,0.15)" strokeDasharray="2 8" />
-        <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(148,163,184,0.12)" strokeDasharray="2 8" />
+        <circle cx="200" cy="200" r="128" fill="none" stroke="rgba(65,95,175,0.23)" strokeDasharray="2 8" />
+        <circle cx="200" cy="200" r="188" fill="none" stroke="rgba(65,95,175,0.18)" strokeDasharray="2 8" />
       </svg>
 
       {rings.map((ring) => (
@@ -58,7 +58,7 @@ function Orbit() {
                     <div style={{ transform: `rotate(${-angle}deg)` }}>
                       <TechBadge
                         tech={tech}
-                        className="whitespace-nowrap shadow-[0_12px_34px_-14px_rgba(0,0,0,0.95)]"
+                        className="whitespace-nowrap shadow-[0_12px_34px_-18px_rgba(53,74,128,0.32)]"
                       />
                     </div>
                   </div>
@@ -69,7 +69,7 @@ function Orbit() {
         </div>
       ))}
 
-      <div className="absolute left-1/2 top-1/2 grid h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center gap-1.5 rounded-full border border-white/12 bg-[linear-gradient(150deg,rgba(25,34,58,0.95),rgba(13,18,32,0.98))] shadow-[0_20px_80px_-20px_rgba(91,134,255,0.8)] backdrop-blur-xl">
+      <div className="absolute left-1/2 top-1/2 grid h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center gap-1.5 rounded-full border border-white bg-[linear-gradient(150deg,#ffffff,#e7efff)] shadow-[0_20px_80px_-20px_rgba(62,99,233,0.3)] backdrop-blur-xl">
         <LogoMark className="h-11 w-11" animated />
         <span className="eyebrow text-mist-400">Ecosystem</span>
       </div>
@@ -106,7 +106,7 @@ function Marquee() {
 
 export function TechSection() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24">
       <div className="shell relative flex flex-col gap-12">
         <SectionHeading
           eyebrow="Our stack"
@@ -125,7 +125,7 @@ export function TechSection() {
             {techCategories.map((category) => (
               <li
                 key={category}
-                className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300"
+                className="rounded-full border border-slate-900/10 bg-slate-900/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300"
               >
                 {category}
               </li>

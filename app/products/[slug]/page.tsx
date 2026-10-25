@@ -156,7 +156,7 @@ export default async function ProductCaseStudy({
       </section>
 
       {study.results.length > 0 ? (
-        <section className="relative overflow-hidden border-y border-white/[0.06] py-16">
+        <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-16">
           <div className="shell">
             <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {study.results.map((result) => (
@@ -174,7 +174,7 @@ export default async function ProductCaseStudy({
         </section>
       ) : null}
 
-      <section className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+      <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
             eyebrow="How it was built"
@@ -233,7 +233,7 @@ export default async function ProductCaseStudy({
               {study.stack.map((tech) => (
                 <span
                   key={tech}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300"
+                  className="rounded-full border border-slate-900/10 bg-slate-900/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300"
                 >
                   {tech}
                 </span>
@@ -244,7 +244,7 @@ export default async function ProductCaseStudy({
       </section>
 
       {others.length > 0 ? (
-        <section className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+        <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
           <div className="shell flex flex-col gap-10">
             <SectionHeading eyebrow="Also ours" title="The other" highlight="product" />
             <div className="mx-auto grid w-full max-w-3xl gap-5">

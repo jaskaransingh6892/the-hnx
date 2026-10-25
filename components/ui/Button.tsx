@@ -13,11 +13,11 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "text-white shadow-[0_10px_40px_-12px_rgba(91,134,255,0.85)] hover:shadow-[0_16px_50px_-10px_rgba(91,134,255,0.95)] bg-[linear-gradient(100deg,#22d3ee_0%,#5b86ff_48%,#9b72f8_100%)] bg-[length:200%_100%] bg-[position:0%_0%] hover:bg-[position:100%_0%] [transition:background-position_.6s_ease,box-shadow_.4s_ease,transform_.3s_ease]",
+    "text-white shadow-[0_12px_30px_-14px_rgba(62,99,233,0.72)] hover:shadow-[0_18px_38px_-14px_rgba(93,77,224,0.78)] bg-[linear-gradient(100deg,#2460e8_0%,#5364e9_48%,#8b43cf_100%)] bg-[length:200%_100%] bg-[position:0%_0%] hover:bg-[position:100%_0%] [transition:background-position_.6s_ease,box-shadow_.4s_ease,transform_.3s_ease]",
   secondary:
-    "text-mist-100 border border-white/12 bg-white/[0.04] backdrop-blur-md hover:border-white/25 hover:bg-white/[0.08]",
+    "text-mist-100 border border-ink-700 bg-white/90 shadow-[0_8px_25px_-18px_rgba(53,74,128,0.45)] hover:border-hnx-blue/35 hover:bg-white hover:shadow-[0_14px_32px_-18px_rgba(53,74,128,0.4)]",
   ghost:
-    "text-mist-300 hover:text-mist-100 border border-transparent hover:border-white/10 hover:bg-white/[0.04]",
+    "text-mist-300 hover:text-mist-100 border border-transparent hover:border-slate-900/10 hover:bg-slate-900/[0.04]",
 };
 
 const sizes: Record<Size, string> = {

@@ -236,9 +236,9 @@ export const products: Product[] = [
 ];
 
 export const productStatusStyles: Record<ProductStatus, string> = {
-  Live: "border-emerald-400/30 bg-emerald-400/10 text-emerald-300",
-  "In Development": "border-sky-400/30 bg-sky-400/10 text-sky-300",
-  "Coming Soon": "border-amber-400/30 bg-amber-400/10 text-amber-300",
+  Live: "border-emerald-200 bg-emerald-50 text-emerald-800",
+  "In Development": "border-sky-200 bg-sky-50 text-sky-800",
+  "Coming Soon": "border-amber-200 bg-amber-50 text-amber-800",
 };
 
 export const productCategories = [

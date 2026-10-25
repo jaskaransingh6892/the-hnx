@@ -108,7 +108,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-white/[0.06] py-20 sm:py-24">
+      <section className="relative overflow-hidden border-t border-slate-900/[0.06] py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
             eyebrow="How we build products"

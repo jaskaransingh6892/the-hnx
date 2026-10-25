@@ -110,8 +110,9 @@ uprights, **N** in the left rail, descending diagonal and right rail, and
 - `public/brand/hnx-icon.svg` — square icon for social profiles and app stores
 
 Colour tokens and the type scale live in `app/globals.css` under `@theme`.
-Accents run cyan `#22d3ee` → blue `#4f7cff` → violet `#8b5cf6` on a near-black
-`#03050a` ground.
+The site uses a light `#f7f9ff` ground, white raised surfaces, and cyan, blue,
+and violet accents. Service icons use distinct colour families; technology
+badges use brand SVGs from Simple Icons where available.
 
 ---
 

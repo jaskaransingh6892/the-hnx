@@ -87,7 +87,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+      <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-hnx-blue/10 blur-[130px]"

@@ -130,7 +130,7 @@ export function ContactForm() {
         role="status"
       >
         <span className="grid h-16 w-16 place-items-center rounded-full border border-emerald-400/30 bg-emerald-400/10">
-          <CheckCircle2 className="h-8 w-8 text-emerald-300" strokeWidth={1.5} />
+          <CheckCircle2 className="h-8 w-8 text-emerald-700" strokeWidth={1.5} />
         </span>
         <h3 className="font-display text-2xl font-semibold text-mist-100">Message received.</h3>
         <p className="max-w-sm text-[0.9375rem] leading-relaxed text-mist-300">
@@ -233,7 +233,7 @@ export function ContactForm() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             role="alert"
-            className="mt-6 flex items-center gap-2 rounded-xl border border-rose-400/30 bg-rose-400/10 px-4 py-3 text-[0.8125rem] text-rose-200"
+            className="mt-6 flex items-center gap-2 rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-[0.8125rem] text-rose-800"
           >
             <TriangleAlert className="h-4 w-4 shrink-0" strokeWidth={1.8} />
             {serverMessage}

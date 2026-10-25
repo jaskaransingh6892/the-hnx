@@ -18,7 +18,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative isolate overflow-hidden pt-36 pb-20 sm:pt-44 sm:pb-24">
+    <section className="relative isolate overflow-hidden bg-[linear-gradient(155deg,#f7f9ff_8%,#edf4ff_58%,#f9efff_100%)] pt-36 pb-20 sm:pt-44 sm:pb-24">
       <Aurora intensity="soft" />
       <GridField />
       <div

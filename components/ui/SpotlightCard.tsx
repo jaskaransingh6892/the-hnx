@@ -24,16 +24,28 @@ export function SpotlightCard({
     const node = ref.current;
     if (!node) return;
     const rect = node.getBoundingClientRect();
-    node.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-    node.style.setProperty("--my", `${event.clientY - rect.top}px`);
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    node.style.setProperty("--mx", `${x}px`);
+    node.style.setProperty("--my", `${y}px`);
+    node.style.setProperty("--rx", `${((y / rect.height) - 0.5) * -7}deg`);
+    node.style.setProperty("--ry", `${((x / rect.width) - 0.5) * 7}deg`);
+  }
+
+  function handleLeave() {
+    const node = ref.current;
+    if (!node) return;
+    node.style.setProperty("--rx", "0deg");
+    node.style.setProperty("--ry", "0deg");
   }
 
   return (
     <Tag
       ref={ref as never}
       onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
       className={cn(
-        "edge-glow glass group relative overflow-hidden rounded-2xl transition-transform duration-500",
+        "edge-glow glass spotlight-tilt group relative overflow-hidden rounded-2xl",
         className,
       )}
       style={{ ["--glow" as string]: glow }}

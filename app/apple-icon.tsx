@@ -14,7 +14,7 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(150deg, #131a2c 0%, #080b14 100%)",
+          background: "linear-gradient(150deg, #ffffff 0%, #e8efff 100%)",
         }}
       >
         <svg width="132" height="132" viewBox="0 0 48 48">
@@ -33,7 +33,7 @@ export default function AppleIcon() {
             <path d="M12.5 9 L12.5 39" />
             <path d="M35.5 9 L35.5 39" />
           </g>
-          <circle cx="24" cy="24" r="4.8" fill="#080b14" />
+          <circle cx="24" cy="24" r="4.8" fill="#ffffff" />
           <circle cx="24" cy="24" r="2.9" fill="#7dd3fc" />
         </svg>
       </div>

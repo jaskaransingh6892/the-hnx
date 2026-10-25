@@ -6,11 +6,11 @@ export function Eyebrow({ children, className }: { children: ReactNode; classNam
   return (
     <span
       className={cn(
-        "eyebrow inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-mist-300 backdrop-blur-sm",
+        "eyebrow inline-flex items-center gap-2 rounded-full border border-hnx-blue/15 bg-hnx-blue/[0.07] px-3.5 py-1.5 font-semibold text-hnx-blue",
         className,
       )}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-hnx-cyan shadow-[0_0_10px_2px_rgba(34,211,238,0.7)]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-hnx-cyan shadow-[0_0_10px_2px_rgba(8,127,156,0.28)]" />
       {children}
     </span>
   );

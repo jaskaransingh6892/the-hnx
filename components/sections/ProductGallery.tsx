@@ -40,7 +40,7 @@ export function ProductGallery() {
               {selected && (
                 <motion.span
                   layoutId="product-filter"
-                  className="absolute inset-0 -z-10 rounded-full border border-white/12 bg-white/[0.06]"
+                  className="absolute inset-0 -z-10 rounded-full border border-slate-900/12 bg-slate-900/[0.06]"
                   transition={{ duration: 0.4, ease: EASE }}
                 />
               )}

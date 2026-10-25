@@ -32,8 +32,8 @@ export function OgCard({
         justifyContent: "space-between",
         padding: 72,
         background:
-          "radial-gradient(1000px 620px at 78% 12%, #16224a 0%, #0d1220 55%, #080b14 100%)",
-        color: "#e9effa",
+          "radial-gradient(1000px 620px at 78% 12%, #e2eaff 0%, #f5f8ff 55%, #ffffff 100%)",
+        color: "#111c38",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -53,12 +53,12 @@ export function OgCard({
             <path d="M12.5 9 L12.5 39" />
             <path d="M35.5 9 L35.5 39" />
           </g>
-          <circle cx="24" cy="24" r="4.8" fill="#080b14" />
+          <circle cx="24" cy="24" r="4.8" fill="#ffffff" />
           <circle cx="24" cy="24" r="2.9" fill="#7dd3fc" />
         </svg>
         <div style={{ display: "flex", fontSize: 34, letterSpacing: -1 }}>
-          <span style={{ color: "#94a3c0" }}>The&nbsp;</span>
-          <span style={{ color: "#7dd3fc", fontWeight: 700 }}>HNX</span>
+          <span style={{ color: "#50617d" }}>The&nbsp;</span>
+          <span style={{ color: "#3e63e9", fontWeight: 700 }}>HNX</span>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ export function OgCard({
             fontSize: 24,
             letterSpacing: 4,
             textTransform: "uppercase",
-            color: "#7dd3fc",
+            color: "#3e63e9",
           }}
         >
           {eyebrow}
@@ -90,7 +90,7 @@ export function OgCard({
         </div>
       </div>
 
-      <div style={{ display: "flex", fontSize: 24, color: "#7b8aab" }}>
+      <div style={{ display: "flex", fontSize: 24, color: "#50617d" }}>
         {footnote} · {site.domain}
       </div>
     </div>

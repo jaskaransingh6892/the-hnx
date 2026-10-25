@@ -14,6 +14,16 @@ export function ServiceCard({
   showCapabilities?: boolean;
 }) {
   const Icon = service.icon;
+  const palette = [
+    "bg-cyan-100 text-cyan-700 ring-cyan-200/70",
+    "bg-indigo-100 text-indigo-700 ring-indigo-200/70",
+    "bg-violet-100 text-violet-700 ring-violet-200/70",
+    "bg-emerald-100 text-emerald-700 ring-emerald-200/70",
+    "bg-amber-100 text-amber-700 ring-amber-200/70",
+    "bg-fuchsia-100 text-fuchsia-700 ring-fuchsia-200/70",
+    "bg-blue-100 text-blue-700 ring-blue-200/70",
+    "bg-rose-100 text-rose-700 ring-rose-200/70",
+  ][index % 8];
 
   return (
     <SpotlightCard as="article" className="h-full">
@@ -25,12 +35,11 @@ export function ServiceCard({
         <div className="flex items-start justify-between gap-4">
           <span
             className={cn(
-              "relative grid h-12 w-12 shrink-0 place-items-center rounded-xl border border-white/10 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105",
-              service.accent,
+              "relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl ring-1 shadow-[0_12px_24px_-16px_currentColor] transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110",
+              palette,
             )}
           >
-            <span className="absolute inset-0 rounded-xl bg-ink-900/70" />
-            <Icon className="relative h-[22px] w-[22px] text-mist-100" strokeWidth={1.6} />
+            <Icon className="relative h-7 w-7" strokeWidth={1.8} />
           </span>
 
           <span className="font-mono text-[0.6875rem] tracking-[0.2em] text-mist-400/70">
@@ -48,7 +57,7 @@ export function ServiceCard({
             {service.capabilities.map((capability) => (
               <li
                 key={capability}
-                className="rounded-full border border-white/8 bg-white/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
+                className="rounded-full border border-slate-900/8 bg-slate-900/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
               >
                 {capability}
               </li>

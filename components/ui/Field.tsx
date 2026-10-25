@@ -5,7 +5,7 @@ import { AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const controlClasses =
-  "w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-[0.9375rem] text-mist-100 outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-mist-400/70 hover:border-white/20 focus:border-hnx-cyan/60 focus:bg-white/[0.05] focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)]";
+  "w-full rounded-xl border border-slate-900/10 bg-slate-900/[0.03] px-4 py-3 text-[0.9375rem] text-mist-100 outline-none transition-[border-color,box-shadow,background-color] duration-300 placeholder:text-mist-400/70 hover:border-slate-900/20 focus:border-hnx-cyan/60 focus:bg-slate-900/[0.05] focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)]";
 
 type BaseProps = {
   label: string;

@@ -45,7 +45,7 @@ export function ContactSection() {
                   const Icon = detail.icon;
                   return (
                     <li key={detail.label} className="flex items-start gap-3.5">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.04]">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-slate-900/10 bg-slate-900/[0.04]">
                         <Icon className="h-4 w-4 text-hnx-cyan" strokeWidth={1.7} />
                       </span>
                       <span className="flex flex-col gap-0.5">
@@ -69,14 +69,14 @@ export function ContactSection() {
                 })}
               </ul>
 
-              <div className="flex flex-wrap gap-2 border-t border-white/[0.08] pt-6">
+              <div className="flex flex-wrap gap-2 border-t border-slate-900/[0.08] pt-6">
                 {site.socials.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noreferrer noopener"
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300 transition-colors duration-300 hover:border-hnx-cyan/40 hover:text-hnx-cyan"
+                    className="rounded-full border border-slate-900/10 bg-slate-900/[0.03] px-3.5 py-1.5 text-[0.75rem] text-mist-300 transition-colors duration-300 hover:border-hnx-cyan/40 hover:text-hnx-cyan"
                   >
                     {social.label}
                   </a>

@@ -19,7 +19,7 @@ export function ProcessSection() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 90, damping: 26, restDelta: 0.001 });
 
   return (
-    <section id="process" className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+    <section id="process" className="relative overflow-hidden border-y border-slate-900/[0.06] bg-[#f9f6ff] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(155,114,248,0.10),transparent_60%)]"
@@ -37,7 +37,7 @@ export function ProcessSection() {
           {/* rail */}
           <div
             aria-hidden
-            className="absolute left-[1.4375rem] top-2 bottom-2 w-px bg-white/[0.08] sm:left-[2.1875rem]"
+            className="absolute left-[1.4375rem] top-2 bottom-2 w-px bg-slate-900/[0.08] sm:left-[2.1875rem]"
           />
           <motion.div
             aria-hidden
@@ -58,7 +58,7 @@ export function ProcessSection() {
                   className="group relative flex gap-5 sm:gap-8"
                 >
                   <div className="relative z-10 shrink-0">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-white/12 bg-ink-900 shadow-[0_10px_40px_-16px_rgba(91,134,255,0.9)] transition-colors duration-500 group-hover:border-hnx-cyan/45 sm:h-[4.5rem] sm:w-[4.5rem]">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-slate-900/12 bg-ink-900 shadow-[0_10px_40px_-16px_rgba(91,134,255,0.9)] transition-colors duration-500 group-hover:border-hnx-cyan/45 sm:h-[4.5rem] sm:w-[4.5rem]">
                       <Icon
                         className="h-5 w-5 text-hnx-cyan transition-transform duration-500 group-hover:scale-110 sm:h-7 sm:w-7"
                         strokeWidth={1.5}
@@ -87,7 +87,7 @@ export function ProcessSection() {
                       {step.deliverables.map((deliverable) => (
                         <li
                           key={deliverable}
-                          className="rounded-full border border-white/8 bg-white/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
+                          className="rounded-full border border-slate-900/8 bg-slate-900/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
                         >
                           {deliverable}
                         </li>

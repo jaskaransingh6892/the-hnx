@@ -20,7 +20,7 @@ const capabilityStrip = [
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-28 pb-20 sm:pt-32 lg:pt-24 lg:pb-24">
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[linear-gradient(155deg,#f7f9ff_4%,#edf4ff_54%,#f9efff_100%)] pt-28 pb-20 sm:pt-32 lg:pt-24 lg:pb-24">
       <Aurora intensity="medium" />
       <GridField />
       <ParticleField className="opacity-70" />
@@ -35,7 +35,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="eyebrow inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-mist-300 backdrop-blur-sm"
+            className="eyebrow inline-flex items-center gap-2 rounded-full border border-hnx-blue/15 bg-white/80 px-4 py-2 font-semibold text-hnx-blue shadow-sm backdrop-blur-sm"
           >
             <Sparkles className="h-3.5 w-3.5 text-hnx-cyan" strokeWidth={1.8} />
             Products &amp; Engineering
@@ -99,7 +99,7 @@ export function Hero() {
             className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3"
           >
             {capabilityStrip.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-[0.75rem] text-mist-400">
+              <li key={item} className="flex items-center gap-2 text-[0.8125rem] font-medium text-mist-300">
                 <span className="h-1 w-1 rounded-full bg-hnx-blue" />
                 {item}
               </li>

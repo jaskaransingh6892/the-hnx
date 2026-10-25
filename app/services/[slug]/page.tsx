@@ -159,7 +159,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+      <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
             eyebrow="What we build"
@@ -235,7 +235,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-white/[0.06] py-20 sm:py-24">
+      <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
             eyebrow="Questions"

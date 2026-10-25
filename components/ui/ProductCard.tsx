@@ -13,19 +13,17 @@ export function ProductCard({ product }: { product: Product }) {
     <SpotlightCard
       as="article"
       className="h-full"
-      glow={isLive ? "rgba(34,211,238,0.16)" : "rgba(155,114,248,0.14)"}
+      glow={isLive ? "rgba(62,99,233,0.12)" : "rgba(120,67,216,0.1)"}
     >
       <div id={product.slug} className="flex h-full scroll-mt-32 flex-col gap-6 p-6 sm:p-7">
         <div className="flex items-start justify-between gap-4">
           <span
             className={cn(
-              "relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br p-[1px] transition-transform duration-500 group-hover:scale-105",
+              "relative grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br shadow-[0_14px_28px_-14px_rgba(62,99,233,0.35)] transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110",
               product.accent,
             )}
           >
-            <span className="grid h-full w-full place-items-center rounded-[15px] bg-ink-900">
-              <Icon className="h-6 w-6 text-mist-100" strokeWidth={1.5} />
-            </span>
+            <Icon className="h-8 w-8 text-white drop-shadow-sm" strokeWidth={1.8} />
           </span>
           <StatusBadge status={product.status} />
         </div>
@@ -43,14 +41,14 @@ export function ProductCard({ product }: { product: Product }) {
           {product.highlights.map((highlight) => (
             <li
               key={highlight}
-              className="rounded-full border border-white/8 bg-white/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
+              className="rounded-full border border-slate-900/8 bg-slate-900/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
             >
               {highlight}
             </li>
           ))}
         </ul>
 
-        <div className="mt-auto flex items-center justify-between border-t border-white/[0.07] pt-5">
+        <div className="mt-auto flex items-center justify-between border-t border-slate-900/[0.07] pt-5">
           <Link
             href={`/products/${product.slug}`}
             className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300 hover:text-hnx-cyan"
