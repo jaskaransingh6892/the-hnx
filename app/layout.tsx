@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AppLoader } from "@/components/layout/AppLoader";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { Analytics, AnalyticsNoScript } from "@/components/layout/Analytics";
 import { site } from "@/lib/site";
@@ -161,7 +162,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Without JS the scroll-reveal animations never run, so make sure
             every element they hide starts visible instead. */}
         <noscript>
-          <style>{`[style*="opacity:0"]{opacity:1!important;filter:none!important;transform:none!important}`}</style>
+          <style>{`[style*="opacity:0"]{opacity:1!important;filter:none!important;transform:none!important}.app-loader{display:none!important}html:has(.app-loader){overflow-y:auto!important}`}</style>
         </noscript>
       </head>
       <body className="min-h-screen bg-ink-950 antialiased">
@@ -173,16 +174,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-hnx-blue focus:px-5 focus:py-2.5 focus:text-sm focus:text-white"
-        >
-          Skip to content
-        </a>
-        <ScrollProgress />
-        <Navbar />
-        <main id="main">{children}</main>
-        <Footer />
+        <AppLoader />
+        <div id="app-content">
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-hnx-blue focus:px-5 focus:py-2.5 focus:text-sm focus:text-white"
+          >
+            Skip to content
+          </a>
+          <ScrollProgress />
+          <Navbar />
+          <main id="main">{children}</main>
+          <Footer />
+        </div>
         <Analytics />
       </body>
     </html>

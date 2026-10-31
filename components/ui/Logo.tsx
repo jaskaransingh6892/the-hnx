@@ -55,6 +55,7 @@ export function LogoMark({
 
       {/* diagonals: the N stroke and its mirror, forming the X */}
       <g
+        className="logo-mark-diagonals"
         stroke={`url(#${stroke})`}
         strokeWidth="3.1"
         strokeLinecap="round"
@@ -66,20 +67,22 @@ export function LogoMark({
       </g>
 
       {/* uprights: the H rails */}
-      <g stroke={`url(#${stroke})`} strokeWidth="3.4" strokeLinecap="round">
+      <g className="logo-mark-rails" stroke={`url(#${stroke})`} strokeWidth="3.4" strokeLinecap="round">
         <path d="M12.5 9 L12.5 39" />
         <path d="M35.5 9 L35.5 39" />
       </g>
 
       {/* the connection node */}
-      <circle cx="24" cy="24" r="4.8" fill="#080b14" />
-      <circle
-        cx="24"
-        cy="24"
-        r="2.9"
-        fill={`url(#${core})`}
-        className={animated ? "origin-center animate-pulse-glow" : undefined}
-      />
+      <g className="logo-mark-node">
+        <circle cx="24" cy="24" r="4.8" fill="#080b14" />
+        <circle
+          cx="24"
+          cy="24"
+          r="2.9"
+          fill={`url(#${core})`}
+          className={animated ? "origin-center animate-pulse-glow" : undefined}
+        />
+      </g>
     </svg>
   );
 }
