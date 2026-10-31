@@ -70,7 +70,7 @@ function Orbit() {
       ))}
 
       <div className="absolute left-1/2 top-1/2 grid h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 place-items-center gap-1.5 rounded-full border border-white bg-[linear-gradient(150deg,#ffffff,#e7efff)] shadow-[0_20px_80px_-20px_rgba(62,99,233,0.3)] backdrop-blur-xl">
-        <LogoMark className="h-11 w-11" animated />
+        <LogoMark className="-mb-1 h-20 w-20 scale-150 drop-shadow-[0_8px_18px_rgba(62,99,233,0.24)]" animated />
         <span className="eyebrow text-mist-400">Ecosystem</span>
       </div>
     </div>
