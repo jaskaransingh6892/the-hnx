@@ -36,13 +36,13 @@ export function Aurora({
   );
 }
 
-/** Faint technical grid with a radial fade, used as a section floor. */
+/** Shared Faceted Light background used as a section floor. */
 export function GridField({ className }: { className?: string }) {
   return (
     <div
       aria-hidden
       className={cn(
-        "grid-field pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_15%,transparent_72%)]",
+        "grid-field pointer-events-none absolute inset-0",
         className,
       )}
     />

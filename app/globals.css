@@ -196,11 +196,6 @@
     position: absolute;
     inset: 0;
     content: "";
-    background-image:
-      linear-gradient(to right, rgb(78 111 173 / 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(78 111 173 / 0.07) 1px, transparent 1px);
-    background-size: 62px 62px;
-    mask-image: radial-gradient(circle, black 10%, transparent 72%);
     pointer-events: none;
   }
   .app-loader--leaving { opacity: 0; pointer-events: none; }
@@ -370,11 +365,16 @@
     color: transparent;
   }
 
-  .grid-field {
+  /* Faceted Light replaces the square grid wherever it appeared, including the loader. */
+  .grid-field,
+  .app-loader::before {
     background-image:
-      linear-gradient(to right, rgb(72 105 165 / 0.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(72 105 165 / 0.08) 1px, transparent 1px);
-    background-size: 64px 64px;
+      linear-gradient(132deg, transparent 0 38%, rgb(62 99 233 / 0.065) 38% 50%, transparent 50% 100%),
+      linear-gradient(132deg, transparent 0 51.8%, rgb(72 105 165 / 0.14) 52%, transparent 52.2% 100%),
+      linear-gradient(132deg, transparent 0 64.8%, rgb(120 67 216 / 0.11) 65%, transparent 65.2% 100%),
+      linear-gradient(132deg, transparent 0 77.8%, rgb(8 127 156 / 0.10) 78%, transparent 78.2% 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 20%, #000 95%);
+    mask-image: linear-gradient(90deg, transparent 20%, #000 95%);
   }
 
   .noise-layer {
