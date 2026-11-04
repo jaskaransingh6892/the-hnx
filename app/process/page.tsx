@@ -10,11 +10,29 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { engagementModels, processSteps } from "@/lib/content";
 import { site } from "@/lib/site";
 
+const pageTitle = "Our Process";
+const pageDescription =
+  "Discover, strategy, design, build, launch and scale — how The HNX turns an idea into software that lasts.";
+
 export const metadata: Metadata = {
-  title: "Our Process",
-  description:
-    "Discover, strategy, design, build, launch and scale — how The HNX turns an idea into software that lasts.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/process" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/process`,
+    locale: "en_US",
+    images: [{ url: `${site.url}/opengraph-image`, width: 1200, height: 630, alt: "The HNX" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${site.url}/opengraph-image`],
+  },
 };
 
 // The page is already a numbered sequence; HowTo just states that in a form a

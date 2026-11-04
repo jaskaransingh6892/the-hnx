@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
 
-export const alt = `${site.name} — ${site.tagline}`;
+export const alt = `${site.name} — website development, ERP and cybersecurity VAPT`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,18 +53,18 @@ export default function OpengraphImage() {
             Building What&apos;s Next.
           </div>
           <div style={{ display: "flex", fontSize: 30, color: "#50617d", maxWidth: 900 }}>
-            Digital products, intelligent software, and AI-driven systems.
+            Custom websites, ERP systems, and cybersecurity testing.
           </div>
         </div>
 
         <div style={{ display: "flex", gap: 16, fontSize: 22, color: "#50617d" }}>
           <span>Web</span>
           <span>·</span>
-          <span>ERP &amp; SaaS</span>
+          <span>ERP &amp; CRM</span>
           <span>·</span>
-          <span>Mobile</span>
+          <span>VAPT</span>
           <span>·</span>
-          <span>AI &amp; Automation</span>
+          <span>Custom Software</span>
           <span>·</span>
           <span>Cloud</span>
         </div>

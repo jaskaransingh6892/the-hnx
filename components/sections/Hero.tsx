@@ -1,6 +1,8 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "motion/react";
+import Link from "next/link";
 import { ArrowRight, MoveDown, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { EASE } from "@/components/ui/Reveal";
@@ -12,10 +14,11 @@ import { site } from "@/lib/site";
 const headline = ["Building", "What's", "Next."];
 
 const capabilityStrip = [
-  "Digital Products",
-  "Enterprise Software",
-  "AI Systems",
-  "Cloud Platforms",
+  { label: "Website Development", href: "/services/web-development" },
+  { label: "ERP Systems", href: "/services/erp-business-systems" },
+  { label: "Cybersecurity & VAPT", href: "/services/cybersecurity" },
+  { label: "AI & Automation", href: "/services/ai-automation" },
+  { label: "Custom Software", href: "/services/custom-software" },
 ];
 
 export function Hero() {
@@ -30,7 +33,7 @@ export function Hero() {
       />
 
       <div className="shell relative grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
-        <div className="flex flex-col items-start gap-7">
+        <div className="flex min-w-0 flex-col items-start gap-7">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -41,29 +44,35 @@ export function Hero() {
             Products &amp; Engineering
           </motion.span>
 
-          {/* The brand name lives inside the h1, not just the <title>. Search
-              engines lean on the h1 to decide what entity a homepage is about,
-              and "Building What's Next." on its own never names the company. */}
-          <h1 className="font-display text-[clamp(2.7rem,8.2vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.035em]">
+          {/* Name the company and its work in the visible heading so the page
+              makes sense beyond the brand tagline. */}
+          <h1 className="w-full font-display text-[clamp(2.7rem,8.2vw,5.4rem)] font-bold leading-[0.98] tracking-[-0.035em]">
             <motion.span
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EASE }}
-              className="mb-3 block font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.22em] text-mist-400 sm:text-sm"
+              className="mb-3 block w-full font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.14em] text-mist-400 sm:text-sm"
             >
-              {site.name}
+              {site.name} — Websites, ERP &amp; Cybersecurity
             </motion.span>
             {headline.map((word, index) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.85, delay: 0.12 + index * 0.11, ease: EASE }}
-                className={index === 2 ? "text-gradient-accent inline-block" : "inline-block"}
-              >
-                {word}
-                {index < headline.length - 1 ? " " : ""}
-              </motion.span>
+              <Fragment key={word}>
+                <motion.span
+                  initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ duration: 0.85, delay: 0.12 + index * 0.11, ease: EASE }}
+                  className={
+                    index === 0
+                      ? "block sm:inline-block"
+                      : index === 2
+                        ? "text-gradient-accent inline-block"
+                        : "inline-block"
+                  }
+                >
+                  {word}
+                </motion.span>
+                {index < headline.length - 1 ? " " : null}
+              </Fragment>
             ))}
           </h1>
 
@@ -71,11 +80,10 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.42, ease: EASE }}
-            className="max-w-xl text-[1.0125rem] leading-relaxed text-mist-300 sm:text-lg"
+            className="w-full max-w-xl text-[1.0125rem] leading-relaxed text-mist-300 sm:text-lg"
           >
-            We design, build, and scale powerful digital products, intelligent software,
-            and AI-driven solutions — for startups finding their shape and enterprises
-            rebuilding their core.
+            We build websites, ERP and CRM systems, AI workflows, and custom software. We also assess
+            websites and APIs through scoped VAPT and security audits for teams worldwide.
           </motion.p>
 
           <motion.div
@@ -85,7 +93,7 @@ export function Hero() {
             className="flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <ButtonLink href="/contact" size="lg" icon={<ArrowRight className="h-[18px] w-[18px]" />}>
-              Start Your Project
+              Talk to an Engineer
             </ButtonLink>
             <ButtonLink href="/products" size="lg" variant="secondary">
               Explore Our Work
@@ -96,12 +104,14 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.72 }}
-            className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3"
+            className="flex w-full flex-wrap items-center gap-x-6 gap-y-2 pt-3"
           >
             {capabilityStrip.map((item) => (
-              <li key={item} className="flex items-center gap-2 text-[0.8125rem] font-medium text-mist-300">
+              <li key={item.href} className="flex items-center gap-2 text-[0.8125rem] font-medium text-mist-300">
                 <span className="h-1 w-1 rounded-full bg-hnx-blue" />
-                {item}
+                <Link href={item.href} className="transition-colors hover:text-hnx-blue">
+                  {item.label}
+                </Link>
               </li>
             ))}
           </motion.ul>

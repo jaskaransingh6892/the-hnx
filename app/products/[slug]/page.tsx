@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Check, ExternalLink } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { CTASection } from "@/components/sections/CTASection";
@@ -9,7 +10,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { OwnershipSeal } from "@/components/ui/OwnershipSeal";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { products } from "@/lib/content";
+import { products, services } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
 import { site } from "@/lib/site";
 
@@ -24,6 +25,12 @@ function find(slug: string) {
   const study = caseStudies[slug];
   return product && study ? { product, study } : null;
 }
+
+const relevantServiceSlugs: Record<string, string[]> = {
+  nabz: ["custom-software", "erp-business-systems"],
+  myinventory: ["erp-business-systems", "web-development"],
+  educationcloud: ["custom-software", "web-development"],
+};
 
 export async function generateMetadata({
   params,
@@ -64,6 +71,10 @@ export default async function ProductCaseStudy({
 
   const { product, study } = found;
   const others = products.filter((item) => item.slug !== slug && caseStudies[item.slug]);
+  const relatedServices = services.filter((service) =>
+    relevantServiceSlugs[slug]?.includes(service.slug),
+  );
+  const contactHref = `/contact?product=${encodeURIComponent(product.name)}`;
   const url = `${site.url}/products/${slug}`;
 
   const schema = [
@@ -99,7 +110,7 @@ export default async function ProductCaseStudy({
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }}
       />
 
       <PageHero eyebrow={product.category} title={study.h1} description={study.standfirst}>
@@ -115,7 +126,7 @@ export default async function ProductCaseStudy({
               <ExternalLink className="h-4 w-4" strokeWidth={1.8} />
             </a>
           ) : null}
-          <ButtonLink href="/contact" size="lg" variant="secondary">
+          <ButtonLink href={contactHref} size="lg" variant="secondary">
             Build something like this
           </ButtonLink>
           <StatusBadge status={product.status} />
@@ -155,6 +166,38 @@ export default async function ProductCaseStudy({
         </div>
       </section>
 
+      {study.screenshots?.length ? (
+        <section className="relative overflow-hidden border-y border-slate-900/[0.06] bg-white py-20 sm:py-24">
+          <div className="shell flex flex-col gap-12">
+            <SectionHeading
+              eyebrow="Product screens"
+              title="See the system"
+              highlight="in use"
+              description="Screens from the product itself, with the workflow each one shows."
+            />
+            <div className="grid gap-6 md:grid-cols-2">
+              {study.screenshots.map((screenshot) => (
+                <figure key={screenshot.src} className="glass overflow-hidden rounded-2xl p-3 sm:p-4">
+                  <div className="overflow-hidden rounded-xl border border-slate-900/[0.06] bg-white">
+                    <Image
+                      src={screenshot.src}
+                      width={screenshot.width}
+                      height={screenshot.height}
+                      alt={screenshot.alt}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="h-auto w-full"
+                    />
+                  </div>
+                  <figcaption className="px-2 pt-4 pb-2 text-[0.8125rem] leading-relaxed text-mist-300">
+                    {screenshot.caption}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       {study.results.length > 0 ? (
         <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-16">
           <div className="shell">
@@ -166,10 +209,49 @@ export default async function ProductCaseStudy({
                       {result.metric}
                     </p>
                     <p className="mt-3 text-[0.8125rem] text-mist-300">{result.label}</p>
+                    <p className="mt-2 text-[0.75rem] leading-relaxed text-mist-400">
+                      {result.context}
+                    </p>
                   </div>
                 </StaggerItem>
               ))}
             </Stagger>
+          </div>
+        </section>
+      ) : null}
+
+      {study.testimonials?.length ? (
+        <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
+          <div className="shell flex flex-col gap-12">
+            <SectionHeading eyebrow="Approved feedback" title="In their" highlight="own words" />
+            <div className="mx-auto grid w-full max-w-5xl gap-5 md:grid-cols-2">
+              {study.testimonials.map((testimonial) => (
+                <figure key={`${testimonial.organization}-${testimonial.name}`} className="glass edge-glow flex h-full flex-col rounded-2xl p-7 sm:p-8">
+                  <blockquote className="font-display text-[1.0625rem] leading-relaxed text-mist-100">
+                    “{testimonial.quote}”
+                  </blockquote>
+                  <figcaption className="mt-auto flex items-center gap-4 pt-7">
+                    {testimonial.logo ? (
+                      <Image
+                        src={testimonial.logo.src}
+                        width={testimonial.logo.width}
+                        height={testimonial.logo.height}
+                        alt={testimonial.logo.alt}
+                        className="h-10 w-auto max-w-28 object-contain"
+                      />
+                    ) : null}
+                    <span className="flex flex-col gap-0.5">
+                      <strong className="text-[0.875rem] font-semibold text-mist-100">
+                        {testimonial.name}
+                      </strong>
+                      <span className="text-[0.75rem] text-mist-400">
+                        {testimonial.role} · {testimonial.organization}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
       ) : null}
@@ -243,10 +325,40 @@ export default async function ProductCaseStudy({
         </div>
       </section>
 
+      {relatedServices.length > 0 ? (
+        <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
+          <div className="shell flex flex-col gap-10">
+            <SectionHeading
+              eyebrow="Related services"
+              title="Explore the work"
+              highlight="behind this build"
+              description="See how we approach similar systems for other teams."
+            />
+            <Stagger className="grid gap-5 md:grid-cols-2">
+              {relatedServices.map((service) => (
+                <StaggerItem key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="glass edge-glow group flex h-full flex-col gap-2.5 rounded-2xl p-6"
+                  >
+                    <h3 className="font-display text-base font-bold text-mist-100">{service.title}</h3>
+                    <p className="text-[0.8125rem] leading-relaxed text-mist-300">{service.description}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[0.8125rem] font-medium text-hnx-cyan">
+                      Explore {service.title}
+                      <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
+                    </span>
+                  </Link>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </section>
+      ) : null}
+
       {others.length > 0 ? (
         <section className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24">
           <div className="shell flex flex-col gap-10">
-            <SectionHeading eyebrow="Also ours" title="The other" highlight="product" />
+            <SectionHeading eyebrow="Also ours" title="More of our" highlight="products" />
             <div className="mx-auto grid w-full max-w-3xl gap-5">
               {others.map((item) => (
                 <Reveal key={item.slug}>
@@ -279,7 +391,7 @@ export default async function ProductCaseStudy({
       <section className="relative pb-16">
         <div className="shell flex justify-center">
           <ButtonLink
-            href="/contact"
+            href={contactHref}
             size="lg"
             icon={<ArrowRight className="h-[18px] w-[18px]" />}
           >

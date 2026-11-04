@@ -54,7 +54,7 @@ export function ServiceCard({
 
         {showCapabilities ? (
           <ul className="mt-auto flex flex-wrap gap-1.5 pt-1">
-            {service.capabilities.map((capability) => (
+            {service.capabilities.slice(0, 4).map((capability) => (
               <li
                 key={capability}
                 className="rounded-full border border-slate-900/8 bg-slate-900/[0.03] px-2.5 py-1 text-[0.6875rem] text-mist-300"
@@ -62,6 +62,11 @@ export function ServiceCard({
                 {capability}
               </li>
             ))}
+            {service.capabilities.length > 4 ? (
+              <li className="rounded-full border border-hnx-blue/15 bg-hnx-blue/[0.05] px-2.5 py-1 text-[0.6875rem] font-medium text-hnx-blue">
+                +{service.capabilities.length - 4} more
+              </li>
+            ) : null}
           </ul>
         ) : null}
 

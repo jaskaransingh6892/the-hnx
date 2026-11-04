@@ -15,19 +15,17 @@ export const site = {
   name: "The HNX",
   legalName: "The HNX",
   /**
-   * Every spelling people actually type for the brand. Google reads "thehnx" as
-   * a misspelling of other words until it recognises it as a name, so these are
-   * published as schema.org alternateName values on the Organization and the
-   * WebSite to tie all the variants to one entity.
+   * Brand spellings published as schema.org alternateName values on the
+   * Organization and WebSite nodes.
    */
-  alternateNames: ["TheHNX", "The HNX", "HNX", "The Hnx", "TheHnx", "HNX Technologies"],
+  alternateNames: ["TheHNX", "The HNX", "HNX", "The Hnx", "TheHnx"],
   domain: "thehnx.com",
   url: origin,
   tagline: "Building What's Next.",
   description:
-    "The HNX builds powerful digital products, intelligent software, and AI-driven systems for startups, businesses, and enterprises worldwide.",
+    "The HNX builds websites, ERP and CRM systems, custom software, and AI workflows, and provides website and API VAPT for teams worldwide.",
   shortDescription:
-    "Building powerful digital products, intelligent software, and technology for what's next.",
+    "Websites, ERP, AI, VAPT, and custom software for teams worldwide.",
   email: "info@thehnx.com",
   salesEmail: "projects@thehnx.com",
   phone: "+91 78890 02108",

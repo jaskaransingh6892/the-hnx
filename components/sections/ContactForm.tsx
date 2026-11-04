@@ -7,7 +7,8 @@ import { CheckCircle2, Loader2, Send, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SelectField, TextAreaField, TextField } from "@/components/ui/Field";
 import { EASE } from "@/components/ui/Reveal";
-import { budgetRanges, projectTypes } from "@/lib/content";
+import { budgetRanges, products, projectTypes } from "@/lib/content";
+import { site } from "@/lib/site";
 
 type Values = {
   name: string;
@@ -34,6 +35,33 @@ const empty: Values = {
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
+const messagePrompts: Record<string, string> = {
+  Website: "Share your current website, the pages or features you need, your audience, and your launch goal.",
+  "ERP / CRM": "Which tools do you use today, what workflow should the first module solve, and who will use it?",
+  "Cybersecurity / VAPT": "Which website or API needs assessment, is it staging or production, and what is your target timeframe? Do not include passwords.",
+};
+
+const stageIntros: Record<string, string> = {
+  planning: "We are planning a new project.",
+  live: "We want to improve something already live.",
+  problem: "We need to solve a specific problem.",
+};
+
+function emailFallback(values: Values) {
+  const subject = `Project enquiry: ${values.projectType || "New project"}`;
+  const body = [
+    `Name: ${values.name.trim()}`,
+    `Email: ${values.email.trim()}`,
+    ...(values.company.trim() ? [`Company: ${values.company.trim()}`] : []),
+    `Project type: ${values.projectType}`,
+    ...(values.budget ? [`Budget: ${values.budget}`] : []),
+    "",
+    values.message.trim(),
+  ].join("\n");
+
+  return `mailto:${site.salesEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export function validate(values: Values): Errors {
   const errors: Errors = {};
 
@@ -42,6 +70,8 @@ export function validate(values: Values): Errors {
   if (!values.projectType) errors.projectType = "Choose the closest project type.";
   if (values.message.trim().length < 20) {
     errors.message = "A little more detail helps. Twenty characters minimum.";
+  } else if (values.message.trim().length > 5000) {
+    errors.message = "Please keep the message under 5,000 characters.";
   }
 
   return errors;
@@ -54,22 +84,30 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [serverMessage, setServerMessage] = useState("");
 
-  // Product cards link through as /contact?product=<slug>. Seeding the form
-  // during render keeps it out of an effect and out of the submit path.
+  // Product cards and the scope planner pass only fixed context in the URL.
+  // The key also updates the form when a visitor chooses another shortcut
+  // while already on the contact page.
   const params = useSearchParams();
-  const product = params.get("product");
+  const requestedProduct = params.get("product");
+  const product = products.find((item) => item.name === requestedProduct)?.name ?? null;
   const requestedType = params.get("type");
-  const [seeded, setSeeded] = useState(false);
+  const requestedStage = params.get("stage");
+  const seedKey = `${product ?? ""}|${requestedType ?? ""}|${requestedStage ?? ""}`;
+  const starterMessage = [
+    ...(product ? [`I would like to talk about ${product}.`] : []),
+    ...(requestedStage && stageIntros[requestedStage] ? [stageIntros[requestedStage]] : []),
+  ].join(" ");
+  const [lastSeedKey, setLastSeedKey] = useState("");
 
-  if (!seeded && (product || requestedType)) {
-    setSeeded(true);
+  if (seedKey !== lastSeedKey) {
+    setLastSeedKey(seedKey);
     setValues((current) => ({
       ...current,
       projectType:
         requestedType && (projectTypes as readonly string[]).includes(requestedType)
           ? requestedType
           : current.projectType,
-      message: product ? `I would like to talk about ${product}. ` : current.message,
+      message: starterMessage || current.message,
     }));
   }
 
@@ -89,6 +127,9 @@ export function ContactForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const found = validate(values);
+    if (starterMessage && values.message.trim() === starterMessage.trim()) {
+      found.message = "Please add a few details after the opening line.";
+    }
     setErrors(found);
     setTouched({ name: true, email: true, projectType: true, message: true });
 
@@ -134,8 +175,8 @@ export function ContactForm() {
         </span>
         <h3 className="font-display text-2xl font-semibold text-mist-100">Message received.</h3>
         <p className="max-w-sm text-[0.9375rem] leading-relaxed text-mist-300">
-          A senior engineer will read this and reply within one business day, usually with
-          questions, because the good projects always have them.
+          Your enquiry was delivered. We will review the details and contact you using the
+          email address you provided.
         </p>
         <Button variant="secondary" magnetic={false} onClick={() => setStatus("idle")}>
           Send another message
@@ -204,7 +245,9 @@ export function ContactForm() {
           label="Message"
           required
           name="message"
-          placeholder="What are you building, who is it for, and what does success look like?"
+          maxLength={5000}
+          hint={values.projectType === "Cybersecurity / VAPT" ? "Do not share passwords or secrets here" : undefined}
+          placeholder={messagePrompts[values.projectType] ?? "What are you building, who is it for, and what does success look like?"}
           value={values.message}
           error={touched.message ? errors.message : undefined}
           onChange={(event) => update("message", event.target.value)}
@@ -228,22 +271,28 @@ export function ContactForm() {
 
       <AnimatePresence>
         {status === "error" ? (
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             role="alert"
-            className="mt-6 flex items-center gap-2 rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-[0.8125rem] text-rose-800"
+            className="mt-6 flex items-start gap-2 rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-[0.8125rem] text-rose-800"
           >
-            <TriangleAlert className="h-4 w-4 shrink-0" strokeWidth={1.8} />
-            {serverMessage}
-          </motion.p>
+            <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.8} />
+            <div>
+              <p>{serverMessage}</p>
+              <a className="mt-2 inline-block font-semibold underline underline-offset-2" href={emailFallback(values)}>
+                Open an email draft
+              </a>
+              <p className="mt-1">Or email {site.salesEmail} directly.</p>
+            </div>
+          </motion.div>
         ) : null}
       </AnimatePresence>
 
       <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xs text-[0.75rem] leading-relaxed text-mist-400">
-          We reply within one business day. No mailing list, no sales sequence.
+          We use your contact details to respond to this project enquiry.
         </p>
         <Button
           type="submit"

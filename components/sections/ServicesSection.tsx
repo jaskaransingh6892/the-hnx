@@ -18,12 +18,12 @@ export function ServicesSection() {
       <div className="shell relative flex flex-col gap-14">
         <SectionHeading
           eyebrow="What we do"
-          title="Technology Built Around"
-          highlight="Your Vision"
-          description="Sixteen capabilities, one engineering standard. Pick the piece you need, or hand us the whole problem."
+          title="Websites, ERP &"
+          highlight="Cybersecurity"
+          description="Build a website, bring operations into one ERP, or assess web and API security. Explore the service that fits the problem you need solved."
         />
 
-        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <StaggerItem key={service.slug} className="h-full">
               <ServiceCard service={service} index={index} />

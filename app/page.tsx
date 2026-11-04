@@ -5,6 +5,7 @@ import { ProductsSection } from "@/components/sections/ProductsSection";
 import { WhySection } from "@/components/sections/WhySection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { TechSection } from "@/components/sections/TechSection";
+import { GuidesSection } from "@/components/sections/GuidesSection";
 import { CTASection } from "@/components/sections/CTASection";
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
       <WhySection />
       <ProcessSection />
       <TechSection />
+      <GuidesSection />
       <CTASection />
     </>
   );

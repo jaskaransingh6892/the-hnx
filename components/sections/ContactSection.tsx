@@ -1,12 +1,13 @@
 import { Suspense } from "react";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight, Clock, Globe2, LayoutDashboard, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { assurances } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const details = [
-  { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
+  { icon: Mail, label: "Project email", value: site.salesEmail, href: `mailto:${site.salesEmail}` },
   {
     icon: Phone,
     label: "Phone",
@@ -24,6 +25,42 @@ const details = [
   { icon: Clock, label: "Hours", value: site.hours },
 ];
 
+const startingPoints = [
+  {
+    title: "Website or web app",
+    summary: "What should the new site help people do?",
+    href: "/contact?type=Website#project-enquiry",
+    icon: Globe2,
+  },
+  {
+    title: "ERP or CRM",
+    summary: "Which workflow needs one reliable system?",
+    href: "/contact?type=ERP%20%2F%20CRM#project-enquiry",
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Cybersecurity or VAPT",
+    summary: "Which website or API needs an assessment?",
+    href: "/contact?type=Cybersecurity%20%2F%20VAPT#project-enquiry",
+    icon: ShieldCheck,
+  },
+] as const;
+
+const nextSteps = [
+  {
+    title: "Share the problem",
+    body: "A brief description, the current system or public asset, and the outcome you need are enough to start. Keep passwords and sensitive data out of the form.",
+  },
+  {
+    title: "Clarify the scope",
+    body: "An engineer reviews the context and asks about the users, constraints, and first useful milestone. When a call helps, we use it to map the work rather than pitch a package.",
+  },
+  {
+    title: "Agree the next step",
+    body: "For a suitable engagement, we outline deliverables, phases, ownership, and an estimate before work starts.",
+  },
+] as const;
+
 export function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden pb-24 pt-4 sm:pb-32">
@@ -33,6 +70,52 @@ export function ContactSection() {
       />
 
       <div className="shell relative flex flex-col gap-12">
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="font-display text-xl font-semibold text-mist-100 sm:text-2xl">
+              Choose a starting point
+            </h2>
+            <p className="max-w-xl text-[0.8125rem] leading-relaxed text-mist-300">
+              These paths preselect the closest project type. You can change it in the form.
+            </p>
+          </div>
+          <nav aria-label="Start by service" className="grid gap-3 md:grid-cols-3">
+            {startingPoints.map((point) => {
+              const Icon = point.icon;
+              return (
+                <Link
+                  key={point.title}
+                  href={point.href}
+                  className="glass edge-glow group flex flex-col gap-3 rounded-2xl p-5 transition-colors hover:border-hnx-blue/30"
+                >
+                  <span className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 shrink-0 text-hnx-blue" strokeWidth={1.7} />
+                    <span className="font-display text-[0.9375rem] font-semibold text-mist-100">
+                      {point.title}
+                    </span>
+                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-hnx-blue transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} />
+                  </span>
+                  <span className="text-[0.8125rem] leading-relaxed text-mist-300">{point.summary}</span>
+                </Link>
+              );
+            })}
+          </nav>
+          <p className="text-[0.8125rem] leading-relaxed text-mist-400">
+            Need more detail first? Read about{" "}
+            <Link href="/services/web-development" className="font-medium text-hnx-blue hover:text-hnx-cyan">
+              website development
+            </Link>
+            ,{" "}
+            <Link href="/services/erp-business-systems" className="font-medium text-hnx-blue hover:text-hnx-cyan">
+              ERP and CRM
+            </Link>
+            , or{" "}
+            <Link href="/services/cybersecurity" className="font-medium text-hnx-blue hover:text-hnx-cyan">
+              VAPT and security audits
+            </Link>
+            .
+          </p>
+        </div>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_1.25fr] lg:gap-12">
           <Reveal direction="right" className="flex flex-col gap-6">
@@ -102,13 +185,45 @@ export function ContactSection() {
             </ul>
           </Reveal>
 
-          <Reveal direction="left" delay={0.08}>
-            {/* useSearchParams needs a boundary so the rest of the page can stay static */}
-            <Suspense fallback={<div className="glass h-[42rem] rounded-2xl" aria-hidden />}>
-              <ContactForm />
-            </Suspense>
-          </Reveal>
+          <div id="project-enquiry" className="scroll-mt-28">
+            <Reveal direction="left" delay={0.08}>
+              {/* useSearchParams needs a boundary so the rest of the page can stay static */}
+              <Suspense fallback={<div className="glass h-[42rem] rounded-2xl" aria-hidden />}>
+                <ContactForm />
+              </Suspense>
+            </Reveal>
+          </div>
         </div>
+
+        <section aria-labelledby="contact-next-steps" className="border-t border-slate-900/[0.08] pt-12">
+          <div className="flex flex-col gap-3">
+            <p className="eyebrow text-hnx-blue">From enquiry to scope</p>
+            <h2 id="contact-next-steps" className="font-display text-2xl font-semibold text-mist-100 sm:text-3xl">
+              What happens after you get in touch
+            </h2>
+            <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-mist-300">
+              The first conversation is for understanding the work and deciding whether we are the right team.
+            </p>
+          </div>
+          <ol className="mt-8 grid gap-5 md:grid-cols-3">
+            {nextSteps.map((step, index) => (
+              <li key={step.title} className="glass rounded-2xl p-6">
+                <span className="font-mono text-[0.75rem] font-semibold text-hnx-blue">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-4 font-display text-base font-semibold text-mist-100">{step.title}</h3>
+                <p className="mt-2 text-[0.8125rem] leading-relaxed text-mist-300">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+          <a
+            href="#project-enquiry"
+            className="mt-7 inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-hnx-blue transition-colors hover:text-hnx-cyan"
+          >
+            Share your brief
+            <ArrowRight className="h-4 w-4" strokeWidth={1.8} />
+          </a>
+        </section>
       </div>
     </section>
   );

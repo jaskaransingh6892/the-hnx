@@ -2,24 +2,42 @@ import type { Metadata } from "next";
 import { ArrowRight, Check } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { CTASection } from "@/components/sections/CTASection";
+import { ProjectScopePlanner } from "@/components/sections/ProjectScopePlanner";
 import { ButtonLink } from "@/components/ui/Button";
 import { FeatureCard } from "@/components/ui/FeatureCard";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ServiceCard } from "@/components/ui/ServiceCard";
-import { engagementModels, services } from "@/lib/content";
+import { engagementModels, projectTypes, services } from "@/lib/content";
+import { servicePages } from "@/lib/service-pages";
 import { site } from "@/lib/site";
 
+const pageTitle = "Web Development, ERP, VAPT & Software Services";
+const pageDescription =
+  "Web development, custom ERP and CRM, website and API VAPT, and software engineering services for teams worldwide. Explore how The HNX works.";
+
 export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Custom software, web and mobile applications, ERP and CRM platforms, AI automation, cloud architecture, and product design — engineered by The HNX.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/services" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/services`,
+    locale: "en_US",
+    images: [{ url: `${site.url}/opengraph-image`, width: 1200, height: 630, alt: "The HNX" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${site.url}/opengraph-image`],
+  },
 };
 
-// An ItemList tells Google this page is a catalogue pointing at eight indexable
-// service pages rather than one long page about everything, which is what makes
-// the individual pages eligible to surface instead of this one.
+// The ItemList describes this catalogue and links to each service detail page.
 const schema = [
   {
     "@context": "https://schema.org",
@@ -49,6 +67,27 @@ const schema = [
   },
 ];
 
+const contactTypes: Record<string, (typeof projectTypes)[number]> = {
+  "web-development": "Website",
+  "custom-software": "Custom Software",
+  "erp-business-systems": "ERP / CRM",
+  cybersecurity: "Cybersecurity / VAPT",
+  "mobile-applications": "Mobile App",
+  "desktop-applications": "Desktop Software",
+  "ai-automation": "AI Solution",
+  "cloud-api": "Cloud / API",
+  "ui-ux-design": "UI / UX Design",
+};
+
+const scopeOptions = services.map((service) => ({
+  slug: service.slug,
+  title: service.title,
+  tagline: service.tagline,
+  detailHref: `/services/${service.slug}`,
+  contactHref: `/contact?type=${encodeURIComponent(contactTypes[service.slug] ?? "Other")}`,
+  deliverables: servicePages[service.slug]?.deliverables ?? [],
+}));
+
 export default function ServicesPage() {
   return (
     <>
@@ -61,29 +100,41 @@ export default function ServicesPage() {
       />
       <PageHero
         eyebrow="Services"
-        title="Technology Built Around"
-        highlight="Your Vision"
-        description="Sixteen capabilities across eight disciplines. Engage us for one of them or hand over the entire problem — the standard does not change."
+        title="Web Development, ERP &"
+        highlight="Cybersecurity Services"
+        description="Custom websites and web apps, ERP and CRM platforms, VAPT and API security audits, and specialist software engineering for teams worldwide."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <ButtonLink href="/contact" size="lg" icon={<ArrowRight className="h-[18px] w-[18px]" />}>
             Discuss your project
           </ButtonLink>
-          <ButtonLink href="/process" size="lg" variant="secondary">
-            See how we work
+          <ButtonLink href="#scope-planner" size="lg" variant="secondary">
+            Plan your scope
           </ButtonLink>
         </div>
       </PageHero>
 
       <section className="relative py-8 sm:py-12">
         <div className="shell">
-          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
               <StaggerItem key={service.slug} className="h-full">
                 <ServiceCard service={service} index={index} showCapabilities />
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section id="scope-planner" className="relative scroll-mt-20 border-y border-slate-900/[0.06] bg-white py-20 sm:py-24">
+        <div className="shell flex flex-col gap-12">
+          <SectionHeading
+            eyebrow="Project planner"
+            title="Find the right"
+            highlight="starting scope"
+            description="Choose the work and where you are today. Use the resulting checklist to prepare a focused first conversation."
+          />
+          <ProjectScopePlanner options={scopeOptions} />
         </div>
       </section>
 

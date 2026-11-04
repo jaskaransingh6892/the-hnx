@@ -5,7 +5,7 @@
  * there carries the short summaries reused across cards and navigation, while
  * everything here exists only to give /services/[slug] a page worth indexing.
  *
- * Each entry has to say something the other seven do not. Eight pages spun
+ * Each entry has to say something the other pages do not. Pages spun
  * from the same paragraph would compete with each other and read as thin
  * content, which costs more in search than having fewer pages would.
  */
@@ -19,6 +19,7 @@ export type ServicePage = {
   approach: { title: string; body: string }[];
   audience: string[];
   faq: { q: string; a: string }[];
+  deliverables?: { title: string; body: string }[];
 };
 
 export const servicePages: Record<string, ServicePage> = {
@@ -52,7 +53,7 @@ export const servicePages: Record<string, ServicePage> = {
     approach: [
       {
         title: "Speed is a feature, not a phase",
-        body: "Performance budgets are set before the first component is written. Fixing a slow site afterwards costs several times what building a fast one does.",
+        body: "Performance budgets are set before the first component is written. Planning for speed early reduces the rework needed after launch.",
       },
       {
         title: "Search visibility is built in",
@@ -71,7 +72,7 @@ export const servicePages: Record<string, ServicePage> = {
     faq: [
       {
         q: "How long does a website take to build?",
-        a: "A focused marketing site is usually four to six weeks from kickoff to launch. A portal or web application with accounts and permissions typically runs eight to sixteen weeks depending on how much of it is genuinely new.",
+        a: "The timeline depends on the content, design reviews, integrations, and features in scope. We agree milestones after understanding the brief and aim to launch a useful first release before expanding it.",
       },
       {
         q: "Can we edit the content ourselves afterwards?",
@@ -79,7 +80,21 @@ export const servicePages: Record<string, ServicePage> = {
       },
       {
         q: "Do you redesign existing websites or only build new ones?",
-        a: "Both. Where the current site has search history worth protecting we migrate URLs and redirects carefully so rankings carry across instead of resetting.",
+        a: "Both. For a redesign, we map existing URLs, preserve useful content, plan redirects where needed, and monitor search visibility after launch.",
+      },
+    ],
+    deliverables: [
+      {
+        title: "An agreed site or application",
+        body: "The pages, templates, and user flows defined in the scope, built for desktop and mobile use.",
+      },
+      {
+        title: "Launch and search foundations",
+        body: "Metadata, crawlable links, a sitemap, and a launch plan. For a redesign, that includes a URL and redirect map where needed.",
+      },
+      {
+        title: "Code and editing handover",
+        body: "Repository and deployment access, plus guidance for the team that will maintain the site or edit its content.",
       },
     ],
   },
@@ -144,6 +159,20 @@ export const servicePages: Record<string, ServicePage> = {
         a: "Yes. You own the code, the repositories, and the infrastructure accounts. There is no arrangement where switching provider means losing the software.",
       },
     ],
+    deliverables: [
+      {
+        title: "Workflow and system map",
+        body: "The users, exceptions, existing tools, data, and integration points the first release must account for, documented with the agreed scope.",
+      },
+      {
+        title: "A working software release",
+        body: "The agreed workflows and permissions implemented as a usable application, with acceptance checks tied to the work it needs to support.",
+      },
+      {
+        title: "Code and operating handover",
+        body: "Repository access, deployment notes, and a migration or integration plan where the new system replaces or connects to an existing one.",
+      },
+    ],
   },
 
   "erp-business-systems": {
@@ -195,7 +224,7 @@ export const servicePages: Record<string, ServicePage> = {
     faq: [
       {
         q: "How long before an ERP is actually usable?",
-        a: "The first module is typically in production within six to ten weeks. The full platform is built out from there, which is deliberate — an ERP delivered all at once is an ERP nobody has been trained on.",
+        a: "We identify the first useful module during discovery and agree milestones before development. Timing depends on integrations, data quality, permissions, and rollout needs. Later modules can follow once the first workflow is working for its users.",
       },
       {
         q: "Can it work alongside our accounting software?",
@@ -204,6 +233,96 @@ export const servicePages: Record<string, ServicePage> = {
       {
         q: "What about our existing stock and customer data?",
         a: "It is migrated as part of the build, with both systems running in parallel until the balances match. Nothing is switched off on trust alone.",
+      },
+    ],
+    deliverables: [
+      {
+        title: "Process and data map",
+        body: "The workflows, roles, existing systems, and records the first module needs to work with, agreed before implementation.",
+      },
+      {
+        title: "A usable first module",
+        body: "A working slice of the ERP or CRM that solves one operational problem, with roles and permissions that match the people using it.",
+      },
+      {
+        title: "Migration and handover plan",
+        body: "Data mapping, reconciliation checks, and the documentation your team needs to operate and extend the system.",
+      },
+    ],
+  },
+
+  cybersecurity: {
+    metaTitle: "VAPT Services — Website & API Security Audits",
+    metaDescription:
+      "Website and API VAPT from The HNX: scoped penetration testing, evidence-backed findings, and practical remediation guidance for your engineering team.",
+    h1: "VAPT and security audits for websites and APIs",
+    intro: [
+      "A scanner can list exposed software versions. It may miss whether one customer's account can read another customer's records, or whether a harmless-looking workflow can be used in a way the team never intended. Those questions need an assessment shaped around the application itself.",
+      "The HNX assesses websites, web applications, and APIs with an agreed scope and written authorization. We examine the paths that handle identities, data, and business actions, then give your team a report that explains what was found, why it matters, and how to address it. The objective is a safer system and a clear next step, not a long list of scanner alerts.",
+    ],
+    build: [
+      {
+        name: "Website security audits",
+        body: "A review of the public-facing site and its exposed functionality, including configuration, forms, authentication, and the paths that handle sensitive data.",
+      },
+      {
+        name: "Web application VAPT",
+        body: "Vulnerability assessment and penetration testing across agreed user roles and workflows, with attention to access control, session handling, input processing, and business logic.",
+      },
+      {
+        name: "API security assessments",
+        body: "Testing the agreed endpoints and roles for authentication, object-level authorization, data exposure, and misuse of sensitive business actions.",
+      },
+      {
+        name: "Findings and remediation guidance",
+        body: "A prioritized report with evidence, reproduction context, likely impact, and practical fix recommendations that engineers can use to plan remediation.",
+      },
+    ],
+    approach: [
+      {
+        title: "Written scope before testing",
+        body: "We agree which domains, environments, APIs, accounts, and test windows are in scope. Authorization and operational boundaries are settled before any active testing starts.",
+      },
+      {
+        title: "Tools support the assessment",
+        body: "Automated checks help find coverage gaps; manual review follows the application's roles and workflows, where access-control and business-logic mistakes often hide.",
+      },
+      {
+        title: "Reports are written for the fix",
+        body: "Each confirmed issue should have enough context for the owning team to understand and reproduce it. We separate confirmed findings from observations that need further investigation.",
+      },
+    ],
+    audience: [
+      "Teams preparing to launch or substantially change a website, web application, or API",
+      "Businesses handling customer, payment, or operational data through online workflows",
+      "Engineering teams that need a clear, prioritized view of web and API security risks",
+    ],
+    faq: [
+      {
+        q: "What is the difference between a vulnerability scan and VAPT?",
+        a: "A scan is an automated check for known patterns. VAPT uses that information alongside manual testing of agreed roles and workflows to validate whether an issue is real and what it could affect. The exact coverage is defined in the scope.",
+      },
+      {
+        q: "Can you test a live production website?",
+        a: "Sometimes. We first agree authorization, test windows, accounts, rate limits, and activities to avoid. Where a production test could disrupt users or data, a staging environment may be the safer choice.",
+      },
+      {
+        q: "Does a VAPT report certify that our system is secure?",
+        a: "No assessment can prove the absence of every vulnerability. The report records the agreed scope, the work performed, and the findings at that point in time. If you need a particular compliance or certification outcome, tell us before scoping so the requirements can be reviewed separately.",
+      },
+    ],
+    deliverables: [
+      {
+        title: "Agreed test scope",
+        body: "A written record of the assets, user roles, environments, boundaries, and test window covered by the assessment.",
+      },
+      {
+        title: "Prioritized findings report",
+        body: "Confirmed issues with evidence, reproduction context, severity rationale, and the affected workflow or data.",
+      },
+      {
+        title: "Remediation discussion",
+        body: "A walkthrough with the owning team to explain the risks and help prioritize practical fixes. Any retest is scoped separately.",
       },
     ],
   },
@@ -268,6 +387,20 @@ export const servicePages: Record<string, ServicePage> = {
         a: "Crash reporting and analytics are in from day one, and both platforms force OS updates on their own schedule. We support apps past release rather than handing over a build and leaving.",
       },
     ],
+    deliverables: [
+      {
+        title: "Mobile flows and device plan",
+        body: "The agreed screens, platform behaviours, permissions, and offline or sync rules documented for the people and devices that will use the app.",
+      },
+      {
+        title: "Testable app builds",
+        body: "Builds for the agreed iOS and Android targets, with the core journeys and backend connections ready for review on real devices.",
+      },
+      {
+        title: "Release and support handover",
+        body: "Store submission materials where included, plus repository, signing, crash-reporting, and update guidance for the team that will operate the app.",
+      },
+    ],
   },
 
   "desktop-applications": {
@@ -330,33 +463,55 @@ export const servicePages: Record<string, ServicePage> = {
         a: "Where the business needs it, yes. We confirm the supported versions up front, because it affects which frameworks are available and is expensive to change later.",
       },
     ],
+    deliverables: [
+      {
+        title: "Compatibility and device scope",
+        body: "The supported operating systems, workstation constraints, peripheral models, and offline or sync requirements agreed before implementation.",
+      },
+      {
+        title: "Installable desktop application",
+        body: "The scoped workflows packaged for the agreed platforms, including the file or hardware integrations the work depends on.",
+      },
+      {
+        title: "Update and recovery guidance",
+        body: "Repository and release notes with the agreed update process, local data handling, and steps for restoring or reconciling work after a failure.",
+      },
+    ],
   },
 
   "ai-automation": {
-    metaTitle: "AI Development & Automation Company — Assistants, Copilots, Pipelines",
+    metaTitle: "AI Development Services — RAG, Private LLMs & Automation",
     metaDescription:
-      "AI solutions grounded in your own data: assistants and chatbots that cite sources, document intelligence, and automation that removes repetitive work.",
-    h1: "AI that answers from your data, not the internet's",
+      "AI development for RAG assistants, private LLMs, computer vision, predictive analytics, and workflow automation with evaluation and human review.",
+    h1: "AI development for real business workflows",
     intro: [
-      "Most AI disappointment comes from the same place: a capable model with no reliable access to the company's own information, answering confidently and wrongly. The interesting engineering is not the model — it is retrieval, evaluation, and the guardrails that decide when the system should say it does not know.",
-      "We build assistants, copilots, and automated pipelines grounded in your documents, records, and processes, with the checks that make the output safe to act on.",
+      "An AI prototype can look convincing while failing on messy inputs, changing data, access boundaries, or real user questions. Useful systems start with a bounded task and an evaluation plan, whether the work involves retrieval, image analysis, forecasting, or automation.",
+      "We build assistants, private model deployments, vision and prediction workflows, and automated processes connected to your systems. The right review and monitoring depend on what an error would cost your team.",
     ],
     build: [
       {
-        name: "AI solutions",
-        body: "Retrieval over your own content so answers cite a source your team can open and verify, rather than arriving unattributed.",
+        name: "Knowledge assistants and RAG",
+        body: "Search and retrieval over approved company content so responses can point to their sources and users can check the answer.",
       },
       {
-        name: "AI chatbots",
-        body: "Assistants that resolve the repetitive questions, know their limits, and hand a real person the full context instead of a transcript.",
+        name: "Workflow agents and automation",
+        body: "Assistants and pipelines that can classify, draft, route, or take bounded actions through approved tools, with a person reviewing consequential steps.",
       },
       {
-        name: "AI automation",
-        body: "Pipelines for classification, extraction, routing, and summarising — the work that consumes hours and rewards nobody.",
+        name: "Private LLM deployment",
+        body: "A managed or controlled model environment selected around data handling, latency, and operating cost. Fine-tuning is considered only where evaluation shows it helps.",
       },
       {
-        name: "Document and data intelligence",
-        body: "Invoices, contracts, and forms turned into structured data, with confidence scores so low-certainty cases go to a human instead of straight through.",
+        name: "Computer vision",
+        body: "Image and video analysis scoped around the actual dataset and task, with uncertain predictions routed for review rather than treated as facts.",
+      },
+      {
+        name: "Predictive analytics",
+        body: "Forecasting and anomaly detection compared with a useful baseline, then monitored as the underlying data and business process change.",
+      },
+      {
+        name: "Document intelligence",
+        body: "Forms, invoices, and records turned into structured information with traceable extraction and review for low-confidence cases.",
       },
     ],
     approach: [
@@ -372,6 +527,10 @@ export const servicePages: Record<string, ServicePage> = {
         title: "A human stays in the loop where it counts",
         body: "For anything with money or legal weight attached, the system proposes and a person approves. Automation is a lever, not an abdication.",
       },
+      {
+        title: "Governance is part of the workflow",
+        body: "Data access, model choice, approval points, and operating logs are defined with the team that owns the process, then revisited as the system changes.",
+      },
     ],
     audience: [
       "Teams answering the same questions from the same documents every week",
@@ -381,15 +540,33 @@ export const servicePages: Record<string, ServicePage> = {
     faq: [
       {
         q: "Will our data be used to train someone else's model?",
-        a: "Not in how we build it. We use providers and configurations where your content is not retained for training, and where the requirement is strict we run models in your own environment.",
+        a: "Data handling depends on the provider and deployment. We document retention, training use, and access controls before choosing a managed or private setup. Where the requirement is strict, we can assess a model in your own environment.",
       },
       {
-        q: "How do we know the answers are accurate?",
-        a: "We build an evaluation set from your real questions and score against it before launch and after each change. Answers also carry their sources, so accuracy can be checked rather than assumed.",
+        q: "How do we validate the output?",
+        a: "We use representative inputs and an agreed baseline to test quality before launch and after meaningful changes. For knowledge assistants, answers should also carry sources; for vision or prediction, uncertain cases need a review path.",
+      },
+      {
+        q: "Do we need to fine-tune a model?",
+        a: "Often the first improvement is better data access, prompts, or workflow design. We consider fine-tuning only when a test set shows that those approaches are insufficient and the extra operating cost is justified.",
       },
       {
         q: "Is this worth it for a small team?",
         a: "It depends entirely on volume. If a task takes an hour a week, no. If three people spend a morning a day on it, the case usually makes itself. We would rather work that out with you before quoting than after.",
+      },
+    ],
+    deliverables: [
+      {
+        title: "Use-case and data inventory",
+        body: "The approved sources or datasets, target task, access boundaries, and cases that require a person's decision.",
+      },
+      {
+        title: "Working model or integrated workflow",
+        body: "The scoped assistant, vision or prediction flow, private deployment, or automation connected to the agreed data and review steps.",
+      },
+      {
+        title: "Evaluation and operating guide",
+        body: "A representative test set, documented limitations and approvals, and a process for checking quality as data, models, or workflows change.",
       },
     ],
   },
@@ -454,6 +631,20 @@ export const servicePages: Record<string, ServicePage> = {
         a: "Yes. That begins with documenting what exists and what it costs, because inherited infrastructure usually has more running in it than anyone remembers.",
       },
     ],
+    deliverables: [
+      {
+        title: "Architecture and cost baseline",
+        body: "An inventory of the agreed services, integrations, traffic assumptions, and current or expected spend so design choices have a clear starting point.",
+      },
+      {
+        title: "Infrastructure and API setup",
+        body: "The scoped environments, deployment pipeline, and documented endpoints or integrations implemented on the agreed platform.",
+      },
+      {
+        title: "Monitoring and operations handover",
+        body: "Relevant logs, metrics, and alerts, with deployment, rollback, access, and ownership notes for the team operating the system.",
+      },
+    ],
   },
 
   "ui-ux-design": {
@@ -514,6 +705,20 @@ export const servicePages: Record<string, ServicePage> = {
       {
         q: "How do you know the design is better?",
         a: "By testing it. Prototypes go in front of people who resemble your users, and we measure task completion and where they hesitate — before the design becomes code.",
+      },
+    ],
+    deliverables: [
+      {
+        title: "User and workflow findings",
+        body: "A concise record of the users, tasks, friction points, and design priorities found in the agreed research or product audit.",
+      },
+      {
+        title: "Flows and interactive designs",
+        body: "The agreed screens and prototypes, including key empty, error, permission, and keyboard states where they affect the experience.",
+      },
+      {
+        title: "Build-ready design handover",
+        body: "Component rules, visual tokens, interaction notes, and accessibility findings that engineers can use without guessing at the intended behaviour.",
       },
     ],
   },

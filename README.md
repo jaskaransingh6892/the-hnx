@@ -29,9 +29,10 @@ Node 20+ is required.
 app/
   layout.tsx              root shell: fonts, metadata, JSON-LD, navbar, footer
   page.tsx                homepage (composes the sections below)
-  services/               capability catalogue + engagement models
-  products/               filterable product showcase
-  about/                  philosophy, stats, differentiators
+  services/               capability catalogue + service detail pages
+  products/               product showcase + build stories
+  guides/                 website, ERP, and VAPT buyer guides
+  about/                  philosophy and differentiators
   process/                delivery timeline
   contact/                contact form and company details
   api/contact/route.ts    form endpoint (validation + delivery hook)
@@ -43,14 +44,18 @@ app/
 components/
   layout/    Navbar, Footer, PageHero, ScrollProgress
   sections/  Hero, TrustIntro, Services, Products, ProductGallery, Why,
-             Process, Tech, CTA, About, Contact, ContactForm
+             Process, Tech, Guides, ProjectScopePlanner, CTA, About,
+             Contact, ContactForm
   ui/        Logo, Button, SectionHeading, Reveal, Magnetic, Counter,
              SpotlightCard, ServiceCard, ProductCard, FeatureCard,
              TechBadge, StatusBadge, Field
   visuals/   ParticleField (canvas), HeroCore (orbits), Aurora, GridField
 
 lib/
-  content.ts  services, products, process, technologies, stats, copy
+  content.ts  services, products, process, technologies, form options
+  service-pages.ts  detail-page copy for each service
+  case-studies.ts  product build stories and optional verified evidence
+  guides.ts   guide links used across the site
   site.ts     company name, contact details, social links, navigation
   utils.ts    classname helper
 ```
@@ -59,13 +64,19 @@ lib/
 
 ## Editing the site
 
-Almost all copy and data lives in two files. Nothing else needs touching.
+The brand, catalogue, and detailed editorial content live in these files:
 
 **`lib/site.ts`** — company name, email, phone, location, hours, social links,
 and the primary navigation.
 
-**`lib/content.ts`** — services, products, process steps, technologies, stats,
-and form options.
+**`lib/content.ts`** — services, products, process steps, technologies, and
+form options.
+
+**`lib/service-pages.ts`** — service detail-page copy and FAQs.
+
+**`lib/case-studies.ts`** — product build stories and verified evidence when available.
+
+**`lib/guides.ts`** — links to the buyer guides under `app/guides/`.
 
 ### Adding a product
 
@@ -75,7 +86,7 @@ Append an entry to `products` in `lib/content.ts`:
 {
   slug: "atlas",
   name: "Atlas",
-  category: "AI Platform",       // new categories appear in the filter automatically
+  category: "AI Platform",
   status: "Coming Soon",         // "Live" | "In Development" | "Coming Soon"
   summary: "One-line pitch.",
   description: "Two-line explanation.",
@@ -85,15 +96,40 @@ Append an entry to `products` in `lib/content.ts`:
 }
 ```
 
-It then appears on the homepage showcase, the products page, and the category
-filter with no further changes. The homepage shows the first three
-(`<ProductsSection limit={3} />`); `/products` shows all of them.
+It then appears on the homepage showcase and the products page. The homepage
+shows the first three (`<ProductsSection limit={3} />`); `/products` shows all
+of them. Add an entry to `lib/case-studies.ts` to publish a build-story detail
+page and link it from the product card. Without that entry, the card can still
+link to the running product but does not point to a missing case study.
 
 ### Adding a service
 
-Append to `services` in the same file. Each entry carries a `capabilities`
-array — those strings render as the chips on `/services` and the links in the
-footer.
+Append to `services` in `lib/content.ts` and add matching detail content in
+`lib/service-pages.ts`. The `capabilities` array renders on `/services` and
+the service links in the footer point to the detail pages.
+
+### Adding verified case-study evidence
+
+Case-study content lives in `lib/case-studies.ts`. Each case study can show
+real product screenshots, measured outcomes, and approved testimonials when
+those materials are available. These sections stay hidden while their data is
+absent or empty.
+
+- Put genuine product screenshots in `public/products/<slug>/`. Remove any
+  private customer or patient data first. Add each image to `screenshots` with
+  its public path, intrinsic width and height, descriptive alt text, and a
+  caption explaining the workflow shown.
+- Add a `results` entry only for a value you have measured. Include the metric,
+  its plain-language label, and `context` naming the baseline, timeframe, or
+  measurement method so the claim can be checked.
+- Add an attributed `testimonials` entry only after written approval of the
+  exact quote, name, role, organization, and any logo. Set
+  `approvedForPublication: true` only when that approval is recorded.
+- For a public “satisfied clients” count, confirm the count, the period it
+  covers, and what qualifies as satisfied (for example, approved feedback or
+  a survey response). Do not substitute the number of enquiries or projects.
+
+Do not turn illustrative graphics or estimates into case-study proof.
 
 ---
 
@@ -122,15 +158,23 @@ badges use brand SVGs from Simple Icons where available.
 inline field errors, and has distinct submitting / success / error states. A
 hidden honeypot field catches bots.
 
-`app/api/contact/route.ts` re-validates everything server-side (never trust the
-client), rejects unknown project types and budget ranges, and currently writes
-the enquiry to the server log. To deliver it for real, replace the marked
-integration point with a transactional email provider (Resend, Postmark,
-SendGrid, SES) or a CRM webhook, reading credentials from environment
-variables.
+`app/api/contact/route.ts` re-validates everything server-side and sends valid
+enquiries to a configured HTTPS webhook. Set `CONTACT_WEBHOOK_URL` to an email
+provider workflow or CRM endpoint that accepts a JSON `POST` and returns a 2xx
+response only after storing or delivering the enquiry. If the endpoint expects
+Bearer authentication, set `CONTACT_WEBHOOK_TOKEN` as well. Both variables are
+server-side secrets; do not use the `NEXT_PUBLIC_` prefix. Test with a real
+enquiry after deployment and verify it reaches the destination.
+
+If the webhook is missing or rejects a request, the form keeps the visitor's
+answers, shows an error, and offers a pre-filled email draft to
+`projects@thehnx.com`. It no longer reports success for an undelivered enquiry
+or logs the visitor's personal details.
 
 Product cards deep-link as `/contact?product=<name>`, which pre-fills the
-message. `?type=<project type>` pre-selects the project type.
+message. `?type=<project type>` pre-selects the project type. The services page
+planner also adds a fixed `stage` value to the contact draft; visitors still
+need to add their own project details.
 
 ---
 
@@ -142,8 +186,7 @@ message. `?type=<project type>` pre-selects the project type.
 - The canvas particle count scales with viewport area and is capped, so it
   stays cheap on low-power devices.
 - A skip link, visible focus rings, `aria-invalid` / `aria-describedby` on form
-  fields, `aria-pressed` on the product filter, and labelled landmarks are in
-  place.
+  fields, and labelled landmarks are in place.
 - A `<noscript>` rule reveals anything the reveal animations would otherwise
   leave hidden.
 
@@ -154,12 +197,14 @@ message. `?type=<project type>` pre-selects the project type.
 Next.js needs no build configuration on Vercel — it detects the framework,
 runs `npm run build`, and serves the app.
 
-**One environment variable matters.** Set it in Project Settings → Environment
-Variables, for all environments:
+Set the canonical origin in Project Settings → Environment Variables for all
+environments. Configure contact delivery before accepting enquiries:
 
 | Key | Value |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | the deployment origin, e.g. `https://the-hnx.vercel.app` (no trailing slash) |
+| `NEXT_PUBLIC_SITE_URL` | the public canonical origin, e.g. `https://thehnx.com` (no trailing slash) |
+| `CONTACT_WEBHOOK_URL` | HTTPS endpoint that delivers or stores form enquiries |
+| `CONTACT_WEBHOOK_TOKEN` | optional Bearer token required by that endpoint |
 
 Canonical tags, `og:url`, the social card URL, `sitemap.xml`, and
 `robots.txt` all derive from it. Without it they fall back to
@@ -183,6 +228,5 @@ every push to `main`.
 1. Replace the placeholder contact details and social URLs in `lib/site.ts`.
 2. Set `NEXT_PUBLIC_SITE_URL` on the host to the real domain — canonical URLs,
    the sitemap, robots.txt, and social card URLs all derive from it.
-3. Review the figures in `stats` (`lib/content.ts`); they are placeholders.
-4. Swap the six example products for real ones.
-5. Wire the contact endpoint to a real delivery provider.
+3. Confirm product links and case-study claims match the live products.
+4. Configure the contact webhook and verify a real enquiry reaches the destination.

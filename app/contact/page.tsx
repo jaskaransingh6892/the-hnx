@@ -1,17 +1,36 @@
 import type { Metadata } from "next";
+import { ArrowDown } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
+const pageTitle = "Discuss a Website, ERP or VAPT Project";
+const pageDescription = `Discuss website development, ERP and CRM, or a scoped VAPT assessment with ${site.name}. Share the problem and the outcome you need.`;
+
 export const metadata: Metadata = {
-  title: "Contact",
-  description: `Start a project with ${site.name}. Tell us what you are building and a senior engineer will reply within one business day.`,
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/contact" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/contact`,
+    locale: "en_US",
+    images: [{ url: `${site.url}/opengraph-image`, width: 1200, height: 630, alt: "The HNX" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${site.url}/opengraph-image`],
+  },
 };
 
-// Marks this as the organisation's contact page and hangs the reachable
-// channels off the same Organization node the root layout declares, which is
-// what a knowledge panel reads when it shows a phone number or an email.
+// Link the contact page and its channels to the Organization node declared
+// in the root layout.
 const contactSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
@@ -49,10 +68,14 @@ export default function ContactPage() {
       />
       <PageHero
         eyebrow="Contact"
-        title="Let's Build"
-        highlight="What's Next."
-        description="Tell us what you have in mind. Rough ideas are welcome — most of the best projects arrive as a paragraph and a question."
-      />
+        title="Tell us what you need"
+        highlight="built or assessed."
+        description="A website to launch, an ERP workflow to untangle, or a website or API to assess? Share the problem and what a useful outcome would look like. Rough notes are welcome."
+      >
+        <ButtonLink href="#project-enquiry" size="lg" icon={<ArrowDown className="h-[18px] w-[18px]" />}>
+          Start your enquiry
+        </ButtonLink>
+      </PageHero>
       <ContactSection />
     </>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { products } from "@/lib/content";
+import { caseStudies } from "@/lib/case-studies";
 
 /**
  * This panel used to hold four counters — projects delivered, industries
@@ -11,7 +12,7 @@ import { products } from "@/lib/content";
  * on faith, so that is what sits here instead.
  */
 const commitments = [
-  "A senior engineer reads every enquiry, and replies within one business day",
+  "Clear scope and deliverables before implementation starts",
   "You own the code, the repositories, and the infrastructure accounts",
   "Same engineers and same standards, whether the brief is a marketing site or an ERP",
 ];
@@ -51,6 +52,11 @@ export function TrustIntro() {
         </div>
 
         <div className="flex flex-col gap-4">
+          <Reveal>
+            <p className="eyebrow font-semibold text-hnx-blue">
+              Our own work · {products.length} products
+            </p>
+          </Reveal>
           <Stagger className="flex flex-col gap-4">
             {products.map((product) => (
               <StaggerItem key={product.slug}>
@@ -67,13 +73,15 @@ export function TrustIntro() {
                     {product.summary}
                   </p>
                   <div className="relative mt-4 flex flex-wrap items-center gap-4">
-                    <Link
-                      href={`/products/${product.slug}`}
-                      className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300 hover:text-hnx-cyan"
-                    >
-                      Read the case study
-                      <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
-                    </Link>
+                    {caseStudies[product.slug] ? (
+                      <Link
+                        href={`/products/${product.slug}`}
+                        className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300 hover:text-hnx-cyan"
+                      >
+                        Read the case study
+                        <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
+                      </Link>
+                    ) : null}
                     {product.href ? (
                       <a
                         href={product.href}

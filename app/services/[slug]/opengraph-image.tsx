@@ -8,7 +8,7 @@ export const size = OG_SIZE;
 export const contentType = "image/png";
 export const alt = `${site.name} — services`;
 
-/** Same eight slugs as the pages, so every card is generated at build time. */
+/** Same slugs as the service pages, so every card is generated at build time. */
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }

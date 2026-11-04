@@ -28,27 +28,16 @@ const mono = JetBrains_Mono({
   variable: "--font-code",
 });
 
+const homeTitle = `Website Development, ERP & Cybersecurity | ${site.name}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.tagline}`,
+    default: homeTitle,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
-  keywords: [
-    "software development company",
-    "custom software development",
-    "ERP development",
-    "CRM development",
-    "SaaS product development",
-    "AI solutions",
-    "AI automation",
-    "web application development",
-    "mobile app development",
-    "cloud solutions",
-    ...site.alternateNames,
-  ],
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   publisher: site.name,
@@ -56,14 +45,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
+    title: homeTitle,
     description: site.description,
     url: site.url,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
+    title: homeTitle,
     description: site.description,
   },
   robots: {
@@ -86,8 +75,7 @@ export const viewport: Viewport = {
 
 /**
  * One graph, two nodes, stable @ids so every other page can reference them.
- * The alternateName lists are the point: they tell Google that "TheHNX",
- * "HNX" and "The Hnx" are the same named entity rather than a typo.
+ * Alternate names describe the spellings used for this brand.
  */
 const structuredData = {
   "@context": "https://schema.org",
@@ -116,12 +104,17 @@ const structuredData = {
         "Custom software development",
         "Artificial intelligence",
         "AI automation",
+        "Private LLM deployment",
+        "Computer vision",
+        "Predictive analytics",
         "SaaS product development",
         "ERP software",
         "CRM software",
         "Web application development",
         "Mobile app development",
         "Cloud infrastructure",
+        "Vulnerability assessment and penetration testing",
+        "Website and API security audits",
       ],
       contactPoint: [
         {

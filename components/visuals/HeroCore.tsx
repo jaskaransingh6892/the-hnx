@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
-import { Cloud, Layers3, Sparkles } from "lucide-react";
+import { Globe, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { LogoMark } from "@/components/ui/Logo";
 
 /** A layered 3D object with two tilted orbital planes. Pointer movement adds
@@ -64,21 +64,21 @@ export function HeroCore() {
 
         <div className="hero-float-label hero-float-label--products">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-100 text-hnx-blue">
-            <Layers3 className="h-5 w-5" strokeWidth={1.8} />
+            <Globe className="h-5 w-5" strokeWidth={1.8} />
           </span>
-          <span>Digital products</span>
+          <span>Web platforms</span>
         </div>
         <div className="hero-float-label hero-float-label--ai">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-violet-100 text-hnx-violet">
-            <Sparkles className="h-5 w-5" strokeWidth={1.8} />
+            <LayoutDashboard className="h-5 w-5" strokeWidth={1.8} />
           </span>
-          <span>AI systems</span>
+          <span>ERP systems</span>
         </div>
         <div className="hero-float-label hero-float-label--cloud">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-cyan-100 text-hnx-cyan">
-            <Cloud className="h-5 w-5" strokeWidth={1.8} />
+            <ShieldCheck className="h-5 w-5" strokeWidth={1.8} />
           </span>
-          <span>Cloud platforms</span>
+          <span>Security audits</span>
         </div>
       </motion.div>
       <div className="hero-floor-shadow" />

@@ -7,8 +7,31 @@
  * deliberately absent rather than estimated: an invented metric is the fastest
  * way to lose a reader who decides to verify one.
  *
- * When real numbers exist, add them to `results` and they will render.
+ * Add screenshots, measured outcomes, and attributed testimonials only after
+ * the assets and publication permissions have been verified. Empty fields do
+ * not render on the public page.
  */
+export type CaseStudyScreenshot = {
+  /** A real product image placed in public/products/<slug>/. */
+  src: string;
+  width: number;
+  height: number;
+  /** Describe what the screen shows, rather than repeating the caption. */
+  alt: string;
+  caption: string;
+};
+
+export type CaseStudyTestimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  organization: string;
+  /** A client-supplied logo in public/products/<slug>/, when permitted. */
+  logo?: { src: string; width: number; height: number; alt: string };
+  /** Confirm written permission for the exact attribution and wording. */
+  approvedForPublication: true;
+};
+
 export type CaseStudy = {
   metaTitle: string;
   metaDescription: string;
@@ -22,8 +45,12 @@ export type CaseStudy = {
   /** What was actually built, grouped so the scope is legible. */
   built: { area: string; items: string[] }[];
   stack: string[];
-  /** Measured outcomes. Left empty until there are real ones to show. */
-  results: { metric: string; label: string }[];
+  /** Real product screens. Omit until approved images exist. */
+  screenshots?: CaseStudyScreenshot[];
+  /** Measured outcomes. Context must say how/when the value was established. */
+  results: { metric: string; label: string; context: string }[];
+  /** Attributed feedback published only with permission. */
+  testimonials?: CaseStudyTestimonial[];
 };
 
 export const caseStudies: Record<string, CaseStudy> = {

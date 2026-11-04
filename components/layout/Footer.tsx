@@ -55,6 +55,14 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/guides"
+                  className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-hnx-cyan"
+                >
+                  Guides
+                </Link>
+              </li>
             </ul>
           </nav>
 
@@ -64,7 +72,7 @@ export function Footer() {
               {services.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={`/services#${service.slug}`}
+                    href={`/services/${service.slug}`}
                     className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-hnx-cyan"
                   >
                     {service.title}

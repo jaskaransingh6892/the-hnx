@@ -8,11 +8,29 @@ import { WhySection } from "@/components/sections/WhySection";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/lib/site";
 
+const pageTitle = "About Us";
+const pageDescription =
+  "The HNX combines engineering, design, strategy, and artificial intelligence to build software that moves businesses forward.";
+
 export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "The HNX combines engineering, design, strategy, and artificial intelligence to build software that moves businesses forward.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/about" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/about`,
+    locale: "en_US",
+    images: [{ url: `${site.url}/opengraph-image`, width: 1200, height: 630, alt: "The HNX" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${site.url}/opengraph-image`],
+  },
 };
 
 // Points /about at the Organization node declared in the root layout, so the

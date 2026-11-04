@@ -3,9 +3,8 @@
 import { useEffect, useState } from "react";
 import { LogoMark } from "@/components/ui/Logo";
 
-const MINIMUM_VISIBLE_MS = 1350;
-const MAXIMUM_WAIT_MS = 4000;
-const FADE_MS = 600;
+const MINIMUM_VISIBLE_MS = 350;
+const FADE_MS = 260;
 
 /** The markup is server-rendered so the logo appears on the first paint. */
 export function AppLoader() {
@@ -13,30 +12,12 @@ export function AppLoader() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const startedAt = performance.now();
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const minimum = reduceMotion ? 150 : MINIMUM_VISIBLE_MS;
-    let exitTimer: number | undefined;
-    let exitRequested = false;
-
-    function requestExit() {
-      if (exitRequested) return;
-      exitRequested = true;
-      const remaining = Math.max(0, minimum - (performance.now() - startedAt));
-      exitTimer = window.setTimeout(() => setLeaving(true), remaining);
-    }
-
-    if (document.readyState === "complete") requestExit();
-    else window.addEventListener("load", requestExit, { once: true });
-
-    // A slow third-party asset must not leave the splash covering the site.
-    const fallbackTimer = window.setTimeout(requestExit, MAXIMUM_WAIT_MS);
-
-    return () => {
-      window.removeEventListener("load", requestExit);
-      window.clearTimeout(fallbackTimer);
-      window.clearTimeout(exitTimer);
-    };
+    // performance.now() includes the time spent loading and hydrating the page.
+    // The splash should not add another fixed wait after content is ready.
+    const remaining = reduceMotion ? 0 : Math.max(0, MINIMUM_VISIBLE_MS - performance.now());
+    const timer = window.setTimeout(() => setLeaving(true), remaining);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -49,9 +30,9 @@ export function AppLoader() {
   useEffect(() => {
     const content = document.getElementById("app-content");
     if (!content) return;
-    content.inert = visible;
+    content.inert = visible && !leaving;
     return () => { content.inert = false; };
-  }, [visible]);
+  }, [visible, leaving]);
 
   if (!visible) return null;
 

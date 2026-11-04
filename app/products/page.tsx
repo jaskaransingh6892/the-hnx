@@ -1,21 +1,36 @@
 import type { Metadata } from "next";
-import { ArrowRight, Layers, Rocket, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
-import { CTASection } from "@/components/sections/CTASection";
 import { ProductGallery } from "@/components/sections/ProductGallery";
 import { ButtonLink } from "@/components/ui/Button";
-import { FeatureCard } from "@/components/ui/FeatureCard";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { products } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
 import { site } from "@/lib/site";
 
+const pageTitle = "Software Products & Case Studies";
+const pageDescription =
+  "Explore Nabz for clinics, MyInventory for retail, and EducationCloud for schools. Open the products and read how The HNX built each system.";
+
 export const metadata: Metadata = {
-  title: "Products",
-  description:
-    "Retail billing and school management software built, shipped, and supported by The HNX — both running in production today.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: { canonical: "/products" },
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: pageTitle,
+    description: pageDescription,
+    url: `${site.url}/products`,
+    locale: "en_US",
+    images: [{ url: `${site.url}/opengraph-image`, width: 1200, height: 630, alt: "The HNX" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [`${site.url}/opengraph-image`],
+  },
 };
 
 // Only the products with a case-study page are listed: an ItemList entry
@@ -51,30 +66,7 @@ const schema = [
   },
 ];
 
-const productPrinciples = [
-  {
-    title: "Built from real problems",
-    description:
-      "Every product started as something a client needed and no vendor did properly.",
-    icon: Layers,
-  },
-  {
-    title: "Run in production by us",
-    description:
-      "We operate what we build, so reliability is our problem before it is ever yours.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Shipped continuously",
-    description:
-      "Roadmaps move in weeks. Customers see improvements, not a release note once a year.",
-    icon: Rocket,
-  },
-];
-
 export default function ProductsPage() {
-  const live = products.filter((product) => product.status === "Live").length;
-
   return (
     <>
       <script
@@ -85,48 +77,56 @@ export default function ProductsPage() {
         }}
       />
       <PageHero
-        eyebrow="Products"
-        title="Products Built for"
-        highlight="the Future"
-        description="Platforms we design, build, and support ourselves. Each one solves a problem we hit repeatedly in client work, then engineered properly."
+        eyebrow="Our products"
+        title="Real products, real"
+        highlight="build decisions"
+        description="Explore the clinic, retail, and school platforms The HNX builds and operates. Open the product or read what was actually built and why."
       >
-        <div className="flex flex-wrap items-center gap-4">
-          <ButtonLink href="/contact" size="lg" icon={<ArrowRight className="h-[18px] w-[18px]" />}>
-            Request a demo
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="#portfolio" size="lg" icon={<ArrowDown className="h-[18px] w-[18px]" />}>
+            Explore the work
           </ButtonLink>
-          <p className="text-[0.8125rem] text-mist-400">
-            {live} live · {products.length - live} in the pipeline
-          </p>
+          <ButtonLink href="/contact?type=Custom%20Software" size="lg" variant="secondary">
+            Discuss a similar build
+          </ButtonLink>
         </div>
       </PageHero>
 
-      <section className="relative py-8 sm:py-12">
-        <div className="shell">
-          <Reveal>
-            <ProductGallery />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden border-t border-slate-900/[0.06] py-20 sm:py-24">
+      <section id="portfolio" className="relative scroll-mt-20 py-20 sm:py-24">
         <div className="shell flex flex-col gap-12">
           <SectionHeading
-            eyebrow="How we build products"
-            title="Owned, operated,"
-            highlight="and improved."
-            description="Building our own software keeps us honest about the decisions we recommend to clients."
+            eyebrow="Selected work"
+            title="From a workflow"
+            highlight="to working software"
+            description="Each case study shows the problem, engineering choices, and shipped scope. The product links let you inspect the result yourself."
           />
-          <Stagger className="grid gap-5 md:grid-cols-3">
-            {productPrinciples.map((principle) => (
-              <StaggerItem key={principle.title} className="h-full">
-                <FeatureCard feature={principle} />
-              </StaggerItem>
-            ))}
-          </Stagger>
+          <ProductGallery />
         </div>
       </section>
 
-      <CTASection />
+      <section className="relative border-t border-slate-900/[0.06] bg-white py-20 sm:py-24">
+        <div className="shell">
+          <div className="glass edge-glow flex flex-col gap-7 rounded-[2rem] p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="eyebrow text-hnx-blue">Your own workflow</p>
+              <h2 className="mt-4 font-display text-2xl font-bold text-mist-100 sm:text-3xl">
+                Need software shaped around your business?
+              </h2>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist-300">
+                Tell us what current tools make difficult: the people, records, and handoffs involved.
+                We can discuss a scoped first release for your team.
+              </p>
+            </div>
+            <ButtonLink
+              href="/contact?type=Custom%20Software"
+              size="lg"
+              icon={<ArrowRight className="h-[18px] w-[18px]" />}
+            >
+              Discuss your system
+            </ButtonLink>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

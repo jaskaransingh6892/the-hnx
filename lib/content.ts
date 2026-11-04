@@ -31,7 +31,7 @@ import {
 
 /* ------------------------------------------------------------------
    SERVICES
-   Eight capability groups shown on the homepage; each group unpacks
+   Capability groups shown on the homepage; each group unpacks
    into the individual services listed on /services.
 ------------------------------------------------------------------ */
 export type Service = {
@@ -91,6 +91,21 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: "cybersecurity",
+    title: "Cybersecurity & VAPT",
+    tagline: "Find web and API risks before they become incidents",
+    description:
+      "Penetration testing and security audits for websites, web applications, and APIs, with clear findings your team can act on.",
+    icon: ShieldCheck,
+    accent: "from-emerald-400/80 to-cyan-500/70",
+    capabilities: [
+      "Web Application VAPT",
+      "Website Security Audits",
+      "API Security Assessments",
+      "Remediation Guidance",
+    ],
+  },
+  {
     slug: "mobile-applications",
     title: "Mobile Applications",
     tagline: "Native-grade experiences on every device",
@@ -123,16 +138,19 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     title: "AI & Automation",
-    tagline: "Intelligence wired into daily operations",
+    tagline: "Practical AI with evaluation and control",
     description:
-      "Assistants, copilots, and automated pipelines that remove repetitive work and surface decisions faster.",
+      "RAG assistants, private models, computer vision, predictive analytics, and workflow automation built around your data and review process.",
     icon: BrainCircuit,
     accent: "from-fuchsia-400/80 to-violet-500/70",
     capabilities: [
-      "AI Solutions",
-      "AI Chatbots",
-      "AI Automation",
-      "Document & Data Intelligence",
+      "Knowledge Assistants & RAG",
+      "Workflow Agents & Automation",
+      "Private LLM Deployment",
+      "Computer Vision",
+      "Predictive Analytics",
+      "Document Intelligence",
+      "AI Governance & Evaluation",
     ],
   },
   {
@@ -174,8 +192,8 @@ export const serviceCatalogue: { name: string; group: string }[] = services.flat
 
 /* ------------------------------------------------------------------
    PRODUCTS
-   Placeholder catalogue. Add an entry here and it appears on the
-   homepage showcase, the products page, and the footer automatically.
+   First-party product catalogue. Add an entry here to show a product on
+   the homepage, the products page, and in the footer.
 ------------------------------------------------------------------ */
 export type ProductStatus = "Live" | "In Development" | "Coming Soon";
 
@@ -231,7 +249,7 @@ export const products: Product[] = [
       "Students, teachers, houses, homework, exams and fees in a single cloud portal, with a parent app, online payments and an assistant that answers from the school’s own data.",
     icon: GraduationCap,
     accent: "from-sky-400 to-indigo-600",
-    highlights: ["25+ modules", "Parent app & online fees", "PM POSHAN ready", "Built-in AI assistant"],
+    highlights: ["School operations", "Parent app & online fees", "PM POSHAN workflows", "Built-in AI assistant"],
   },
 ];
 
@@ -240,11 +258,6 @@ export const productStatusStyles: Record<ProductStatus, string> = {
   "In Development": "border-sky-200 bg-sky-50 text-sky-800",
   "Coming Soon": "border-amber-200 bg-amber-50 text-amber-800",
 };
-
-export const productCategories = [
-  "All",
-  ...Array.from(new Set(products.map((product) => product.category))),
-];
 
 /* ------------------------------------------------------------------
    WHY THE HNX
@@ -444,9 +457,12 @@ export const projectTypes = [
   "Website",
   "Web Application",
   "ERP / CRM",
+  "Cybersecurity / VAPT",
   "Mobile App",
   "Desktop Software",
   "AI Solution",
+  "Cloud / API",
+  "UI / UX Design",
   "Custom Software",
   "Other",
 ] as const;
@@ -462,8 +478,8 @@ export const budgetRanges = [
 
 export const assurances: Feature[] = [
   {
-    title: "Reply within one business day",
-    description: "A senior engineer reads every enquiry that arrives.",
+    title: "Direct project enquiry",
+    description: "Share the brief, current system, and target outcome with us.",
     icon: ScanSearch,
   },
   {
