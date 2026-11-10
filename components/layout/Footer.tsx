@@ -12,10 +12,10 @@ const socialGlyphs: Record<string, string> = {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-ink-950">
+    <footer className="relative overflow-hidden border-t border-slate-900/[0.07] bg-[#eef3ff]">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[52rem] -translate-x-1/2 rounded-full bg-hnx-blue/10 blur-[120px]"
+        className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[52rem] -translate-x-1/2 rounded-full bg-hnx-blue/12 blur-[120px]"
       />
 
       <div className="shell relative py-16 sm:py-20">
@@ -33,7 +33,7 @@ export function Footer() {
                     target="_blank"
                     rel="noreferrer noopener"
                     aria-label={social.label}
-                    className="grid h-10 w-10 place-items-center rounded-full border border-white/[0.08] bg-white/[0.04] font-mono text-[0.6875rem] uppercase text-mist-300 transition-colors duration-300 hover:border-cyan-500/40 hover:text-cyan-400"
+                    className="grid h-10 w-10 place-items-center rounded-full border border-slate-900/10 bg-slate-900/[0.03] font-mono text-[0.6875rem] uppercase text-mist-300 transition-colors duration-300 hover:border-hnx-cyan/40 hover:text-hnx-cyan"
                   >
                     {socialGlyphs[social.label] ?? social.label.slice(0, 2)}
                   </a>
@@ -47,12 +47,12 @@ export function Footer() {
             <ul className="flex flex-col gap-2.5">
               {nav.map((item) => (
                 <li key={item.href}>
-              <Link
-                href={item.href}
-                className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-cyan-400"
-              >
-                {item.label}
-              </Link>
+                  <Link
+                    href={item.href}
+                    className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-hnx-cyan"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
               <li>
@@ -81,7 +81,7 @@ export function Footer() {
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
-                    className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-cyan-400"
+                    className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-hnx-cyan"
                   >
                     {service.title}
                   </Link>
@@ -128,22 +128,22 @@ export function Footer() {
               </li>
             </ul>
 
-              <Link
-                href="/contact"
-                className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.04] px-4 py-2 text-[0.8125rem] font-medium text-mist-100 transition-colors duration-300 hover:border-cyan-500/40 hover:text-cyan-400"
-              >
-                Start a project
-                <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
-              </Link>
+            <Link
+              href="/contact"
+              className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full border border-slate-900/12 bg-slate-900/[0.04] px-4 py-2 text-[0.8125rem] font-medium text-mist-100 transition-colors duration-300 hover:border-hnx-cyan/40 hover:text-hnx-cyan"
+            >
+              Start a project
+              <ArrowUpRight className="h-4 w-4" strokeWidth={1.8} />
+            </Link>
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-slate-900/[0.07] pt-8 sm:flex-row">
           <p className="text-[0.75rem] text-mist-400">
             &copy; {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>
           <p className="font-mono text-[0.6875rem] tracking-[0.18em] text-mist-400/70 uppercase">
-            Interface · Logic · Intelligence
+            Building What&apos;s Next
           </p>
         </div>
       </div>
