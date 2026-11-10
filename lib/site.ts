@@ -1,12 +1,5 @@
 /**
- * Central site configuration.
- * Replace the placeholder contact details and social handles with real ones
- * before going live — every consumer of this file picks the change up.
- */
-/**
- * Canonical origin. Vercel (or any host) should set NEXT_PUBLIC_SITE_URL to the
- * real domain; without it the values below fall back to the intended domain.
- * Everything SEO-facing derives from this: canonicals, sitemap, robots, OG tags.
+ * Central site configuration — personal portfolio.
  */
 const rawOrigin = process.env.NEXT_PUBLIC_SITE_URL || "https://thehnx.com";
 const origin = rawOrigin.endsWith("/") ? rawOrigin.slice(0, -1) : rawOrigin;
@@ -14,55 +7,107 @@ const origin = rawOrigin.endsWith("/") ? rawOrigin.slice(0, -1) : rawOrigin;
 export const site = {
   name: "The HNX",
   legalName: "The HNX",
-  /**
-   * Brand spellings published as schema.org alternateName values on the
-   * Organization and WebSite nodes.
-   */
   alternateNames: ["TheHNX", "The HNX", "HNX", "The Hnx", "TheHnx"],
   domain: "thehnx.com",
   url: origin,
-  tagline: "Building What's Next.",
+  tagline: "Interface · Logic · Intelligence",
   description:
-    "The HNX builds websites, ERP and CRM systems, custom software, and AI workflows, and provides website and API VAPT for teams worldwide.",
-  shortDescription:
-    "Websites, ERP, AI, VAPT, and custom software for teams worldwide.",
-  email: "info@thehnx.com",
-  salesEmail: "projects@thehnx.com",
+    "Full-stack developer & AI/ML engineer. I build the interface, the services and the model behind them, so a rough idea becomes a product people can use.",
+  shortDescription: "Interface, services and the model behind them.",
+  email: "hello@thehnx.com",
+  salesEmail: "hello@thehnx.com",
   phone: "+91 78890 02108",
-  /**
-   * The wa.me form of `phone`, digits only. Derived rather than typed twice so
-   * the two can never disagree the way the old number did across our sites.
-   */
   get whatsapp() {
     return this.phone.replace(/\D/g, "");
   },
-  location: "Remote-first — delivering to teams worldwide",
+  location: "Remote-first",
   hours: "Mon – Fri · 09:00 – 19:00",
-  /** GA4 measurement ID for the Google tag; override per environment with NEXT_PUBLIC_GA_ID. */
   gaId: process.env.NEXT_PUBLIC_GA_ID || "G-563R65KGMV",
-  /** Google Tag Manager container ID; override per environment with NEXT_PUBLIC_GTM_ID. */
   gtmId: process.env.NEXT_PUBLIC_GTM_ID || "GTM-K98J9FCB",
-  /**
-   * Search Console HTML-tag verification token, checked in deliberately: it is
-   * served in the page head on every request, so it is public by design and is
-   * not a credential. Search Console keeps checking for it after verification —
-   * removing it un-verifies the property.
-   */
   googleSiteVerification:
     process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
     "A2OLyaGhacAh2P_6UpYgk5fmKUjc7tzfRJPBMnY7vFk",
   socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/the-hnx-278582434/" },
-    { label: "X", href: "https://x.com/the__hnx" },
-    { label: "Instagram", href: "https://www.instagram.com/the__hnx/" },
+    { label: "Email", href: "mailto:hello@thehnx.com" },
+    { label: "GitHub", href: "https://github.com/the-hnx" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/the-hnx" },
   ],
 } as const;
 
 export const nav = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
-  { label: "About Us", href: "/about" },
-  { label: "Our Process", href: "/process" },
-  { label: "Contact", href: "/contact" },
+  { label: "Work", href: "#work" },
+  { label: "Experience", href: "#experience" },
+  { label: "Stack", href: "#stack" },
+  { label: "Contact", href: "#contact" },
+] as const;
+
+export const works = [
+  {
+    slug: "vpn-tunneling-dashboard",
+    title: "VPN Tunneling Dashboard",
+    category: "Full-stack / Network visibility",
+    tagline: "Make the invisible readable.",
+    description:
+      "A monitoring interface that brings VPN tunnel activity into one clear view. Graphs and structured tables make IKE and Child SA data easier to inspect.",
+    stack: ["React", "REST APIs", "Data visualization"],
+  },
+  {
+    slug: "jatayu",
+    title: "JATAYU",
+    category: "Applied AI / Autonomous UAV",
+    tagline: "From seeing to responding.",
+    description:
+      "An autonomous UAV project connecting human detection, tracking and stereo-vision navigation with hardware and control logic.",
+    stack: ["Python", "OpenCV", "NanoDet", "MAVLink", "Raspberry Pi"],
+  },
+  {
+    slug: "retail-optimization-platform",
+    title: "Retail Optimization Platform",
+    category: "Product engineering / Retail analytics",
+    tagline: "Connect the floor to the bigger picture.",
+    description:
+      "A retail platform bringing analytics and inventory tracking into one connected product.",
+    stack: ["React", "Node.js", "Express", "Supabase", "YOLO", "OpenCV"],
+  },
+] as const;
+
+export const experiences = [
+  {
+    year: "July 2026 – Now",
+    role: "Research Intern",
+    org: "IIT Bombay",
+    orgLocation: "Mumbai",
+    detail: "Working on the industry project Dhatuverse.",
+  },
+  {
+    year: "2026",
+    role: "B.E. Computer Engineering",
+    org: "Xavier Institute of Engineering",
+    orgLocation: "",
+    detail: "Bachelor of Engineering, class of 2026.",
+  },
+  {
+    year: "July 2025",
+    role: "Project Intern",
+    org: "BARC",
+    orgLocation: "Mumbai",
+    detail: "Built a research-focused web system under expert mentorship.",
+  },
+  {
+    year: "June 2024",
+    role: "AI/ML Intern",
+    org: "IBM SkillsBuild",
+    orgLocation: "Virtual",
+    detail: "Machine learning fundamentals and data analysis.",
+  },
+] as const;
+
+export const stack = [
+  { group: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { group: "Backends & APIs", items: ["Node.js", "Express", "FastAPI", "REST"] },
+  { group: "Databases", items: ["PostgreSQL", "MongoDB", "Supabase", "Qdrant"] },
+  { group: "Data pipelines", items: ["SQL", "ETL / ELT", "Python", "Power BI"] },
+  { group: "Computer vision", items: ["OpenCV", "YOLO", "NanoDet", "Raspberry Pi"] },
+  { group: "Applied AI", items: ["LangChain", "Hugging Face", "Model evaluation", "MLOps"] },
 ] as const;
