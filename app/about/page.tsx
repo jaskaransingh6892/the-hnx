@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { CTASection } from "@/components/sections/CTASection";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { TrustIntro } from "@/components/sections/TrustIntro";
 import { WhySection } from "@/components/sections/WhySection";
 import { ButtonLink } from "@/components/ui/Button";
@@ -73,6 +74,7 @@ export default function AboutPage() {
 
       <TrustIntro />
       <AboutSection compact />
+      <TeamSection />
       <WhySection />
       <CTASection />
     </>

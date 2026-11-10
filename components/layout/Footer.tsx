@@ -63,6 +63,14 @@ export function Footer() {
                   Guides
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-[0.8125rem] text-mist-300 transition-colors duration-300 hover:text-hnx-cyan"
+                >
+                  Journal
+                </Link>
+              </li>
             </ul>
           </nav>
 

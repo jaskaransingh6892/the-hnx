@@ -427,6 +427,47 @@ export const principles: Feature[] = [
 ];
 
 /* ------------------------------------------------------------------
+   TEAM
+------------------------------------------------------------------ */
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  icon: LucideIcon;
+};
+
+export const team: TeamMember[] = [
+  {
+    name: "Aanya Desai",
+    role: "Engineering Lead",
+    bio:
+      "Builds distributed systems and cloud infrastructure. Formerly at a fintech platform handling millions of transactions daily.",
+    icon: Network,
+  },
+  {
+    name: "Kabir Sharma",
+    role: "Product Design",
+    bio:
+      "Designs interfaces for complex workflows — ERPs, dashboards, and clinic software — with a focus on accessibility.",
+    icon: Palette,
+  },
+  {
+    name: "Ishaan Verma",
+    role: "Security & VAPT",
+    bio:
+      "Runs website and API penetration tests, with an emphasis on access control and business-logic flaws scanners miss.",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Neha Rao",
+    role: "AI & Automation",
+    bio:
+      "Deploys private LLMs and RAG assistants, with evaluation frameworks that keep outputs grounded in source data.",
+    icon: BrainCircuit,
+  },
+];
+
+/* ------------------------------------------------------------------
    ENGAGEMENT MODELS
 ------------------------------------------------------------------ */
 export const engagementModels: Feature[] = [
