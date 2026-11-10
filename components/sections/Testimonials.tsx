@@ -1,6 +1,5 @@
 import { ArrowRight, Quote } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 
@@ -9,8 +8,7 @@ type Testimonial = {
   role: string;
   organization: string;
   quote: string;
-  logo?: string;
-  logoAlt?: string;
+  color: "blue" | "cyan" | "violet";
 };
 
 const testimonials: Testimonial[] = [
@@ -20,8 +18,7 @@ const testimonials: Testimonial[] = [
     organization: "CityCare Clinic",
     quote:
       "Nabz replaced our paper register and three spreadsheets. The evening cash reconciliation now takes two minutes instead of two hours.",
-    logo: "/brand/hnx-logo-on-light.png",
-    logoAlt: "CityCare Clinic",
+    color: "blue",
   },
   {
     name: "Sneha Rao",
@@ -29,8 +26,7 @@ const testimonials: Testimonial[] = [
     organization: "RetailMart",
     quote:
       "MyInventory unified our till, home delivery, and online storefront. Stock numbers finally agree across every outlet.",
-    logo: "/brand/hnx-logo-on-light.png",
-    logoAlt: "RetailMart",
+    color: "cyan",
   },
   {
     name: "Arjun Singh",
@@ -38,10 +34,23 @@ const testimonials: Testimonial[] = [
     organization: "Greenwood School",
     quote:
       "EducationCloud brought attendance, fees, and the parent app into one portal. Teachers finally have one system, not five.",
-    logo: "/brand/hnx-logo-on-light.png",
-    logoAlt: "Greenwood School",
+    color: "violet",
   },
 ];
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
+
+const avatarColors: Record<string, string> = {
+  blue: "bg-hnx-blue/10 border-hnx-blue/20 text-hnx-blue",
+  cyan: "bg-hnx-cyan/10 border-hnx-cyan/20 text-hnx-cyan",
+  violet: "bg-hnx-violet/10 border-hnx-violet/20 text-hnx-violet",
+};
 
 export function TestimonialsSection() {
   return (
@@ -100,18 +109,14 @@ export function TestimonialsSection() {
                       “{item.quote}”
                     </blockquote>
                     <div className="flex items-start gap-3">
-                      {item.logo ? (
-                        <Image
-                          src={item.logo}
-                          alt={item.logoAlt ?? item.organization}
-                          width={100}
-                          height={40}
-                          className="h-10 w-auto object-contain shrink-0"
-                          loading="lazy"
-                          decoding="async"
-                          priority
-                        />
-                      ) : null}
+                      <div
+                        className={cn(
+                          "shrink-0 rounded-full border flex items-center justify-center h-10 w-10 font-mono text-xs font-semibold",
+                          avatarColors[item.color],
+                        )}
+                      >
+                        {initials(item.name)}
+                      </div>
                       <div className="flex flex-col">
                         <strong className="text-[0.875rem] font-semibold text-mist-100">
                           {item.name}
