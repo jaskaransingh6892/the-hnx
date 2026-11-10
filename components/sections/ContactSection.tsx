@@ -7,7 +7,7 @@ import { assurances } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const details = [
-  { icon: Mail, label: "Project email", value: site.salesEmail, href: `mailto:${site.salesEmail}` },
+  { icon: Mail, label: "Project email", value: site.email, href: `mailto:${site.email}` },
   {
     icon: Phone,
     label: "Phone",
