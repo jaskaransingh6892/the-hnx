@@ -540,6 +540,120 @@
 }
 
 /* ============================================================
+   MOTION PRIMITIVES
+   ============================================================ */
+@layer components {
+  /* Lenis moves the real scroll position, so the browser's own smooth
+     scrolling has to stand down or the two fight over every wheel tick. */
+  html.lenis,
+  html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+
+  /* Masked line reveal. The padding/negative-margin pair gives descenders
+     room inside the clip without adding height to the line box. */
+  .rv-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.16em;
+    margin-bottom: -0.16em;
+  }
+  .rv-word__in {
+    display: inline-block;
+    will-change: transform;
+  }
+  /* Once the line has landed the clip has no job left, and keeping it would
+     cut off focus rings and hover underlines. */
+  .rv-split--done .rv-word { overflow: visible; }
+
+  .bl-word { display: inline-block; }
+  .bl-word__in {
+    display: inline-block;
+    will-change: opacity, filter;
+  }
+
+  /* Trailing cursor ring. The native cursor stays visible underneath it. */
+  .hnx-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.1rem;
+    height: 2.1rem;
+    padding-inline: 0.55rem;
+    border: 1.5px solid color-mix(in oklab, var(--color-hnx-blue) 42%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--color-hnx-blue) 6%, transparent);
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform;
+    transition:
+      opacity 280ms ease,
+      min-width 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      height 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 280ms ease,
+      border-color 280ms ease;
+  }
+  html.cursor-on .hnx-cursor { opacity: 1; }
+  .hnx-cursor.is-active {
+    min-width: 2.9rem;
+    height: 2.9rem;
+    background: color-mix(in oklab, var(--color-hnx-blue) 13%, transparent);
+    border-color: color-mix(in oklab, var(--color-hnx-blue) 60%, transparent);
+  }
+  .hnx-cursor.is-labelled {
+    height: 2.1rem;
+    border-color: transparent;
+    background: var(--color-hnx-blue);
+    box-shadow: 0 10px 26px -12px rgb(62 99 233 / 0.75);
+  }
+  .hnx-cursor__label {
+    font-family: var(--font-mono);
+    font-size: 0;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: font-size 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease;
+  }
+  .hnx-cursor.is-labelled .hnx-cursor__label {
+    font-size: 0.625rem;
+    opacity: 1;
+  }
+  @media (hover: none), (pointer: coarse) {
+    .hnx-cursor { display: none; }
+  }
+
+  /* Scroll-velocity marquee. --skew is written per frame by the component. */
+  .hnx-marquee {
+    --marquee-gap: 0.85rem;
+    width: 100%;
+    overflow: hidden;
+    transform: skewX(var(--skew, 0deg));
+    will-change: transform;
+  }
+  .hnx-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+  .hnx-marquee__set {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--marquee-gap);
+    padding-right: var(--marquee-gap);
+  }
+}
+
+/* ============================================================
    ACCESSIBILITY
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -559,4 +673,10 @@
   .app-loader *::after { animation: none !important; }
   .app-loader__logo .logo-mark-rails path,
   .app-loader__logo .logo-mark-diagonals path { stroke-dashoffset: 0 !important; }
+
+  /* The motion primitives all bail out in JS too; these are the belt to
+     that braces, for anything already in the DOM when the query flips. */
+  .hnx-cursor { display: none !important; }
+  .rv-word { overflow: visible !important; }
+  .hnx-marquee { transform: none !important; }
 }

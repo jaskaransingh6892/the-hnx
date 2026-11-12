@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { Service } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "./SpotlightCard";
+import { DrawSVG } from "@/components/motion/DrawSVG";
 
 export function ServiceCard({
   service,
@@ -29,6 +30,7 @@ export function ServiceCard({
     <SpotlightCard as="article" className="h-full">
       <Link
         href={`/services/${service.slug}`}
+        data-cursor="Explore"
         className="flex h-full flex-col gap-5 p-6 sm:p-7"
         aria-label={`${service.title} — ${service.tagline}`}
       >
@@ -39,7 +41,9 @@ export function ServiceCard({
               palette,
             )}
           >
-            <Icon className="relative h-7 w-7" strokeWidth={1.8} />
+            <DrawSVG className="relative" duration={1} stagger={0.07}>
+              <Icon className="h-7 w-7" strokeWidth={1.8} />
+            </DrawSVG>
           </span>
 
           <span className="font-mono text-[0.6875rem] tracking-[0.2em] text-mist-400/70">

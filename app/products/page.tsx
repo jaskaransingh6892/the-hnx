@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { products } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
 import { site } from "@/lib/site";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 const pageTitle = "Software Products & Case Studies";
 const pageDescription =
@@ -109,9 +110,9 @@ export default function ProductsPage() {
           <div className="glass edge-glow flex flex-col gap-7 rounded-[2rem] p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <p className="eyebrow text-hnx-blue">Your own workflow</p>
-              <h2 className="mt-4 font-display text-2xl font-bold text-mist-100 sm:text-3xl">
+              <LineReveal as="h2" className="mt-4 block font-display text-2xl font-bold text-mist-100 sm:text-3xl">
                 Need software shaped around your business?
-              </h2>
+              </LineReveal>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist-300">
                 Tell us what current tools make difficult: the people, records, and handoffs involved.
                 We can discuss a scoped first release for your team.

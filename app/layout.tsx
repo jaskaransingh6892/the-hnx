@@ -5,6 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { AppLoader } from "@/components/layout/AppLoader";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { Analytics, AnalyticsNoScript } from "@/components/layout/Analytics";
+import { Cursor } from "@/components/motion/Cursor";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -167,6 +169,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
           }}
         />
+        <SmoothScroll />
+        <Cursor />
         <AppLoader />
         <div id="app-content">
           <a

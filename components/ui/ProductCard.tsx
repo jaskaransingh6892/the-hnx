@@ -4,6 +4,7 @@ import type { Product } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "./SpotlightCard";
+import { ClipReveal } from "@/components/motion/ClipReveal";
 import { StatusBadge } from "./StatusBadge";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -18,7 +19,15 @@ export function ProductCard({ product }: { product: Product }) {
       glow={isLive ? "rgba(62,99,233,0.12)" : "rgba(120,67,216,0.1)"}
     >
       <div id={product.slug} className="flex h-full scroll-mt-32 flex-col">
-        <div className={cn("relative min-h-52 overflow-hidden bg-gradient-to-br p-6 text-white sm:p-7", product.accent)}>
+        <ClipReveal
+          scale={1.06}
+          duration={1.1}
+          className="overflow-hidden"
+          innerClassName={cn(
+            "relative min-h-52 bg-gradient-to-br p-6 text-white sm:p-7",
+            product.accent,
+          )}
+        >
           <span aria-hidden className="absolute -right-14 -top-20 h-64 w-64 rounded-full border border-white/25" />
           <span aria-hidden className="absolute -right-6 -top-10 h-48 w-48 rounded-full border border-white/20" />
           <span aria-hidden className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-black/15 to-transparent" />
@@ -36,7 +45,7 @@ export function ProductCard({ product }: { product: Product }) {
             </p>
             <h3 className="mt-1 font-display text-[1.75rem] font-bold tracking-tight">{product.name}</h3>
           </div>
-        </div>
+        </ClipReveal>
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
           <StatusBadge status={product.status} className="w-fit" />
@@ -60,6 +69,7 @@ export function ProductCard({ product }: { product: Product }) {
             {hasCaseStudy ? (
               <Link
                 href={`/products/${product.slug}`}
+                data-cursor="Build story"
                 className="inline-flex items-center gap-1.5 text-[0.8125rem] font-semibold text-hnx-blue transition-colors hover:text-hnx-cyan"
               >
                 Read the build story
@@ -71,6 +81,7 @@ export function ProductCard({ product }: { product: Product }) {
                 href={product.href}
                 target="_blank"
                 rel="noreferrer noopener"
+                data-cursor="Open"
                 className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-300 transition-colors hover:text-hnx-blue"
               >
                 Open the product

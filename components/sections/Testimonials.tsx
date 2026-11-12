@@ -1,6 +1,7 @@
 import { ArrowRight, Quote } from "lucide-react";
 import Link from "next/link";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { cn } from "@/lib/utils";
 
 type Testimonial = {
@@ -71,12 +72,10 @@ export function TestimonialsSection() {
                 What Teams Say
               </p>
             </Reveal>
-            <Reveal delay={0.06}>
-              <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1]">
-                Trusted by teams building{" "}
-                <span className="text-gradient-accent">what comes next.</span>
-              </h2>
-            </Reveal>
+            <LineReveal as="h2" className="font-display text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1]">
+              Trusted by teams building{" "}
+              <span className="text-gradient-accent">what comes next.</span>
+            </LineReveal>
             <Reveal delay={0.12}>
               <p className="max-w-xl text-[0.9375rem] leading-relaxed text-mist-300">
                 From small clinics to growing schools, the software we build becomes part of how

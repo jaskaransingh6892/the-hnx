@@ -21,6 +21,7 @@ export function GuidesSection() {
               <p className="mt-3 text-[0.875rem] leading-relaxed text-mist-300">{guide.description}</p>
               <Link
                 href={`/guides/${guide.slug}`}
+                data-cursor="Read"
                 className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[0.875rem] font-semibold text-hnx-blue transition-colors hover:text-hnx-cyan"
               >
                 Read the guide

@@ -1,53 +1,60 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { useEffect, useRef, type ReactNode } from "react";
+import { gsap, hasFinePointer, prefersReducedMotion } from "@/lib/gsap";
 
 /**
- * Pulls its child a few pixels toward the cursor. Deliberately subtle —
- * strength is capped and the effect is disabled for reduced-motion users
- * and on coarse pointers.
+ * Pulls its child toward the cursor and releases it on an expo ease, which is
+ * what gives the effect its weight — a spring overshoots, this one glides.
+ * Off for reduced-motion visitors and for anything but a mouse.
  */
 export function Magnetic({
   children,
   strength = 0.28,
   className,
+  max = 18,
 }: {
   children: ReactNode;
   strength?: number;
   className?: string;
+  /** Pixel cap on the pull, so a wide button never slides out of its row. */
+  max?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 220, damping: 18, mass: 0.4 });
-  const springY = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });
 
-  function handleMove(event: React.MouseEvent<HTMLSpanElement>) {
-    if (reduce || !ref.current) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const rect = ref.current.getBoundingClientRect();
-    const dx = event.clientX - (rect.left + rect.width / 2);
-    const dy = event.clientY - (rect.top + rect.height / 2);
-    x.set(Math.max(-14, Math.min(14, dx * strength)));
-    y.set(Math.max(-10, Math.min(10, dy * strength)));
-  }
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || prefersReducedMotion() || !hasFinePointer()) return;
 
-  function reset() {
-    x.set(0);
-    y.set(0);
-  }
+    const toX = gsap.quickTo(node, "x", { duration: 0.6, ease: "expo.out" });
+    const toY = gsap.quickTo(node, "y", { duration: 0.6, ease: "expo.out" });
+    const clamp = (value: number) => Math.max(-max, Math.min(max, value));
+
+    const onMove = (event: PointerEvent) => {
+      const rect = node.getBoundingClientRect();
+      toX(clamp((event.clientX - rect.left - rect.width / 2) * strength));
+      toY(clamp((event.clientY - rect.top - rect.height / 2) * strength * 1.2));
+    };
+
+    const onLeave = () => {
+      toX(0);
+      toY(0);
+    };
+
+    node.addEventListener("pointermove", onMove);
+    node.addEventListener("pointerleave", onLeave);
+
+    return () => {
+      node.removeEventListener("pointermove", onMove);
+      node.removeEventListener("pointerleave", onLeave);
+      gsap.killTweensOf(node);
+      gsap.set(node, { clearProps: "transform" });
+    };
+  }, [max, strength]);
 
   return (
-    <motion.span
-      ref={ref}
-      onMouseMove={handleMove}
-      onMouseLeave={reset}
-      style={{ x: springX, y: springY }}
-      className={className}
-    >
+    <span ref={ref} className={className}>
       {children}
-    </motion.span>
+    </span>
   );
 }

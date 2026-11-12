@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import { CountUp } from "@/components/motion/CountUp";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { products } from "@/lib/content";
 import { caseStudies } from "@/lib/case-studies";
 
@@ -27,12 +29,13 @@ export function TrustIntro() {
 
       <div className="shell relative grid gap-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-20">
         <div className="flex flex-col gap-6">
-          <Reveal>
-            <p className="font-display text-[clamp(1.6rem,3.6vw,2.6rem)] font-semibold leading-[1.16] text-mist-100">
-              The HNX is where ideas evolve into{" "}
-              <span className="text-gradient-accent">powerful digital experiences.</span>
-            </p>
-          </Reveal>
+          <LineReveal
+            as="p"
+            className="font-display text-[clamp(1.6rem,3.6vw,2.6rem)] font-semibold leading-[1.16] text-mist-100"
+          >
+            The HNX is where ideas evolve into{" "}
+            <span className="text-gradient-accent">powerful digital experiences.</span>
+          </LineReveal>
 
           <Reveal delay={0.08}>
             <p className="max-w-2xl text-[0.9375rem] leading-relaxed text-mist-300 sm:text-base">
@@ -54,7 +57,7 @@ export function TrustIntro() {
         <div className="flex flex-col gap-4">
           <Reveal>
             <p className="eyebrow font-semibold text-hnx-blue">
-              Our own work · {products.length} products
+              Our own work · <CountUp value={products.length} /> products
             </p>
           </Reveal>
           <Stagger className="flex flex-col gap-4">
@@ -76,6 +79,7 @@ export function TrustIntro() {
                     {caseStudies[product.slug] ? (
                       <Link
                         href={`/products/${product.slug}`}
+                        data-cursor="Read"
                         className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300 hover:text-hnx-cyan"
                       >
                         Read the case study
@@ -87,6 +91,7 @@ export function TrustIntro() {
                         href={product.href}
                         target="_blank"
                         rel="noreferrer noopener"
+                        data-cursor="Open"
                         className="inline-flex items-center gap-1.5 text-[0.8125rem] font-medium text-hnx-cyan transition-colors duration-300 hover:text-hnx-blue"
                       >
                         Open it

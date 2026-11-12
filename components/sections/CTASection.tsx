@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 import { assurances } from "@/lib/content";
 
@@ -17,11 +18,12 @@ export function CTASection() {
           />
 
           <div className="relative flex flex-col items-center gap-7 text-center">
-            <Reveal>
-              <h2 className="font-display text-[clamp(2rem,5.2vw,3.6rem)] font-bold leading-[1.05]">
-                Have an Idea <span className="text-gradient-accent">Worth Building?</span>
-              </h2>
-            </Reveal>
+            <LineReveal
+              as="h2"
+              className="font-display text-[clamp(2rem,5.2vw,3.6rem)] font-bold leading-[1.05]"
+            >
+              Have an Idea <span className="text-gradient-accent">Worth Building?</span>
+            </LineReveal>
 
             <Reveal delay={0.08}>
               <p className="max-w-xl text-[1.0125rem] text-mist-300">

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { Button } from "@/components/ui/Button";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 
@@ -61,9 +62,12 @@ export function NewsletterSection() {
 
           <div className="relative flex flex-col items-center gap-6 text-center">
             <p className="eyebrow text-hnx-blue">Stay in touch</p>
-            <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] text-mist-100">
+            <LineReveal
+              as="h2"
+              className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] text-mist-100"
+            >
               Engineering notes, shipped.
-            </h2>
+            </LineReveal>
             <p className="max-w-md text-[0.9375rem] text-mist-300">
               Get build stories, security notes, and product updates from The HNX
               — straight to your inbox.

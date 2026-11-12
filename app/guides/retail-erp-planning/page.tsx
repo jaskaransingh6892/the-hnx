@@ -5,6 +5,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { site } from "@/lib/site";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 const path = "/guides/retail-erp-planning";
 const pageUrl = site.url + path;
@@ -286,9 +287,12 @@ export default function RetailErpPlanningPage() {
         <div className="shell">
           <div className="glass edge-glow flex flex-col gap-7 rounded-[2rem] p-8 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
-              <h2 className="font-display text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-mist-100">
+              <LineReveal
+                as="h2"
+                className="block font-display text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-mist-100"
+              >
                 Need to connect stock, billing, and sales?
-              </h2>
+              </LineReveal>
               <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist-300">
                 Bring your current workflow and the module that hurts most. We can map a
                 scoped first release and the data checks it needs before rollout.

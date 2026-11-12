@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { getBlogPost, getRelatedPosts, getBlogPostsByCategory, blogCategories } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 export async function generateMetadata({
   params,
@@ -83,9 +84,14 @@ export default async function BlogPostPage({
               <time className="font-mono text-[0.75rem] tracking-[0.18em] text-mist-400 uppercase">
                 {post.publishedAt}
               </time>
-              <h1 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.08] text-mist-100">
+              <LineReveal
+                as="h1"
+                trigger="mount"
+                delay={0.08}
+                className="font-display text-[clamp(2rem,5vw,3.25rem)] font-bold leading-[1.08] text-mist-100"
+              >
                 {post.title}
-              </h1>
+              </LineReveal>
               <p className="text-[1.125rem] leading-relaxed text-mist-200">
                 {post.summary}
               </p>

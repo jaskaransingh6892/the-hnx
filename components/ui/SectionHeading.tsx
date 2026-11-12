@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./Reveal";
+import { BlurText } from "@/components/motion/BlurText";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -45,29 +47,26 @@ export function SectionHeading({
         </Reveal>
       ) : null}
 
-      <Reveal delay={0.06}>
-        <h2
-          className={cn(
-            "font-display text-[clamp(1.9rem,4.4vw,3.25rem)] font-bold leading-[1.08]",
-            align === "center" ? "mx-auto max-w-4xl" : "max-w-3xl",
-          )}
-        >
-          {title}
-          {highlight ? <span className="text-gradient-accent"> {highlight}</span> : null}
-        </h2>
-      </Reveal>
+      <LineReveal
+        as="h2"
+        className={cn(
+          "font-display text-[clamp(1.9rem,4.4vw,3.25rem)] font-bold leading-[1.08]",
+          align === "center" ? "mx-auto max-w-4xl" : "max-w-3xl",
+        )}
+      >
+        {title}
+        {highlight ? <span className="text-gradient-accent"> {highlight}</span> : null}
+      </LineReveal>
 
       {description ? (
-        <Reveal delay={0.12}>
-          <p
-            className={cn(
-              "text-[0.975rem] leading-relaxed text-mist-300 sm:text-base",
-              align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl",
-            )}
-          >
-            {description}
-          </p>
-        </Reveal>
+        <BlurText
+          className={cn(
+            "text-[0.975rem] leading-relaxed text-mist-300 sm:text-base",
+            align === "center" ? "mx-auto max-w-2xl" : "max-w-2xl",
+          )}
+        >
+          {description}
+        </BlurText>
       ) : null}
     </div>
   );

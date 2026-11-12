@@ -12,6 +12,7 @@ import { caseStudies } from "@/lib/case-studies";
 import { guides } from "@/lib/guides";
 import { servicePages } from "@/lib/service-pages";
 import { site } from "@/lib/site";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 /** Every service is known at build time, so the detail pages are static. */
 export function generateStaticParams() {
@@ -324,9 +325,9 @@ export default async function ServiceDetailPage({
             <div className="glass edge-glow flex flex-col gap-6 rounded-[2rem] p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
                 <p className="eyebrow text-hnx-blue">Practical guide</p>
-                <h2 className="mt-3 font-display text-2xl font-bold text-mist-100 sm:text-3xl">
+                <LineReveal as="h2" className="mt-3 block font-display text-2xl font-bold text-mist-100 sm:text-3xl">
                   {relatedGuide.title}
-                </h2>
+                </LineReveal>
                 <p className="mt-3 text-[0.9375rem] leading-relaxed text-mist-300">
                   {relatedGuide.description}
                 </p>

@@ -96,6 +96,7 @@ export default function BlogPage() {
                     </span>
                     <Link
                       href={`/blog/${post.slug}`}
+                      data-cursor="Read"
                       className="text-hnx-blue font-semibold hover:text-hnx-cyan transition-colors"
                     >
                       Read <ArrowRight className="h-3.5 w-3.5 ml-0.5" strokeWidth={1.8} />

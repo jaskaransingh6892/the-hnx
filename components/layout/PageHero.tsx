@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 
 /** Shared masthead for internal pages. */
@@ -31,12 +32,15 @@ export function PageHero({
           <Eyebrow>{eyebrow}</Eyebrow>
         </Reveal>
 
-        <Reveal delay={0.06}>
-          <h1 className="font-display text-[clamp(2.3rem,6vw,4.2rem)] font-bold leading-[1.03] tracking-[-0.035em]">
-            {title}
-            {highlight ? <span className="text-gradient-accent"> {highlight}</span> : null}
-          </h1>
-        </Reveal>
+        <LineReveal
+          as="h1"
+          trigger="mount"
+          delay={0.08}
+          className="font-display text-[clamp(2.3rem,6vw,4.2rem)] font-bold leading-[1.03] tracking-[-0.035em]"
+        >
+          {title}
+          {highlight ? <span className="text-gradient-accent"> {highlight}</span> : null}
+        </LineReveal>
 
         <Reveal delay={0.12}>
           <p className="max-w-2xl text-[1.0125rem] leading-relaxed text-mist-300">{description}</p>

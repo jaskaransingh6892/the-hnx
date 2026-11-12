@@ -4,8 +4,8 @@ import { LogoMark } from "@/components/ui/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechBadge } from "@/components/ui/TechBadge";
+import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 import { technologies, techCategories } from "@/lib/content";
-import { cn } from "@/lib/utils";
 
 const rings = [
   { items: technologies.filter((tech) => tech.ring === 0), radius: 32, duration: 48, reverse: false },
@@ -77,27 +77,24 @@ function Orbit() {
   );
 }
 
-/** Small screens get a pair of opposing marquees instead of the orbit. */
+/**
+ * Small screens get a pair of opposing marquees instead of the orbit. Their
+ * speed and lean follow the scroll, so the strip feels attached to the page
+ * rather than looping beside it.
+ */
 function Marquee() {
-  const row = [...technologies, ...technologies];
   return (
     <div className="flex flex-col gap-3.5 lg:hidden">
       {[0, 1].map((line) => (
         <div
           key={line}
-          className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
+          className="relative [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
         >
-          <div
-            className={cn(
-              "flex w-max gap-3 animate-marquee motion-reduce:[animation:none]",
-              line === 1 && "[animation-direction:reverse]",
-            )}
-            style={{ animationDuration: line === 0 ? "38s" : "46s" }}
-          >
-            {row.map((tech, index) => (
-              <TechBadge key={`${tech.name}-${index}`} tech={tech} className="whitespace-nowrap" />
+          <VelocityMarquee speed={line === 0 ? 0.85 : 0.65} reverse={line === 1}>
+            {technologies.map((tech) => (
+              <TechBadge key={tech.name} tech={tech} className="whitespace-nowrap" />
             ))}
-          </div>
+          </VelocityMarquee>
         </div>
       ))}
     </div>

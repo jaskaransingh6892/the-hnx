@@ -7,6 +7,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { CTASection } from "@/components/sections/CTASection";
 import { ButtonLink } from "@/components/ui/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import { ClipReveal } from "@/components/motion/ClipReveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { OwnershipSeal } from "@/components/ui/OwnershipSeal";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -178,7 +179,7 @@ export default async function ProductCaseStudy({
             <div className="grid gap-6 md:grid-cols-2">
               {study.screenshots.map((screenshot) => (
                 <figure key={screenshot.src} className="glass overflow-hidden rounded-2xl p-3 sm:p-4">
-                  <div className="overflow-hidden rounded-xl border border-slate-900/[0.06] bg-white">
+                  <ClipReveal className="overflow-hidden rounded-xl border border-slate-900/[0.06] bg-white">
                     <Image
                       src={screenshot.src}
                       width={screenshot.width}
@@ -187,7 +188,7 @@ export default async function ProductCaseStudy({
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="h-auto w-full"
                     />
-                  </div>
+                  </ClipReveal>
                   <figcaption className="px-2 pt-4 pb-2 text-[0.8125rem] leading-relaxed text-mist-300">
                     {screenshot.caption}
                   </figcaption>

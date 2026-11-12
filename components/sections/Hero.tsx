@@ -1,17 +1,15 @@
 "use client";
 
-import { Fragment } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { ArrowRight, MoveDown, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { EASE } from "@/components/ui/Reveal";
+import { LineReveal } from "@/components/motion/LineReveal";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
 import { HeroCore } from "@/components/visuals/HeroCore";
 import { ParticleField } from "@/components/visuals/ParticleField";
 import { site } from "@/lib/site";
-
-const headline = ["Building", "What's", "Next."];
 
 const capabilityStrip = [
   { label: "Website Development", href: "/services/web-development" },
@@ -55,25 +53,9 @@ export function Hero() {
             >
               {site.name} — Websites, ERP &amp; Cybersecurity
             </motion.span>
-            {headline.map((word, index) => (
-              <Fragment key={word}>
-                <motion.span
-                  initial={{ opacity: 0, y: 34, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.85, delay: 0.12 + index * 0.11, ease: EASE }}
-                  className={
-                    index === 0
-                      ? "block sm:inline-block"
-                      : index === 2
-                        ? "text-gradient-accent inline-block"
-                        : "inline-block"
-                  }
-                >
-                  {word}
-                </motion.span>
-                {index < headline.length - 1 ? " " : null}
-              </Fragment>
-            ))}
+            <LineReveal as="span" className="block" trigger="mount" delay={0.14} stagger={0.12}>
+              Building What&apos;s <span className="text-gradient-accent">Next.</span>
+            </LineReveal>
           </h1>
 
           <motion.p

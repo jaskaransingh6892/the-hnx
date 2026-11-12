@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { TrustIntro } from "@/components/sections/TrustIntro";
+import { CapabilityTicker } from "@/components/sections/CapabilityTicker";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ProductsSection } from "@/components/sections/ProductsSection";
 import { WhySection } from "@/components/sections/WhySection";
@@ -15,6 +16,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TrustIntro />
+      <CapabilityTicker />
       <ServicesSection />
       <ProductsSection limit={3} />
       <WhySection />

@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { LogoMark } from "@/components/ui/Logo";
 import { Aurora, GridField } from "@/components/visuals/Aurora";
+import { LineReveal } from "@/components/motion/LineReveal";
 
 // Without this the 404 inherits the root canonical and points at the homepage,
 // which invites Google to index an error page as if it were "/". Nothing here
@@ -23,9 +24,14 @@ export default function NotFound() {
         <p className="font-mono text-[0.75rem] tracking-[0.24em] text-mist-400 uppercase">
           Error 404
         </p>
-        <h1 className="font-display text-[clamp(2.2rem,6vw,3.6rem)] font-bold leading-tight">
+        <LineReveal
+          as="h1"
+          trigger="mount"
+          delay={0.08}
+          className="font-display text-[clamp(2.2rem,6vw,3.6rem)] font-bold leading-tight"
+        >
           This route was never <span className="text-gradient-accent">built.</span>
-        </h1>
+        </LineReveal>
         <p className="max-w-md text-[0.9375rem] leading-relaxed text-mist-300">
           The page you are looking for does not exist, or it moved somewhere more sensible.
         </p>
