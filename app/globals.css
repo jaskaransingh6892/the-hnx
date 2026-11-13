@@ -763,6 +763,13 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* The footer has to be a containing block: its decorative glow is wider
+     than a phone screen and absolutely positioned, and a static parent does
+     not contain it — the glow escaped the footer's own overflow clip and
+     widened the document. Declared here rather than with a `relative`
+     utility, which sits in a later cascade layer than the sticky rule below. */
+  .site-footer { position: relative; }
+
   /* Footer uncover. Sticky rather than a measured, JS-applied fixed:
      switching position after hydration dropped the footer into the viewport
      in one frame, which Chrome scores as a 0.63 layout shift. Sticky holds
