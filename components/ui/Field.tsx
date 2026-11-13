@@ -25,13 +25,15 @@ function Wrapper({
   className,
 }: BaseProps & { id: string; children: ReactNode }) {
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
-      <label htmlFor={id} className="text-[0.8125rem] font-medium text-mist-200">
+    <div className={cn("field flex flex-col gap-2", className)}>
+      <label htmlFor={id} className="text-[0.8125rem] font-medium text-mist-200 transition-colors duration-300">
         {label}
         {required ? <span className="ml-1 text-hnx-cyan">*</span> : null}
         {hint ? <span className="ml-2 text-[0.75rem] font-normal text-mist-400">{hint}</span> : null}
       </label>
       {children}
+      {/* Fills from the left while the control has focus. */}
+      <span aria-hidden className="field__bar" />
       {error ? (
         <p id={`${id}-error`} role="alert" className="flex items-center gap-1.5 text-[0.75rem] text-rose-300">
           <AlertCircle className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />

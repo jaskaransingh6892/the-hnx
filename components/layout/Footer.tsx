@@ -12,13 +12,13 @@ const socialGlyphs: Record<string, string> = {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-slate-900/[0.07] bg-[#eef3ff]">
+    <footer className="site-footer overflow-hidden border-t border-slate-900/[0.07] bg-[#eef3ff]">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[52rem] -translate-x-1/2 rounded-full bg-hnx-blue/12 blur-[120px]"
       />
 
-      <div className="shell relative py-16 sm:py-20">
+      <div className="site-footer__inner shell relative py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
           <div className="flex flex-col gap-5">
             <Logo />

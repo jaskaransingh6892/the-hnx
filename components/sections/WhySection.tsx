@@ -30,7 +30,7 @@ function CoreVisual() {
 
 export function WhySection() {
   return (
-    <section className="relative overflow-hidden bg-[#f4f7ff] py-20 sm:py-24">
+    <section data-chapter="Why us" className="relative overflow-hidden bg-[#f4f7ff] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute left-0 top-1/3 h-80 w-80 rounded-full bg-hnx-cyan/10 blur-[120px]"

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { prefersReducedMotion, withGsap } from "@/lib/gsap";
 import { CheckCircle2, Loader2, Send, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { DrawSVG } from "@/components/motion/DrawSVG";
+import { usePresence } from "@/components/motion/usePresence";
 import { SelectField, TextAreaField, TextField } from "@/components/ui/Field";
-import { EASE } from "@/components/ui/Reveal";
 import { budgetRanges, products, projectTypes } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -83,6 +84,29 @@ export function ContactForm() {
   const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverMessage, setServerMessage] = useState("");
+  const successPanel = useRef<HTMLDivElement>(null);
+  const [errorShown, errorRef] = usePresence<HTMLDivElement>(status === "error", {
+    y: -8,
+    duration: 0.35,
+  });
+
+  // Runs when the success panel first mounts: the panel settles, then the
+  // copy arrives behind the tick that DrawSVG is drawing.
+  useEffect(() => {
+    const node = successPanel.current;
+    if (!node || prefersReducedMotion()) return;
+
+    return withGsap(({ gsap }) => {
+      const context = gsap.context(() => {
+        gsap
+          .timeline({ defaults: { ease: "expo.out" } })
+          .from(node, { opacity: 0, scale: 0.97, duration: 0.55 }, 0)
+          .from("[data-success='line']", { opacity: 0, y: 14, duration: 0.5, stagger: 0.1 }, 0.25);
+      }, node);
+
+      return () => context.revert();
+    });
+  }, [status]);
 
   // Product cards and the scope planner pass only fixed context in the URL.
   // The key also updates the form when a visitor chooses another shortcut
@@ -163,25 +187,27 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.97 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.55, ease: EASE }}
+      <div
+        ref={successPanel}
         className="glass edge-glow flex flex-col items-center gap-5 rounded-2xl p-10 text-center sm:p-14"
         role="status"
       >
         <span className="grid h-16 w-16 place-items-center rounded-full border border-emerald-400/30 bg-emerald-400/10">
-          <CheckCircle2 className="h-8 w-8 text-emerald-700" strokeWidth={1.5} />
+          <DrawSVG duration={0.7} stagger={0.12} start="top bottom">
+            <CheckCircle2 className="h-8 w-8 text-emerald-700" strokeWidth={1.5} />
+          </DrawSVG>
         </span>
-        <h3 className="font-display text-2xl font-semibold text-mist-100">Message received.</h3>
-        <p className="max-w-sm text-[0.9375rem] leading-relaxed text-mist-300">
+        <h3 data-success="line" className="font-display text-2xl font-semibold text-mist-100">
+          Message received.
+        </h3>
+        <p data-success="line" className="max-w-sm text-[0.9375rem] leading-relaxed text-mist-300">
           Your enquiry was delivered. We will review the details and contact you using the
           email address you provided.
         </p>
         <Button variant="secondary" magnetic={false} onClick={() => setStatus("idle")}>
           Send another message
         </Button>
-      </motion.div>
+      </div>
     );
   }
 
@@ -269,12 +295,9 @@ export function ContactForm() {
         />
       </div>
 
-      <AnimatePresence>
-        {status === "error" ? (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
+      {errorShown ? (
+          <div
+            ref={errorRef}
             role="alert"
             className="mt-6 flex items-start gap-2 rounded-xl border border-rose-300 bg-rose-50 px-4 py-3 text-[0.8125rem] text-rose-800"
           >
@@ -286,9 +309,8 @@ export function ContactForm() {
               </a>
               <p className="mt-1">Or email {site.salesEmail} directly.</p>
             </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+          </div>
+      ) : null}
 
       <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-xs text-[0.75rem] leading-relaxed text-mist-400">

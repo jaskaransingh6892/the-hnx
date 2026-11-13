@@ -5,6 +5,7 @@ import { caseStudies } from "@/lib/case-studies";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "./SpotlightCard";
 import { ClipReveal } from "@/components/motion/ClipReveal";
+import { WipeList } from "@/components/motion/WipeList";
 import { StatusBadge } from "./StatusBadge";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -56,14 +57,14 @@ export function ProductCard({ product }: { product: Product }) {
             {product.description}
           </p>
 
-          <ul className="mt-5 grid gap-2 border-t border-slate-900/[0.07] pt-5 sm:grid-cols-2">
+          <WipeList className="mt-5 grid gap-2 border-t border-slate-900/[0.07] pt-5 sm:grid-cols-2">
             {product.highlights.map((highlight) => (
               <li key={highlight} className="flex items-start gap-2 text-[0.75rem] leading-snug text-mist-300">
                 <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-hnx-blue" strokeWidth={2.2} />
                 {highlight}
               </li>
             ))}
-          </ul>
+          </WipeList>
 
           <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-7">
             {hasCaseStudy ? (

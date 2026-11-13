@@ -6,6 +6,10 @@ import { AppLoader } from "@/components/layout/AppLoader";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { Analytics, AnalyticsNoScript } from "@/components/layout/Analytics";
 import { Cursor } from "@/components/motion/Cursor";
+import { ChapterRail } from "@/components/motion/ChapterRail";
+import { FooterUncover } from "@/components/motion/FooterUncover";
+import { PageTransition } from "@/components/motion/PageTransition";
+import { SectionVeil } from "@/components/motion/SectionVeil";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site } from "@/lib/site";
 import "./globals.css";
@@ -171,6 +175,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <SmoothScroll />
         <Cursor />
+        <PageTransition />
         <AppLoader />
         <div id="app-content">
           <a
@@ -182,7 +187,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgress />
           <Navbar />
           <main id="main">{children}</main>
+          <SectionVeil />
+          <ChapterRail />
           <Footer />
+          <FooterUncover />
         </div>
         <Analytics />
       </body>

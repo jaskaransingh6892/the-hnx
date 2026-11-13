@@ -14,15 +14,23 @@ import { site } from "@/lib/site";
  * there, remove this block — otherwise every pageview is counted twice, and
  * GA4 history cannot be corrected afterwards.
  *
- * Both load with the `afterInteractive` strategy so they never compete with
- * the first paint. Set NEXT_PUBLIC_GTM_ID / NEXT_PUBLIC_GA_ID to point a
- * preview or staging deployment at different containers.
+ * Both load with the `lazyOnload` strategy, so these containers — around
+ * 280KB of script between them — wait until the page has finished loading
+ * instead of competing with hydration. The trade-off is deliberate: a
+ * visitor who leaves before the load event will not be counted.
+ *
+ * Note this did not move Lighthouse TBT when it was changed: the lab window
+ * extends past the load event, and the app bundle dominates that number
+ * anyway. The win is to real interactivity during load, not to the score.
+ *
+ * Set NEXT_PUBLIC_GTM_ID / NEXT_PUBLIC_GA_ID to point a preview or staging
+ * deployment at different containers.
  */
 export function Analytics() {
   return (
     <>
       {site.gtmId ? (
-        <Script id="gtm-init" strategy="afterInteractive">
+        <Script id="gtm-init" strategy="lazyOnload">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -35,9 +43,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="gtag-init" strategy="afterInteractive">
+          <Script id="gtag-init" strategy="lazyOnload">
             {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());

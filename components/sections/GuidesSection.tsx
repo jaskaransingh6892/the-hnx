@@ -5,7 +5,7 @@ import { guides } from "@/lib/guides";
 
 export function GuidesSection() {
   return (
-    <section className="relative border-y border-slate-900/[0.06] bg-white py-20 sm:py-24">
+    <section data-chapter="Guides" className="relative border-y border-slate-900/[0.06] bg-white py-20 sm:py-24">
       <div className="shell flex flex-col gap-12">
         <SectionHeading
           eyebrow="Practical guides"

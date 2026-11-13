@@ -7,7 +7,7 @@ import { assurances } from "@/lib/content";
 
 export function CTASection() {
   return (
-    <section className="relative overflow-hidden py-20 sm:py-24">
+    <section data-chapter="Start a project" className="relative overflow-hidden py-20 sm:py-24">
       <div className="shell relative">
         <div className="relative isolate overflow-hidden rounded-[2rem] border border-indigo-100 bg-[linear-gradient(140deg,#eaf5ff_0%,#e9ecff_55%,#f4eaff_100%)] px-6 py-16 shadow-[0_28px_80px_-50px_rgba(76,95,186,0.42)] sm:px-12 sm:py-20 lg:px-20">
           <Aurora intensity="strong" />

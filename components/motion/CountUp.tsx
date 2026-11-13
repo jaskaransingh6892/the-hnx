@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { prefersReducedMotion, withGsap } from "@/lib/gsap";
 
 /**
  * Counts up to a number when it scrolls into view. The final value is what
@@ -24,7 +24,7 @@ export function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
+  useEffect(() => withGsap(({ gsap }) => {
     const node = ref.current;
     if (!node || prefersReducedMotion()) return;
 
@@ -49,7 +49,7 @@ export function CountUp({
       tween.kill();
       node.textContent = format(value);
     };
-  }, [value, duration, suffix, pad]);
+  }), [value, duration, suffix, pad]);
 
   return (
     <span ref={ref} className={className}>

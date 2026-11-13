@@ -3,11 +3,13 @@ import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Clock, Globe2, LayoutDashboard, Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { Reveal } from "@/components/ui/Reveal";
+import { CopyButton } from "@/components/ui/CopyButton";
+import { WipeList } from "@/components/motion/WipeList";
 import { assurances } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const details = [
-  { icon: Mail, label: "Project email", value: site.email, href: `mailto:${site.email}` },
+  { icon: Mail, label: "Project email", value: site.email, href: `mailto:${site.email}`, copy: true },
   {
     icon: Phone,
     label: "Phone",
@@ -131,7 +133,7 @@ export function ContactSection() {
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-slate-900/10 bg-slate-900/[0.04]">
                         <Icon className="h-4 w-4 text-hnx-cyan" strokeWidth={1.7} />
                       </span>
-                      <span className="flex flex-col gap-0.5">
+                      <span className="flex flex-col items-start gap-1">
                         <span className="eyebrow text-mist-400">{detail.label}</span>
                         {detail.href ? (
                           <a
@@ -146,6 +148,9 @@ export function ContactSection() {
                         ) : (
                           <span className="text-[0.9375rem] text-mist-100">{detail.value}</span>
                         )}
+                        {"copy" in detail && detail.copy ? (
+                          <CopyButton value={detail.value} label="Copy email" className="mt-0.5" />
+                        ) : null}
                       </span>
                     </li>
                   );
@@ -167,7 +172,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <ul className="flex flex-col gap-3">
+            <WipeList className="flex flex-col gap-3">
               {assurances.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -182,7 +187,7 @@ export function ContactSection() {
                   </li>
                 );
               })}
-            </ul>
+            </WipeList>
           </Reveal>
 
           <div id="project-enquiry" className="scroll-mt-28">
@@ -205,7 +210,7 @@ export function ContactSection() {
               The first conversation is for understanding the work and deciding whether we are the right team.
             </p>
           </div>
-          <ol className="mt-8 grid gap-5 md:grid-cols-3">
+          <WipeList as="ol" className="mt-8 grid gap-5 md:grid-cols-3">
             {nextSteps.map((step, index) => (
               <li key={step.title} className="glass rounded-2xl p-6">
                 <span className="font-mono text-[0.75rem] font-semibold text-hnx-blue">
@@ -215,7 +220,7 @@ export function ContactSection() {
                 <p className="mt-2 text-[0.8125rem] leading-relaxed text-mist-300">{step.body}</p>
               </li>
             ))}
-          </ol>
+          </WipeList>
           <a
             href="#project-enquiry"
             className="mt-7 inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-hnx-blue transition-colors hover:text-hnx-cyan"

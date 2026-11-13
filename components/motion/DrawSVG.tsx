@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { hideUntilGsap, prefersReducedMotion, withGsap } from "@/lib/gsap";
 
 const STROKEABLE = "path, line, polyline, polygon, circle, ellipse, rect";
 
@@ -36,21 +36,27 @@ export function DrawSVG({
     if (!shapes.length) return;
 
     shapes.forEach((shape) => shape.setAttribute("pathLength", "1"));
-    gsap.set(shapes, { strokeDasharray: 1, strokeDashoffset: 1 });
-
-    const tween = gsap.to(shapes, {
-      strokeDashoffset: 0,
-      duration,
-      stagger,
-      ease: "power2.inOut",
-      onComplete: () => gsap.set(shapes, { clearProps: "strokeDasharray,strokeDashoffset" }),
-      scrollTrigger: { trigger: root, start, once: true },
+    const cancelFallback = hideUntilGsap(shapes as unknown as HTMLElement[], {
+      strokeDasharray: "1",
+      strokeDashoffset: "1",
     });
 
-    return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
-    };
+    return withGsap(({ gsap }) => {
+      cancelFallback();
+      const tween = gsap.to(shapes, {
+        strokeDashoffset: 0,
+        duration,
+        stagger,
+        ease: "power2.inOut",
+        onComplete: () => gsap.set(shapes, { clearProps: "strokeDasharray,strokeDashoffset" }),
+        scrollTrigger: { trigger: root, start, once: true },
+      });
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
   }, [duration, stagger, start]);
 
   return (

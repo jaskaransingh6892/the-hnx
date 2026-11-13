@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
+import { useEffect, useRef } from "react";
+import { hasFinePointer, prefersReducedMotion, withGsap } from "@/lib/gsap";
 import { Globe, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { LogoMark } from "@/components/ui/Logo";
 
@@ -9,38 +9,48 @@ import { LogoMark } from "@/components/ui/Logo";
  * a small second rotation; CSS handles the continuous animation on the GPU. */
 export function HeroCore() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const spring = { stiffness: 110, damping: 22, mass: 0.65 };
-  const rotateX = useSpring(useTransform(py, [-0.5, 0.5], [9, -9]), spring);
-  const rotateY = useSpring(useTransform(px, [-0.5, 0.5], [-12, 12]), spring);
+  const rotor = useRef<HTMLDivElement>(null);
 
-  function handleMove(event: React.MouseEvent<HTMLDivElement>) {
-    if (reduce || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    px.set((event.clientX - rect.left) / rect.width - 0.5);
-    py.set((event.clientY - rect.top) / rect.height - 0.5);
-  }
+  useEffect(() => withGsap(({ gsap }) => {
+    const frame = ref.current;
+    const node = rotor.current;
+    if (!frame || !node || prefersReducedMotion() || !hasFinePointer()) return;
 
-  function reset() {
-    px.set(0);
-    py.set(0);
-  }
+    const toX = gsap.quickTo(node, "rotationX", { duration: 0.7, ease: "power3.out" });
+    const toY = gsap.quickTo(node, "rotationY", { duration: 0.7, ease: "power3.out" });
+
+    const onMove = (event: PointerEvent) => {
+      const rect = frame.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      toX(y * -18);
+      toY(x * 24);
+    };
+
+    const onLeave = () => {
+      toX(0);
+      toY(0);
+    };
+
+    frame.addEventListener("pointermove", onMove);
+    frame.addEventListener("pointerleave", onLeave);
+
+    return () => {
+      frame.removeEventListener("pointermove", onMove);
+      frame.removeEventListener("pointerleave", onLeave);
+      gsap.killTweensOf(node);
+      gsap.set(node, { clearProps: "transform" });
+    };
+  }), []);
 
   return (
     <div
       ref={ref}
-      onMouseMove={handleMove}
-      onMouseLeave={reset}
       aria-hidden="true"
       className="relative mx-auto aspect-square w-full max-w-[21rem] sm:max-w-[27rem] lg:max-w-[36rem] [perspective:1100px]"
     >
       <div className="hero-scene-glow" />
-      <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative h-full w-full"
-      >
+      <div ref={rotor} style={{ transformStyle: "preserve-3d" }} className="relative h-full w-full">
         <div className="hero-orbit hero-orbit--one">
           <span className="hero-orbit-node hero-orbit-node--blue" />
           <span className="hero-orbit-node hero-orbit-node--cyan" />
@@ -80,7 +90,7 @@ export function HeroCore() {
           </span>
           <span>Security audits</span>
         </div>
-      </motion.div>
+      </div>
       <div className="hero-floor-shadow" />
     </div>
   );

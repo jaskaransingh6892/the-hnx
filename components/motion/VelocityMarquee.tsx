@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { prefersReducedMotion, withGsap } from "@/lib/gsap";
 
 /**
  * A marquee whose speed and lean come from how hard the page is being
@@ -16,6 +16,7 @@ export function VelocityMarquee({
   trackClassName,
   copies = 2,
   reverse = false,
+  tilt = false,
 }: {
   children: ReactNode;
   /** Idle pixels-per-frame. */
@@ -25,11 +26,13 @@ export function VelocityMarquee({
   copies?: number;
   /** Idle drift to the right instead of the left. */
   reverse?: boolean;
+  /** Lean the whole strip through the scroll, like a banner being passed. */
+  tilt?: boolean;
 }) {
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useEffect(() => withGsap(({ gsap, ScrollTrigger }) => {
     const wrapNode = wrap.current;
     const trackNode = track.current;
     if (!wrapNode || !trackNode || prefersReducedMotion()) return;
@@ -51,6 +54,20 @@ export function VelocityMarquee({
         direction = (self.direction === 1 ? -1 : 1) * (reverse ? -1 : 1);
       },
     });
+
+    // A slow lean across the whole strip, on top of the per-frame skew.
+    let tiltTween: gsap.core.Tween | undefined;
+    if (tilt) {
+      tiltTween = gsap.fromTo(
+        wrapNode,
+        { "--tilt": "-1.2deg" },
+        {
+          "--tilt": "1.2deg",
+          ease: "none",
+          scrollTrigger: { trigger: wrapNode, start: "top bottom", end: "bottom top", scrub: true },
+        },
+      );
+    }
 
     const tick = () => {
       boost *= 0.92;
@@ -82,8 +99,10 @@ export function VelocityMarquee({
       observer.disconnect();
       if (running) gsap.ticker.remove(tick);
       trigger.kill();
+      tiltTween?.scrollTrigger?.kill();
+      tiltTween?.kill();
     };
-  }, [speed, reverse]);
+  }), [speed, reverse, tilt]);
 
   return (
     <div ref={wrap} className={`hnx-marquee ${className ?? ""}`} aria-hidden>

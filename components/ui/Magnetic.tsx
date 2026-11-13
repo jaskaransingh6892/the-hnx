@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, hasFinePointer, prefersReducedMotion } from "@/lib/gsap";
+import { hasFinePointer, prefersReducedMotion, withGsap } from "@/lib/gsap";
 
 /**
  * Pulls its child toward the cursor and releases it on an expo ease, which is
@@ -22,7 +22,7 @@ export function Magnetic({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
+  useEffect(() => withGsap(({ gsap }) => {
     const node = ref.current;
     if (!node || prefersReducedMotion() || !hasFinePointer()) return;
 
@@ -50,7 +50,7 @@ export function Magnetic({
       gsap.killTweensOf(node);
       gsap.set(node, { clearProps: "transform" });
     };
-  }, [max, strength]);
+  }), [max, strength]);
 
   return (
     <span ref={ref} className={className}>

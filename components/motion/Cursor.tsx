@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, hasFinePointer, prefersReducedMotion } from "@/lib/gsap";
+import { hasFinePointer, prefersReducedMotion, withGsap } from "@/lib/gsap";
 
 /**
  * A trailing ring that lags the pointer and opens into a labelled pill over
@@ -13,7 +13,7 @@ export function Cursor() {
   const ring = useRef<HTMLDivElement>(null);
   const label = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
+  useEffect(() => withGsap(({ gsap }) => {
     const node = ring.current;
     const labelNode = label.current;
     if (!node || !labelNode) return;
@@ -65,7 +65,7 @@ export function Cursor() {
       gsap.ticker.remove(tick);
       root.classList.remove("cursor-on");
     };
-  }, []);
+  }), []);
 
   return (
     <div ref={ring} className="hnx-cursor" aria-hidden>

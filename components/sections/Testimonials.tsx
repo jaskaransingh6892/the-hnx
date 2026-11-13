@@ -55,7 +55,7 @@ const avatarColors: Record<string, string> = {
 
 export function TestimonialsSection() {
   return (
-    <section
+    <section data-chapter="Clients"
       id="testimonials"
       className="relative overflow-hidden border-y border-slate-900/[0.06] py-20 sm:py-24"
     >

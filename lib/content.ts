@@ -379,21 +379,23 @@ export type Tech = {
   category: TechCategory;
   icon: LucideIcon;
   ring: 0 | 1;
+  /** What the technology itself is — a neutral descriptor, not a claim. */
+  blurb: string;
 };
 
 export const technologies: Tech[] = [
-  { name: "Next.js", category: "Frontend", icon: Globe, ring: 0 },
-  { name: "React", category: "Frontend", icon: Blocks, ring: 0 },
-  { name: ".NET", category: "Backend", icon: Server, ring: 0 },
-  { name: "Node.js", category: "Backend", icon: Code2, ring: 0 },
-  { name: "Python", category: "Backend", icon: Cpu, ring: 0 },
-  { name: "PostgreSQL", category: "Data", icon: Database, ring: 0 },
-  { name: "SQL Server", category: "Data", icon: Database, ring: 1 },
-  { name: "Azure", category: "Cloud", icon: CloudCog, ring: 1 },
-  { name: "AWS", category: "Cloud", icon: CloudCog, ring: 1 },
-  { name: "Docker", category: "Cloud", icon: Boxes, ring: 1 },
-  { name: "OpenAI", category: "AI", icon: Sparkles, ring: 1 },
-  { name: "AI APIs", category: "AI", icon: BrainCircuit, ring: 1 },
+  { name: "Next.js", category: "Frontend", icon: Globe, ring: 0, blurb: "React framework with server rendering and file-based routing" },
+  { name: "React", category: "Frontend", icon: Blocks, ring: 0, blurb: "Component model for building user interfaces" },
+  { name: ".NET", category: "Backend", icon: Server, ring: 0, blurb: "Microsoft runtime and libraries for backend services" },
+  { name: "Node.js", category: "Backend", icon: Code2, ring: 0, blurb: "JavaScript runtime for servers and tooling" },
+  { name: "Python", category: "Backend", icon: Cpu, ring: 0, blurb: "General-purpose language, strong in data and automation" },
+  { name: "PostgreSQL", category: "Data", icon: Database, ring: 0, blurb: "Open-source relational database" },
+  { name: "SQL Server", category: "Data", icon: Database, ring: 1, blurb: "Microsoft relational database engine" },
+  { name: "Azure", category: "Cloud", icon: CloudCog, ring: 1, blurb: "Microsoft cloud platform" },
+  { name: "AWS", category: "Cloud", icon: CloudCog, ring: 1, blurb: "Amazon cloud platform" },
+  { name: "Docker", category: "Cloud", icon: Boxes, ring: 1, blurb: "Containers for reproducible builds and deploys" },
+  { name: "OpenAI", category: "AI", icon: Sparkles, ring: 1, blurb: "Hosted language and embedding models over an API" },
+  { name: "AI APIs", category: "AI", icon: BrainCircuit, ring: 1, blurb: "Model providers behind one integration layer" },
 ];
 
 /* ------------------------------------------------------------------

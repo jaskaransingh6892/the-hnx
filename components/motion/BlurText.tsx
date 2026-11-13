@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, type ElementType, type ReactNode } from "react";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { splitWords } from "./split";
+import { hideUntilGsap, prefersReducedMotion, withGsap } from "@/lib/gsap";
+import { inheritGradients, splitWords } from "./split";
 
 /**
  * Copy that resolves out of a blur word by word, tied to the scrollbar rather
@@ -30,24 +30,31 @@ export function BlurText({
 
     const parts = splitWords(root, "bl-word");
     if (!parts.length) return;
+    inheritGradients(parts.map((part) => part.inner), root);
 
-    const tween = gsap.fromTo(
-      parts.map((part) => part.inner),
-      { opacity: 0.16, filter: "blur(7px)" },
-      {
-        opacity: 1,
-        filter: "blur(0px)",
-        ease: "none",
-        stagger: 0.05,
-        scrollTrigger: { trigger: root, start, end, scrub: 0.5 },
-      },
-    );
+    const inners = parts.map((part) => part.inner);
+    const cancelFallback = hideUntilGsap(inners, { opacity: "0.16", filter: "blur(7px)" });
 
-    return () => {
-      tween.scrollTrigger?.kill();
-      tween.kill();
-    };
-  }, [children, start, end]);
+    return withGsap(({ gsap }) => {
+      cancelFallback();
+      const tween = gsap.fromTo(
+        inners,
+        { opacity: 0.16, filter: "blur(7px)" },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          ease: "none",
+          stagger: 0.05,
+          scrollTrigger: { trigger: root, start, end, scrub: 0.5 },
+        },
+      );
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
+  }, [start, end]);
 
   return (
     <Tag ref={ref} className={className}>

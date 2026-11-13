@@ -568,6 +568,11 @@
      cut off focus rings and hover underlines. */
   .rv-split--done .rv-word { overflow: visible; }
 
+  .rv-char {
+    display: inline-block;
+    will-change: transform;
+  }
+
   .bl-word { display: inline-block; }
   .bl-word__in {
     display: inline-block;
@@ -631,12 +636,189 @@
     .hnx-cursor { display: none; }
   }
 
+
+
+
+  /* Section veil — written in by <SectionVeil />, scrubbed by the next
+     section's approach. */
+  .section-veil {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    background: #0a1736;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+
+
+
+  /* Focus affordance for form controls: a hairline that fills from the left
+     while the field has focus. */
+  .field__bar {
+    height: 1.5px;
+    margin-top: -0.3rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22d3ee, #5b86ff, #9b72f8);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .field:focus-within .field__bar { transform: scaleX(1); }
+  .field:focus-within > label { color: var(--color-hnx-cyan); }
+
+  /* The ticker band leans with the scroll, so it is cut wider than the
+     viewport — a rotated full-width band would show bare corners. */
+  /* Qualified with .hnx-marquee: that rule is declared later in this layer
+     and would otherwise win the width back at equal specificity. */
+  .hnx-marquee.capability-band {
+    width: 114%;
+    margin-left: -7%;
+    padding-block: 1.5rem;
+    background: linear-gradient(100deg, #0f1b3d 0%, #1c2d63 52%, #2d1f5e 100%);
+  }
+
+  /* Pinned horizontal track. A plain responsive grid until there is room to
+     read it sideways. */
+  .hnx-htrack {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .hnx-htrack__track {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .hnx-htrack__track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1024px) {
+    /* While pinned the wrapper owns the whole viewport, so its content is
+       centred in it rather than stranded against the top. */
+    .hnx-htrack {
+      min-height: 100vh;
+      justify-content: center;
+      padding-block: 2rem;
+    }
+    .hnx-htrack__viewport { overflow: hidden; }
+    .hnx-htrack__track {
+      display: flex;
+      width: max-content;
+      gap: 1.5rem;
+      will-change: transform;
+    }
+    .hnx-htrack__track > * {
+      width: 23rem;
+      flex: none;
+    }
+  }
+
+  /* Reading position for long pages. Hidden below lg — on a phone it is
+     another thing covering the content it is describing. */
+  .chapter-rail {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.75rem;
+    z-index: 45;
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid rgb(69 96 155 / 0.14);
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.9);
+    box-shadow: 0 16px 40px -28px rgb(52 75 143 / 0.5);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (min-width: 1024px) {
+    .chapter-rail { display: inline-flex; }
+  }
+  .chapter-rail__index { color: var(--color-hnx-blue); font-weight: 600; }
+  .chapter-rail__roll {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    min-width: 7.5rem;
+    height: 1.1em;
+  }
+  /* Outgoing and incoming labels occupy the same box while they cross. */
+  .chapter-rail__roll span {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: var(--color-mist-100);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .chapter-rail__pct {
+    color: var(--color-mist-400);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Footer uncover. Sticky rather than a measured, JS-applied fixed:
+     switching position after hydration dropped the footer into the viewport
+     in one frame, which Chrome scores as a 0.63 layout shift. Sticky holds
+     its space in flow and is in effect from the very first paint.
+
+     The footer sits behind the page (the page paints an opaque background
+     over it) and the last scroll of the document uncovers it. */
+  @media (min-width: 1024px) and (min-height: 720px) {
+    #app-content > main {
+      position: relative;
+      z-index: 1;
+      background-color: var(--color-ink-950);
+    }
+    .site-footer {
+      position: sticky;
+      bottom: 0;
+      z-index: 0;
+    }
+  }
+  .site-footer__inner { will-change: transform; }
+
+  /* Route-change curtain. Idle it sits clipped away below the fold. */
+  .page-curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(100deg, #0f1b3d 0%, #1c2d63 52%, #2d1f5e 100%);
+    clip-path: inset(100% 0% 0% 0%);
+    pointer-events: none;
+    will-change: clip-path;
+  }
+  /* Only swallow clicks while it is actually over the page. */
+  .page-curtain.is-busy { pointer-events: auto; }
+  .page-curtain__mark {
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    opacity: 0;
+  }
+  .page-curtain__mark span {
+    background: linear-gradient(100deg, #4fd3e8, #7aa0ff 50%, #c08bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* Scroll-velocity marquee. --skew is written per frame by the component. */
   .hnx-marquee {
     --marquee-gap: 0.85rem;
     width: 100%;
     overflow: hidden;
-    transform: skewX(var(--skew, 0deg));
+    transform: rotate(var(--tilt, 0deg)) skewX(var(--skew, 0deg));
     will-change: transform;
   }
   .hnx-marquee__track {
@@ -677,6 +859,9 @@
   /* The motion primitives all bail out in JS too; these are the belt to
      that braces, for anything already in the DOM when the query flips. */
   .hnx-cursor { display: none !important; }
+  .page-curtain { display: none !important; }
+  .section-veil { display: none !important; }
+  .chapter-rail { display: none !important; }
   .rv-word { overflow: visible !important; }
   .hnx-marquee { transform: none !important; }
 }

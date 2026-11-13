@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useSpring } from "motion/react";
-import { EASE } from "@/components/ui/Reveal";
+import { useEffect, useRef } from "react";
+import { prefersReducedMotion, withGsap } from "@/lib/gsap";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { processSteps } from "@/lib/content";
 
@@ -12,14 +11,39 @@ import { processSteps } from "@/lib/content";
  */
 export function ProcessSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 72%", "end 65%"],
-  });
-  const scaleY = useSpring(scrollYProgress, { stiffness: 90, damping: 26, restDelta: 0.001 });
+
+  useEffect(() => withGsap(({ gsap }) => {
+    const root = ref.current;
+    if (!root || prefersReducedMotion()) return;
+
+    const context = gsap.context(() => {
+      // The rail fills as the timeline passes through the viewport.
+      gsap.fromTo(
+        "[data-process='rail-fill']",
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: { trigger: root, start: "top 72%", end: "bottom 65%", scrub: 0.6 },
+        },
+      );
+
+      gsap.from("[data-process='step']", {
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        stagger: 0.05,
+        ease: "expo.out",
+        clearProps: "opacity,transform",
+        scrollTrigger: { trigger: root, start: "top 80%", once: true },
+      });
+    }, root);
+
+    return () => context.revert();
+  }), []);
 
   return (
-    <section id="process" className="relative overflow-hidden border-y border-slate-900/[0.06] bg-[#f9f6ff] py-20 sm:py-24">
+    <section id="process" data-chapter="Process" className="relative overflow-hidden border-y border-slate-900/[0.06] bg-[#f9f6ff] py-20 sm:py-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(155,114,248,0.10),transparent_60%)]"
@@ -39,24 +63,17 @@ export function ProcessSection() {
             aria-hidden
             className="absolute left-[1.4375rem] top-2 bottom-2 w-px bg-slate-900/[0.08] sm:left-[2.1875rem]"
           />
-          <motion.div
+          <div
             aria-hidden
-            style={{ scaleY }}
-            className="absolute left-[1.4375rem] top-2 bottom-2 w-px origin-top bg-[linear-gradient(180deg,#22d3ee,#5b86ff,#9b72f8)] sm:left-[2.1875rem]"
+            data-process="rail-fill"
+            className="absolute left-[1.4375rem] top-2 bottom-2 w-px origin-top scale-y-0 bg-[linear-gradient(180deg,#22d3ee,#5b86ff,#9b72f8)] sm:left-[2.1875rem]"
           />
 
           <ol className="flex flex-col gap-10 sm:gap-12">
-            {processSteps.map((step, index) => {
+            {processSteps.map((step) => {
               const Icon = step.icon;
               return (
-                <motion.li
-                  key={step.step}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{ duration: 0.7, delay: index * 0.05, ease: EASE }}
-                  className="group relative flex gap-5 sm:gap-8"
-                >
+                <li key={step.step} data-process="step" className="group relative flex gap-5 sm:gap-8">
                   <div className="relative z-10 shrink-0">
                     <span className="grid h-12 w-12 place-items-center rounded-2xl border border-slate-900/12 bg-ink-900 shadow-[0_10px_40px_-16px_rgba(91,134,255,0.9)] transition-colors duration-500 group-hover:border-hnx-cyan/45 sm:h-[4.5rem] sm:w-[4.5rem]">
                       <Icon
@@ -94,7 +111,7 @@ export function ProcessSection() {
                       ))}
                     </ul>
                   </div>
-                </motion.li>
+                </li>
               );
             })}
           </ol>

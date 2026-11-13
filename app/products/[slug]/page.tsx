@@ -179,7 +179,7 @@ export default async function ProductCaseStudy({
             <div className="grid gap-6 md:grid-cols-2">
               {study.screenshots.map((screenshot) => (
                 <figure key={screenshot.src} className="glass overflow-hidden rounded-2xl p-3 sm:p-4">
-                  <ClipReveal className="overflow-hidden rounded-xl border border-slate-900/[0.06] bg-white">
+                  <ClipReveal scrub className="overflow-hidden rounded-xl border border-slate-900/[0.06] bg-white">
                     <Image
                       src={screenshot.src}
                       width={screenshot.width}
